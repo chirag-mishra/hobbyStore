@@ -5,7 +5,7 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item" *ngFor="let item of sliderObject.images;let i=index" [class.active]="i == 0">
-      <img class="d-block w-100" [src]="item.imgUrl" alt="{{i}}">
+      <img class="d-block w-100" [src]="item.imgUrl" alt="{{item.imgTag}}">
       <div class="carousel-caption d-none d-md-block">
         <h3>{{item.imgTag}}</h3>
         <p>{{item.imgDescription}}</p>

@@ -14,7 +14,8 @@ import { SliderComponent } from './components/slider/slider.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule

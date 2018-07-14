@@ -4,3 +4,26 @@ footer {
     background: #343a40;
     color: #fff;
 }
+
+.toolbar {
+    float: left;
+    background: #fff;
+    border: 1px solid #d1d5da;
+}
+
+.slider {
+    background: #fff;
+    float: left;
+    border: 1px solid #d1d5da;
+    padding: 10px; 
+}
+
+.main-container{
+    padding: 20px;
+    background-color: #f2f3f5;
+}
+
+.main-content{
+    margin: 0 auto;
+    display: inline-block;
+}
