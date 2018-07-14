@@ -31,7 +31,26 @@
     border-right: 1px solid #f2f3f5;
 }
 
+.card-buttons a{
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
 .card img {
     border-bottom: 1px solid #f2f3f5;
     padding: 10px;
+}
+
+.catalogue-controls {
+    float: right;
+}
+
+.cardLayout {
+    clear: both;
+    margin: 10px auto;
+}
+
+.catalogue-controls select{
+    margin: 0px 10px
 }
