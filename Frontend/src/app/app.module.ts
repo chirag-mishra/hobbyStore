@@ -10,6 +10,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { SliderComponent } from './components/slider/slider.component';
 import { ModalPopupComponent } from './components/modal-popup/modal-popup.component';
+
+import { ProductsComponent } from './components/products/products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,8 @@ import { ModalPopupComponent } from './components/modal-popup/modal-popup.compon
     FooterComponent,
     SliderComponent,
     ModalPopupComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule
