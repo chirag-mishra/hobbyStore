@@ -1,75 +1,14 @@
 <div class="catalogue">
-    <div class="card">
-        <img class="card-img-top" src="assets/images/demo.jpg" alt="Card image cap">
+    <div class="card" *ngFor="let product of productsObject.products">
+        <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
         <div class="list-group list-group-flush">
-            <div>Title</div>
-            <div>Price</div>
-            <div>Rating</div>
+            <div>Title : {{product.title}}</div>
+            <div>Price : {{product.price | currency:'&#8377;'}}</div>
+            <div>Rating : {{product.rating}}</div>
         </div>
         <div class="card-buttons">
             <a href="#">Buy Now</a>
             <a href="#">Add to Cart</a>
         </div>
     </div>
-    <div class="card">
-        <img class="card-img-top" src="assets/images/demo.jpg" alt="Card image cap">
-        <div class="list-group list-group-flush">
-            <div>Title</div>
-            <div>Price</div>
-            <div>Rating</div>
-        </div>
-        <div class="card-buttons">
-            <a href="#">Buy Now</a>
-            <a href="#">Add to Cart</a>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="assets/images/demo.jpg" alt="Card image cap">
-        <div class="list-group list-group-flush">
-            <div>Title</div>
-            <div>Price</div>
-            <div>Rating</div>
-        </div>
-        <div class="card-buttons">
-            <a href="#">Buy Now</a>
-            <a href="#">Add to Cart</a>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="assets/images/demo.jpg" alt="Card image cap">
-        <div class="list-group list-group-flush">
-            <div>Title</div>
-            <div>Price</div>
-            <div>Rating</div>
-        </div>
-        <div class="card-buttons">
-            <a href="#">Buy Now</a>
-            <a href="#">Add to Cart</a>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="assets/images/demo.jpg" alt="Card image cap">
-        <div class="list-group list-group-flush">
-            <div>Title</div>
-            <div>Price</div>
-            <div>Rating</div>
-        </div>
-        <div class="card-buttons">
-            <a href="#">Buy Now</a>
-            <a href="#">Add to Cart</a>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="assets/images/demo.jpg" alt="Card image cap">
-        <div class="list-group list-group-flush">
-            <div>Title</div>
-            <div>Price</div>
-            <div>Rating</div>
-        </div>
-        <div class="card-buttons">
-            <a href="#">Buy Now</a>
-            <a href="#">Add to Cart</a>
-        </div>
-    </div>
-
 </div>
