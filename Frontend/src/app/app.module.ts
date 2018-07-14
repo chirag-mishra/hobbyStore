@@ -12,6 +12,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { ModalPopupComponent } from './components/modal-popup/modal-popup.component';
 
 import { ProductsComponent } from './components/products/products.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { ProductsComponent } from './components/products/products.component';
     ProductsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

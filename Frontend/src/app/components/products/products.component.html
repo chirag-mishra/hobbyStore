@@ -1,5 +1,5 @@
 <div class="catalogue">
-    <div class="card" *ngFor="let product of productsObject.products">
+    <div class="card" *ngFor="let product of productsObject.products | paginate: { itemsPerPage: 8, currentPage: p }">
         <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
         <div class="list-group list-group-flush">
             <div>Title : {{product.title}}</div>
@@ -11,4 +11,5 @@
             <a href="#">Add to Cart</a>
         </div>
     </div>
+    <pagination-controls (pageChange)="p = $event" class="paginationProducts"></pagination-controls>
 </div>
