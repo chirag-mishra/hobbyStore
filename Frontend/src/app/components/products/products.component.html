@@ -1,6 +1,6 @@
 <div class="catalogue">
-    <div class="catalogue-controls form-inline">
-        <div class="form-group">
+    <div class="catalogue-controls">
+        <div class="catalogueControlItem">
             <label for="sortBy">Sort By </label>
             <select name="sortBy" id="">
                 <option value="relevance">Relevance</option>
@@ -8,8 +8,8 @@
                 <option value="rating">Rating</option>
             </select>
         </div>
-    
-        <div class="form-group">
+
+        <div class="catalogueControlItem">
             <label for="showingItems">Items per page </label>
             <select name="showingItems" id="">
                 <option value="20">20</option>
@@ -19,14 +19,21 @@
         </div>
     </div>
     <div class="cardLayout clearfix">
-            <div class="card" *ngFor="let product of productsObject.products | paginate: { itemsPerPage: 8, currentPage: p }">
-                    <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
-                    <div class="list-group list-group-flush">
-                        <div>Title : {{product.title}}</div>
-                        <div>Price : {{product.price | currency:'&#8377;'}}</div>
-                        <div>Rating : {{product.rating}}</div>
-                    </div>
-    </div>
-    <pagination-controls (pageChange)="p = $event" class="paginationProducts"></pagination-controls>
-</div>
+        <div class="card" *ngFor="let product of productsObject.products | paginate: { itemsPerPage: 8, currentPage: p }">
+            <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
+            <div class="list-group list-group-flush">
+                <div>Title : {{product.title}}</div>
+                <div>Price : {{product.price | currency:'&#8377;'}}</div>
+                <div>Rating : {{product.rating}}</div>
+            </div>
+            <div class="card-buttons">
+                <a href="#">Buy Now</a>
+                <a href="#">Add to Cart</a>
+            </div>
+        </div>
 
+    </div>
+    <div class="paginationComponent">
+        <pagination-controls (pageChange)="p = $event" class="paginationProducts"></pagination-controls>
+    </div>
+</div>

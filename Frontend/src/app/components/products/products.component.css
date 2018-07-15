@@ -7,8 +7,27 @@
 .card {
     padding: 5px;
     margin: 5px;
-    display: inline-block;
-    width: 23%;
+    float: left;
+    background: #fafafa;
+}
+
+/*media queries for card*/
+@media(min-width: 576px) {
+    .card {
+        width: 46%;
+    }
+}
+
+@media(min-width: 768px) {
+    .card {
+        width: 46%;
+    }
+}
+
+@media(min-width: 992px) {
+    .card {
+        width: 23%;
+    }
 }
 
 .card-buttons{
@@ -34,7 +53,13 @@
 .card-buttons a{
     font-size: 14px;
     font-weight: 600;
+    transition: all ease 0.5s;
     text-transform: capitalize;
+}
+
+.card-buttons a:hover {
+    background: #007bff;
+    color: white;
 }
 
 .card img {
@@ -43,7 +68,8 @@
 }
 
 .catalogue-controls {
-    float: right;
+    display: inline-block;
+    width : 100%;
 }
 
 .cardLayout {
@@ -54,6 +80,24 @@
 .catalogue-controls select{
     margin: 0px 10px
 }
+
+.paginationComponent {
+    display: block;
+    margin: 10px auto;
+    clear: both;
+}
+
 .paginationProducts{
     text-align: center;
+    clear: both;
+    display: block;
+}
+
+.catalogueControlItem {
+    float: right;
+    display: inline-block;
+}
+
+.paginationComponent ul{
+    padding: 0;
 }
