@@ -99,3 +99,6 @@
 .ngx-pagination .current {
     background: red;
   }
+.productItemFilter{
+    margin-right: 10px;
+}

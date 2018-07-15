@@ -13,6 +13,7 @@ import { ModalPopupComponent } from './components/modal-popup/modal-popup.compon
 
 import { ProductsComponent } from './components/products/products.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { StringFilterPipe } from './shared/string-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SliderComponent,
     ModalPopupComponent,
     ToolbarComponent,
-    ProductsComponent
+    ProductsComponent,
+    StringFilterPipe
   ],
   imports: [
     BrowserModule,

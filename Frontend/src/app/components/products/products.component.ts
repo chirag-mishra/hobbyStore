@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PaginationInstance } from '../../../../node_modules/ngx-pagination/dist/ngx-pagination.module';
+import { StringFilterPipe } from './../../shared/string-filter.pipe';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -7,7 +8,7 @@ import { PaginationInstance } from '../../../../node_modules/ngx-pagination/dist
 })
 export class ProductsComponent {
   p: number = 1;
-  productsObject = {
+  productsObject :any = {
     products: [
       {
         "id": 1,
@@ -19,35 +20,35 @@ export class ProductsComponent {
       {
         "id": 2,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "Spades",
         "price": 250,
         "rating": 5
       },
       {
         "id": 3,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "Hearts",
         "price": 250,
         "rating": 5
       },
       {
         "id": 4,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "Diamond",
         "price": 250,
         "rating": 5
       },
       {
         "id": 5,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "Ace",
         "price": 250,
         "rating": 5
       },
       {
         "id": 6,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "King",
         "price": 250,
         "rating": 5
       },
@@ -61,7 +62,7 @@ export class ProductsComponent {
       {
         "id": 8,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "Queen",
         "price": 250,
         "rating": 5
       },
@@ -75,14 +76,14 @@ export class ProductsComponent {
       {
         "id": 10,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "Bicycle Cards",
         "price": 250,
         "rating": 5
       },
       {
         "id": 11,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "BlackJack",
         "price": 250,
         "rating": 5
       },
