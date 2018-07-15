@@ -6,28 +6,13 @@
 
 .card {
     padding: 5px;
-    margin: 5px;
-    float: left;
     background: #fafafa;
 }
 
-/*media queries for card*/
-@media(min-width: 576px) {
-    .card {
-        width: 46%;
-    }
-}
-
-@media(min-width: 768px) {
-    .card {
-        width: 46%;
-    }
-}
-
-@media(min-width: 992px) {
-    .card {
-        width: 23%;
-    }
+.cardContainer{
+    padding: 5px;
+    float: left;
+    display: inline-block;
 }
 
 .card-buttons{
@@ -101,3 +86,7 @@
 .paginationComponent ul{
     padding: 0;
 }
+
+.ngx-pagination .current {
+    background: red;
+  }

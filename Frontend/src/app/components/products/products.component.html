@@ -19,16 +19,18 @@
         </div>
     </div>
     <div class="cardLayout clearfix">
-        <div class="card" *ngFor="let product of productsObject.products | paginate: { itemsPerPage: 8, currentPage: p }">
-            <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
-            <div class="list-group list-group-flush">
-                <div>Title : {{product.title}}</div>
-                <div>Price : {{product.price | currency:'&#8377;'}}</div>
-                <div>Rating : {{product.rating}}</div>
-            </div>
-            <div class="card-buttons">
-                <a href="#">Buy Now</a>
-                <a href="#">Add to Cart</a>
+        <div class="cardContainer col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let product of productsObject.products | paginate: { itemsPerPage: 8, currentPage: p }">
+            <div class="card" >
+                <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
+                <div class="list-group list-group-flush">
+                    <div>Title : {{product.title}}</div>
+                    <div>Price : {{product.price | currency:'&#8377;'}}</div>
+                    <div>Rating : {{product.rating}}</div>
+                </div>
+                <div class="card-buttons">
+                    <a href="#">Buy Now</a>
+                    <a href="#">Add to Cart</a>
+                </div>
             </div>
         </div>
 
