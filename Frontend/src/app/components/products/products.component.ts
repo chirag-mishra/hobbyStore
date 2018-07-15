@@ -132,7 +132,7 @@ export class ProductsComponent {
       {
         "id": 18,
         "imgUrl": "assets/images/demo.jpg",
-        "title": "Bicycle",
+        "title": "Bicycle123",
         "price": 250,
         "rating": 5
       }
