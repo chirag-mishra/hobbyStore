@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
+import { PaginationInstance } from '../../../../node_modules/ngx-pagination/dist/ngx-pagination.module';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -136,5 +136,25 @@ export class ProductsComponent {
         "rating": 5
       }
     ]
+  }
+  public filter: string = '';
+  public maxSize: number = 7;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = false;
+  public config: PaginationInstance = {
+    id: 'advanced',
+    itemsPerPage: 8,
+    currentPage: 1
+  };
+  public labels: any = {
+    previousLabel: 'Previous',
+    nextLabel: 'Next',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
+  };
+
+  onPageChange(number: number) {
+    this.config.currentPage = number;
   }
 }

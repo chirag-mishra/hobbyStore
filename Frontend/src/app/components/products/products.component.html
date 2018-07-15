@@ -1,5 +1,5 @@
 <div class="catalogue">
-    <div class="catalogue-controls">
+    <div class="catalogue-controls">        
         <div class="catalogueControlItem">
             <label for="sortBy">Sort By </label>
             <select name="sortBy" id="">
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="cardLayout clearfix">
-        <div class="cardContainer col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let product of productsObject.products | paginate: { itemsPerPage: 8, currentPage: p }">
+        <div class="cardContainer col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let product of productsObject.products | paginate: config">
             <div class="card" >
                 <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
                 <div class="list-group list-group-flush">
@@ -33,9 +33,17 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="paginationComponent">
-        <pagination-controls (pageChange)="p = $event" class="paginationProducts"></pagination-controls>
-    </div>
+</div>
+<div class="has-text-centered paginationComponent">
+    <pagination-controls [id]="config.id"
+                         [maxSize]="maxSize"
+                         [directionLinks]="directionLinks"
+                         [autoHide]="autoHide"
+                         [previousLabel]="labels.previousLabel"
+                         [nextLabel]="labels.nextLabel"
+                         [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                         [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                         [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                         (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
