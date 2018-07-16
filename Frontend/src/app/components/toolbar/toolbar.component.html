@@ -1,5 +1,5 @@
 <ul class="nav flex-column">
-  <li class="nav-item">
-    <a class="nav-link active" href="#" *ngFor="let item of toolbarItems">{{item}}</a>
+  <li class="nav-item" *ngFor="let item of toolbarInfo.toolbarDetails">
+    <a class="nav-link active" title="{{item.toolbarName}}" href="#" >{{item.toolbarName}}</a>
   </li>
 </ul>

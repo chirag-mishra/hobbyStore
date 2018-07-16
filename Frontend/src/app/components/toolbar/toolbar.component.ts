@@ -6,6 +6,38 @@ import { Component } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent {
-  title: any = ["Cards", "Premium Cards", "Intermmediate Cards", "Tuple Cards", "Beginner Cards", "Jumbo cards"];
-  toolbarItems: any[] = ["Cards", "Premium Cards", "Intermediate Cards", "Tuple Cards", "Beginner Cards", "Jumbo cards"];
+  toolbarInfo: any = {
+    toolbarDetails: [
+      {
+        "id": 1,
+        "title": "Cards",
+        "toolbarName": "Cards"
+      },
+      {
+        "id": 2,
+        "title": "Beginner Cards",
+        "toolbarName": "Beginner Cards"
+      },
+      {
+        "id": 3,
+        "title": "Intermmediate Cards",
+        "toolbarName": "Intermmediate Cards"
+      },
+      {
+        "id": 4,
+        "title": "Premium Cards",
+        "toolbarName": "Premium Cards"
+      },
+      {
+        "id": 5,
+        "title": "Royal Cards",
+        "toolbarName": "Royal Cards"
+      },
+      {
+        "id": 6,
+        "title": "Tuple Cards",
+        "toolbarName": "Tuple Cards"
+      },
+    ]
+  }
 }

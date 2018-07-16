@@ -5,12 +5,6 @@ footer {
     color: #fff;
 }
 
-.toolbar {
-    float: left;
-    background: #fff;
-    border: 1px solid #d1d5da;
-}
-
 .slider {
     background: #fff;
     float: left;
@@ -30,4 +24,11 @@ footer {
 
 body{
     font-family: 'Open Sans', Calibri, Tahoma;
+}
+
+.toolbar {
+    float: left;
+    background: #fff;
+    border: 1px solid #d1d5da;
+    padding: 0;
 }

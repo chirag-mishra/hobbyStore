@@ -1,0 +1,7 @@
+li.nav-item {
+    transition: all ease 0.5s;
+}
+
+li.nav-item:hover {
+    padding-left: 10px;
+}
