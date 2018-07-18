@@ -108,4 +108,11 @@
   }
 .productItemFilter{
     margin-right: 10px;
+    padding:5px;
+}
+#ddOrderByItems{
+    padding: 5px;
+}
+#ddItemsPerPage{
+    padding: 5px;
 }

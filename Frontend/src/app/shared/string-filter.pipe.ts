@@ -9,7 +9,8 @@ export class StringFilterPipe {
         if (!q || q === '') {
             return value;
         }
-        return value.filter(item => -1 < item.title.toLowerCase().indexOf(q.toLowerCase()));
+        return value.filter(item => item.products.title.toLowerCase().indexOf(q.toLowerCase()) !== -1);
+        //return value.filter(item => -1 < item.productItem.title.toLowerCase().indexOf(q.toLowerCase()));
     }
     // transform(items: Product[], filter: Product): Product[] {
     //     console.log(Product,'hey',items);
