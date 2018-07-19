@@ -21,7 +21,7 @@ addCollection = (collectionName, cb) => {
 }
 
 addDocumentToCollection = (collectionName, doc, cb) => {
-    MongoClient.connect(url, function (err, db) {
+    MongoClient.connect(dbUrl, function (err, db) {
         if (err) throw err;
         var dbo = db.db(dbName);
         dbo.collection(collectionName).insertOne(doc, function (err, res) {
@@ -102,7 +102,7 @@ executeQuery = (collectionName, query, cb) => {
 //     console.log(res);
 // });
 
-executeQuery("users", {"gender" : "female", "age" : 20}, function (err, res) {
+executeQuery("users", {guid : "chirmish"}, function (err, res) {
     if (!err) {
         console.log(res);
     }
@@ -110,3 +110,11 @@ executeQuery("users", {"gender" : "female", "age" : 20}, function (err, res) {
         console.log("Error occured");
     }
 });
+
+module.exports = {
+    addCollection : addCollection,
+    addDocumentToCollection : addDocumentToCollection,
+    findDocumentInCollection : findDocumentInCollection,
+    findMultipleDocumentsInCollection : findMultipleDocumentsInCollection,
+    executeQuery : executeQuery
+};
