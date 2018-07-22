@@ -15,6 +15,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { StringFilterPipe } from './shared/string-filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
+import { NgxTypeaheadModule } from 'ngx-typeahead';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,8 @@ import { OrderModule } from 'ngx-order-pipe';
     BrowserModule,
     NgxPaginationModule,
     FormsModule,
-    OrderModule
+    OrderModule,
+    NgxTypeaheadModule
   ],
   providers: [],
   bootstrap: [AppComponent]
