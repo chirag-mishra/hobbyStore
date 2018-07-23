@@ -1,0 +1,56 @@
+h1 .r-ball, h1 .trademark {
+    font-size: 12px;
+    top: -20px;
+}
+.descriptionLeft .productMainImage img{
+    width: 100%;
+}
+.pull-left {
+    float: left;
+}
+.mediumSup{
+font-size: 55%;
+top: -.6em;
+}
+.productDescription{
+padding-top: 5%;
+}
+.review{
+    vertical-align: sub;
+}
+.add-to-cart .btn-qty {
+    width: 52px;
+    height: 46px;
+}
+.inStockMargin{
+    margin:10px auto;
+}
+ul.productImages{
+    list-style-type: none;
+}
+
+ul.productImages li{
+    display: inline-block;
+    float: left;
+}
+
+.singleImage img {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    border : 1px solid #efefef;
+}
+
+.singleImage {
+transition: all ease 0.4s;
+}
+
+.singleImage:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+.btnIncDec{
+    font-size: 14px;
+    vertical-align: sub;
+}
+

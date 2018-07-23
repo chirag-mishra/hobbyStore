@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule } from "@angular/router";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 
@@ -15,6 +15,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { StringFilterPipe } from './shared/string-filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
+import { HomeComponent } from "./components/home/home.component";
+import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,13 +26,16 @@ import { OrderModule } from 'ngx-order-pipe';
     ModalPopupComponent,
     ToolbarComponent,
     ProductsComponent,
-    StringFilterPipe
+    StringFilterPipe,
+    HomeComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
     NgxPaginationModule,
     FormsModule,
-    OrderModule
+    OrderModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
