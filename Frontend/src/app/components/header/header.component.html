@@ -26,9 +26,13 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline mt-2 mt-md-0">
-      <input #txtSearchInput class="form-control mr-sm-2 home-search"  type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" (onclick)="onSearchText(txtSearchInput.val);" type="submit">Search</button>
+    <form class="form-inline mt-2 mt-md-0 formHeader">
+      <input #txtSearchInput class="form-control mr-sm-2 home-search" [value]="query"  type="text" placeholder="Search" aria-label="Search"
+      ngxTypeahead
+      [taUrl]="url"
+      [taParams]="params"
+      (taSelected)="handleResultSelected($event)">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div></div>
     <ul class="navbar-nav">

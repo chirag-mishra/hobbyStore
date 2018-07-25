@@ -17,6 +17,8 @@ import { StringFilterPipe } from './shared/string-filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
 import { HomeComponent } from "./components/home/home.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
+import { NgxTypeaheadModule } from 'ngx-typeahead';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,8 @@ import { ProductDetailComponent } from "./components/product-detail/product-deta
     NgxPaginationModule,
     FormsModule,
     OrderModule,
-    RouterModule
+    RouterModule,
+    NgxTypeaheadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

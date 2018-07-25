@@ -34,3 +34,11 @@ body a:hover{
     border: 1px solid #d1d5da;
     padding: 0;
 }
+@media (min-width: 768px) { 
+.ta-results{width: 100%;}}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { .ta-results{width: 100%;}}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { .ta-results{width: 75%;}}
