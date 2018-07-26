@@ -25,7 +25,9 @@ footer {
 body{
     font-family: 'Open Sans', Calibri, Tahoma;
 }
-
+body a:hover{
+    text-decoration: none;
+}
 .toolbar {
     float: left;
     background: #fff;

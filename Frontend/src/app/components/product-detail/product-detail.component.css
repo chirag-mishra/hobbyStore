@@ -1,0 +1,146 @@
+h1 .r-ball, h1 .trademark {
+    font-size: 12px;
+    top: -20px;
+}
+.descriptionLeft .productMainImage img{
+    width: 100%;
+}
+.pull-left {
+    float: left;
+}
+.mediumSup{
+font-size: 55%;
+top: -.6em;
+}
+.productDescription{
+padding-top: 5%;
+}
+.review{
+    vertical-align: sub;
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    color: #007bff;
+}
+button:focus {outline:0;}
+.add-to-cart .btn-qty {
+    width: 52px;
+    height: 46px;
+}
+.inStockMargin{
+    margin:10px auto;
+}
+ul.productImages{
+    list-style-type: none;
+}
+
+ul.productImages li{
+    display: inline-block;
+    float: left;
+}
+
+.singleImage img {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    border : 1px solid #efefef;
+}
+
+.singleImage {
+transition: all ease 0.4s;
+}
+
+.singleImage:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+.btnIncDec{
+    font-size: 14px;
+    vertical-align: sub;
+}
+.rating span.fa-star:hover{
+    color:red;
+    cursor: pointer;
+}
+.btnAddComment{
+    float: right;
+}
+.commentSection{
+    border: 1px solid #ced4da;
+    margin: 5px;
+    padding: 10px;
+}
+.commentUser{
+    color: #007bff;
+}
+.similarProduct{
+    border: 1px solid #ced4da;
+    margin: 5px;
+    padding: 10px;
+}
+.cardLayout {
+    clear: both;
+    margin: 10px auto;
+}
+.card {
+    padding: 5px;
+    background: #fafafa;
+}
+
+.cardContainer{
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    float: left;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.cardContainer:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardContainer img {
+    transition: all ease 0.4s;
+}
+
+.cardContainer:hover img {
+    transform: scale(1.08);
+}
+
+.card-buttons{
+    border-top : 1px solid #f2f3f5;
+}
+
+.card-buttons a{
+    display: inline-block;
+    width : 50%;
+    float: left;
+    padding: 2px;
+    text-align: center;
+}
+
+.card-buttons a:hover{
+    text-decoration: none;
+}
+
+.card-buttons a:first-child {
+    border-right: 1px solid #f2f3f5;
+}
+
+.card-buttons a{
+    font-size: 14px;
+    font-weight: 600;
+    transition: all ease 0.5s;
+    text-transform: capitalize;
+}
+
+.card-buttons a:hover {
+    background: #007bff;
+    color: white;
+}
+
+.card img {
+    border-bottom: 1px solid #f2f3f5;
+    padding: 10px;
+}
