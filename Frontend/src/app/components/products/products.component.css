@@ -116,3 +116,7 @@
 #ddItemsPerPage{
     padding: 5px;
 }
+
+.itemDetailsCart[_ngcontent-c2] {
+    padding: 5px;
+}

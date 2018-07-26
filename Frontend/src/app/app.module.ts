@@ -16,6 +16,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { StringFilterPipe } from './shared/string-filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxTypeaheadModule } from 'ngx-typeahead';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
     ModalPopupComponent,
     ToolbarComponent,
     ProductsComponent,
-    StringFilterPipe
+    StringFilterPipe,
+    CartDetailsComponent
   ],
   imports: [
     BrowserModule,
