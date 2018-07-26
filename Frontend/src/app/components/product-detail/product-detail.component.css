@@ -2,6 +2,11 @@ h1 .r-ball, h1 .trademark {
     font-size: 12px;
     top: -20px;
 }
+
+.descriptionLeft{
+    padding: 10px 0;
+}
+
 .descriptionLeft .productMainImage img{
     width: 100%;
 }

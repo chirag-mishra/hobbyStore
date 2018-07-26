@@ -146,7 +146,7 @@ export class ProductDetailComponent {
         this.rate=parseInt(value.target.id);
     }
     scrollToRatingDiv (){
-        document.querySelector('#' + 'itemComment').scrollIntoView({
+        document.querySelector('#reviewForm').scrollIntoView({
           behavior: 'smooth'
         });
       };

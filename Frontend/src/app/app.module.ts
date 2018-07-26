@@ -30,7 +30,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
     ToolbarComponent,
     ProductsComponent,
     StringFilterPipe,
-    CartDetailsComponent
+    CartDetailsComponent,
     HomeComponent,
     ProductDetailComponent
   ],

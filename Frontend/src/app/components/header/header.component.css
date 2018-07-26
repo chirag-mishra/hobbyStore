@@ -10,3 +10,7 @@
 .formHeader{
     position: relative;
 }
+
+#signupBtnContainer button{
+    margin: 10px;
+}
