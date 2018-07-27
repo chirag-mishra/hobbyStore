@@ -145,6 +145,12 @@ export class ProductDetailComponent {
     onMouseOverRating(value:any){
         this.rate=parseInt(value.target.id);
     }
+    mouseDown($event){
+        console.log("mouse down");
+    }
+    mouseUp($event){
+        console.log("mouse up");
+    }
     scrollToRatingDiv (){
         document.querySelector('#reviewForm').scrollIntoView({
           behavior: 'smooth'

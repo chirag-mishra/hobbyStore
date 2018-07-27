@@ -149,3 +149,6 @@ transition: all ease 0.4s;
     border-bottom: 1px solid #f2f3f5;
     padding: 10px;
 }
+.starRating{
+    color: #ffc107;
+}

@@ -93,9 +93,8 @@
     <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 commentSection pull-left" id="itemComment">
         <form (submit)="onCommentSubmit()" id="reviewForm">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
-                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 pull-left p-0 rating">
-                    <span class="far fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" (mouseover)="onMouseOverRating($event)"
-                        aria-hidden="true"></span>
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 pull-left p-0">
+                    <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<rate,'far':i>=rate}" (mouseover)="onMouseOverRating($event)"          aria-hidden="true"></span>
                     <span class="badge badge-success" name="rating">{{rate}}</span>
                 </div>
                 <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12 pull-left p-0">
