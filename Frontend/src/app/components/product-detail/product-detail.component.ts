@@ -9,6 +9,7 @@ import { ProductRating } from "./../../shared/product-rating";
 export class ProductDetailComponent {
     public prodRatinObj:ProductRating;
     rate:number;
+    onStarClick:boolean;
     starRating:number[];
     qtyInput:number;
     itemImageUrl:string; 
@@ -83,6 +84,7 @@ export class ProductDetailComponent {
     }];
     images:string[]=["assets/images/bicycleCards/BicycleCard1.jpg","assets/images/bicycleCards/BicycleCard2.jpg","assets/images/bicycleCards/BicycleCard1.jpg"];
     constructor(){
+        this.onStarClick=false;
         this.qtyInput=1;
         this.itemImageUrl = 'assets/images/bicycleCards/BicycleCard1.jpg';
         this.starRating =[0,1,2,3,4];
@@ -143,13 +145,18 @@ export class ProductDetailComponent {
         this.itemImageUrl=value.path[0].src;
     }
     onMouseOverRating(value:any){
+        if(!this.onStarClick){
+            this.rate=parseInt(value.target.id);
+        }
+    }
+    onMouseClickRating(value:any){
+        this.onStarClick=!this.onStarClick;
         this.rate=parseInt(value.target.id);
     }
-    mouseDown($event){
-        console.log("mouse down");
-    }
-    mouseUp($event){
-        console.log("mouse up");
+    onMouseOutRating(value:any){
+        if (!this.onStarClick) {
+            this.rate=0;
+        } 
     }
     scrollToRatingDiv (){
         document.querySelector('#reviewForm').scrollIntoView({
