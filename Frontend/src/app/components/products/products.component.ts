@@ -21,6 +21,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 250,
           "discount":10,
@@ -33,6 +34,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Spades",
           "price": 250,
           "discount":20,
@@ -45,6 +47,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Hearts",
           "price": 2500,
           "discount":30,
@@ -56,6 +59,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Diamond",
           "price": 250,
           "discount":40,
@@ -67,6 +71,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Ace",
           "price": 250,
           "discount":50.5,
@@ -78,6 +83,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "King",
           "price": 1250,
           "discount":10,
@@ -89,6 +95,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 250,
           "discount":50,
@@ -100,6 +107,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Queen",
           "price": 250,
           "discount":0,
@@ -111,6 +119,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 250,
           "discount":5,
@@ -122,6 +131,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle Cards",
           "price": 250,
           "discount":50,
@@ -133,6 +143,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "BlackJack",
           "price": 250,
           "discount":0,
@@ -144,6 +155,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 250,
           "discount":7,
@@ -155,6 +167,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 2110,
           "discount":10,
@@ -166,6 +179,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 21110,
           "discount":10,
@@ -177,6 +191,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 270,
           "discount":10,
@@ -188,6 +203,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 5550,
           "discount":0,
@@ -199,6 +215,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 250,
           "discount":0,
@@ -210,6 +227,7 @@ productObjects : any=
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle123",
           "price": 250,
           "discount":50,

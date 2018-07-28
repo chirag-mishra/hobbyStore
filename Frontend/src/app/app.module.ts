@@ -19,6 +19,15 @@ import { HomeComponent } from "./components/home/home.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+var routes =[{
+  path:"",
+  component:HomeComponent
+},
+{
+  path:"products/categories/:category/:productName/product-details/:id",
+  component:ProductDetailComponent
+}
+];
 
 @NgModule({
   declarations: [
@@ -39,7 +48,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
     NgxPaginationModule,
     FormsModule,
     OrderModule,
-    RouterModule,
+    RouterModule.forRoot(routes),
     NgxTypeaheadModule
   ],
   providers: [],

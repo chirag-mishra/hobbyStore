@@ -1,6 +1,6 @@
 import { Component,Input } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
-
+import { ActivatedRoute } from "@angular/router";
 @Component({
     selector: 'app-product-detail',
     templateUrl: './product-detail.component.html',
@@ -83,7 +83,7 @@ export class ProductDetailComponent {
         }
     }];
     images:string[]=["assets/images/bicycleCards/BicycleCard1.jpg","assets/images/bicycleCards/BicycleCard2.jpg","assets/images/bicycleCards/BicycleCard1.jpg"];
-    constructor(){
+    constructor(private route:ActivatedRoute){
         this.onStarClick=false;
         this.qtyInput=1;
         this.itemImageUrl = 'assets/images/bicycleCards/BicycleCard1.jpg';
@@ -135,6 +135,12 @@ export class ProductDetailComponent {
             }
         }]
     }
+    ngOnInit(){
+        var productId = (this.route.snapshot.params.id);
+        var productName= (this.route.snapshot.params.productName);
+        var productCatgeory=(this.route.snapshot.params.category);
+        //console.log(productId," ",productName," ",productCatgeory);
+     } 
     increaseQty(){
         ++this.qtyInput;
     }

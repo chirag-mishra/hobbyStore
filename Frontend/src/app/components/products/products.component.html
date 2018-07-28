@@ -19,7 +19,7 @@
     </div>
     <div class="cardLayout clearfix">
         <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of (productObjects |  orderBy: order:reverse:'case-insensitive' | stringFilter:filter) | paginate: config">
-            <div class="card" >
+            <div class="card" [routerLink]="['products/categories',product.products.category | lowercase,product.products.title | lowercase,'product-details',product.id]">
                 <img class="card-img-top" [src]="product.products.imgUrl" alt="Card image cap">
                 <div class="list-group list-group-flush">
                     <div>Title : {{product.products.title}}</div>
