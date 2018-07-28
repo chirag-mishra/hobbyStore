@@ -19,13 +19,17 @@ import { HomeComponent } from "./components/home/home.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
-var routes =[{
-  path:"",
-  component:HomeComponent
+var routes = [{
+  path: "",
+  component: HomeComponent
 },
 {
-  path:"products/categories/:category/:productName/product-details/:id",
-  component:ProductDetailComponent
+  path: "products/categories/:category/:id",
+  component: ProductDetailComponent
+},
+{
+  path: "viewcart/cartdetails",
+  component: CartDetailsComponent
 }
 ];
 

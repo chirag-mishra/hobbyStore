@@ -27,17 +27,22 @@
       </li>
     </ul>
     <form class="form-inline mt-2 mt-md-0 formHeader">
-      <input #txtSearchInput class="form-control mr-sm-2 home-search" [value]="query"  type="text" placeholder="Search" aria-label="Search"
-      ngxTypeahead
-      [taUrl]="url"
-      [taParams]="params"
-      (taSelected)="handleResultSelected($event)">
+      <input #txtSearchInput class="form-control mr-sm-2 home-search" [value]="query" type="text" placeholder="Search" aria-label="Search"
+        ngxTypeahead
+        [taUrl]="url" 
+        [taParams]="params" 
+        (taSelected)="handleResultSelected($event)">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div id="signupBtnContainer">
       <button class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal">Signup</button>
     </div>
-          
+    <div>
+      <a href="#" class="btn btn-info btn-md" [routerLink]="['viewcart/cartdetails']">
+        <span class="fas fa-shopping-cart"></span>
+        <span>1</span>
+      </a>
+    </div>
   </div>
 </nav>
 <modal-popup></modal-popup>
