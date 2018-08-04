@@ -2,82 +2,91 @@
     <div class="cart-content">
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 order-md-1 cartProductList">
-                    <div class="productInCart">
-                            <div class="prodThumbnail">
-                                <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
-                            </div>
-                            <div class="itemDetailsCart">
-                                <div class="itemName">
-                                    <a href="#.">Bicycle Cards</a>
-                                </div>
-                                <div class="itemDesc">
-                                    Blue
-                                </div>
-                                <div class="itemPriceDesc">
-                                    <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
-                                    <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
-                                    <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
-                                </div>
-                            </div>
-        
+                <div class="productInCart">
+                    <div class="prodThumbnail">
+                        <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
+                    </div>
+                    <div class="itemDetailsCart">
+                        <div class="itemName">
+                            <a href="#.">Bicycle Cards</a>
                         </div>
-                        <div class="productInCart">
-                                <div class="prodThumbnail">
-                                    <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
-                                </div>
-                                <div class="itemDetailsCart">
-                                    <div class="itemName">
-                                        <a href="#.">Bicycle Cards</a>
-                                    </div>
-                                    <div class="itemDesc">
-                                        Blue
-                                    </div>
-                                    <div class="itemPriceDesc">
-                                        <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
-                                        <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
-                                        <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
-                                    </div>
-                                </div>
-            
-                            </div>
-                            <div class="productInCart">
-                                    <div class="prodThumbnail">
-                                        <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
-                                    </div>
-                                    <div class="itemDetailsCart">
-                                        <div class="itemName">
-                                            <a href="#.">Bicycle Cards</a>
-                                        </div>
-                                        <div class="itemDesc">
-                                            Blue
-                                        </div>
-                                        <div class="itemPriceDesc">
-                                            <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
-                                            <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
-                                            <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
-                                        </div>
-                                    </div>
-                
-                                </div>
-                                <div class="productInCart">
-                                        <div class="prodThumbnail">
-                                            <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
-                                        </div>
-                                        <div class="itemDetailsCart">
-                                            <div class="itemName">
-                                                <a href="#.">Bicycle Cards</a>
-                                            </div>
-                                            <div class="itemDesc">
-                                                Blue
-                                            </div>
-                                            <div class="itemPriceDesc">
-                                                <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
-                                                <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
-                                                <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
-                                            </div>
-                                        </div>
-                    
-                                    </div>
+                        <div class="itemDesc">
+                            Blue
+                        </div>
+                        <div class="itemPriceDesc">
+                            <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
+                            <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
+                            <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
+                        </div>
+                        <div class="product-qty">
+                            <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
+                                <span class="fas fa-minus" aria-hidden="true" (click)="decreaseQty($event)"></span>
+                            </span>
+                            <input class="btn btn-default btn-xs inputCartQnty btn-qty" value="1" [(ngModel)]="qtyInput" />
+                            <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
+                                <span class="fas fa-plus" aria-hidden="true" (click)="increaseQty($event)"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="productInCart">
+                    <div class="prodThumbnail">
+                        <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
+                    </div>
+                    <div class="itemDetailsCart">
+                        <div class="itemName">
+                            <a href="#.">Bicycle Cards</a>
+                        </div>
+                        <div class="itemDesc">
+                            Blue
+                        </div>
+                        <div class="itemPriceDesc">
+                            <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
+                            <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
+                            <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="productInCart">
+                    <div class="prodThumbnail">
+                        <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
+                    </div>
+                    <div class="itemDetailsCart">
+                        <div class="itemName">
+                            <a href="#.">Bicycle Cards</a>
+                        </div>
+                        <div class="itemDesc">
+                            Blue
+                        </div>
+                        <div class="itemPriceDesc">
+                            <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
+                            <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
+                            <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="productInCart">
+                    <div class="prodThumbnail">
+                        <img src="assets/images/prod1.jpg" alt="Product1" class="img-thumbnail">
+                    </div>
+                    <div class="itemDetailsCart">
+                        <div class="itemName">
+                            <a href="#.">Bicycle Cards</a>
+                        </div>
+                        <div class="itemDesc">
+                            Blue
+                        </div>
+                        <div class="itemPriceDesc">
+                            <div class="itemDiscountedPrice">{{price | currency:'&#8377;'}}</div>
+                            <div class="itemActualPrice">{{actualPrice | currency:'&#8377;'}}</div>
+                            <div class="itemDiscount">(-{{discount | percent:'2.0-2'}})</div>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="billingSection">
                     <h4 class="mb-3">Billing address</h4>
                     <form class="needs-validation" novalidate="">

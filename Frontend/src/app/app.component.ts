@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +15,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  onActivate(e){
+  onActivate(e) {
     window.scrollTo(0, 0);
   }
 }

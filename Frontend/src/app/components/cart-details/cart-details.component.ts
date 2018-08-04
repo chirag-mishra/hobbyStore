@@ -7,7 +7,16 @@ import { Component } from '@angular/core';
 })
 
 export class CartDetailsComponent {
+
+  cartProductInfo: any = [
+    {
+      "costPrice": "350",
+      "markPrice": "590"
+    }
+  ]
+
+
   price: number = 350;
   actualPrice: number = 590;
-  discount: number = this.price/this.actualPrice;
+  discount: number = this.price / this.actualPrice;
 }
