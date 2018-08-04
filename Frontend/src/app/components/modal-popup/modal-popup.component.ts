@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class ModalPopupComponent {
 
-  title:string="HobbyBridge";
+  title:string="Hobby Fare";
 }

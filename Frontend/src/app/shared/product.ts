@@ -2,8 +2,8 @@
 export class Product {
   "id": number;
   products: {
-    "imgUrl": String,
-    "title": String,
+    "imgUrl": string,
+    "title": string,
     "price": number,
     "discount": number,
     "rating": number,

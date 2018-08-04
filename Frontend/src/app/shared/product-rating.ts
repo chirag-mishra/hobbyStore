@@ -1,8 +1,8 @@
 export class ProductRating {
     "id": number
     comment: {
-      "userName": String,
-      "title": String,
+      "userName": string,
+      "title": string,
       "description": string,
       "rating": number
     }
