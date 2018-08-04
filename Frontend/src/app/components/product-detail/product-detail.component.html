@@ -14,9 +14,9 @@
     </div>
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
         <div class="productDescription">
-            <h2>BICYCLE
-                <sup class="mediumSup">®</sup>
-                BIG BOX PLAYING CARDS</h2>
+            <h2>{{productsObj.title}}
+                <!-- <sup class="mediumSup">®</sup> -->
+                </h2>
         </div>
         <div>
             <h5>
@@ -26,32 +26,20 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="description">
-                    Big Box cards are a super-sized alternative!
+                <p class="description" *ngFor="let productDesc of productsObj.description">
+                    {{productDesc}}
                 </p>
-                <p class="p1">Want to be a hit at your next game night? Be sure to pick up Bicycle
-                    <span class="s1">
-                        <sup>®</sup>
-                    </span>Big Box playing cards. A fun, super-sized alternative to regular cards.</p>
             </div>
             <ul>
-                <li class="p1">Bicycle Big Box Playing Cards feature the classic rider back design</li>
-                <li class="p1">Big Box playing cards measure 7” x 4.5”</li>
-                <li class="p1">Available in red or blue</li>
-                <li class="p1">Perfect for all ages</li>
-                <li class="p1">Great for play, as a novelty item, for decorating, and more</li>
+                <li class="p1" *ngFor="let productSpec of productsObj.specification">{{productSpec}}</li>
             </ul>
         </div>
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 p-0">
-                    <span class="sr-only">Four out of Five Stars</span>
-                    <span class="fas fa-star" aria-hidden="true"></span>
-                    <span class="fas fa-star" aria-hidden="true"></span>
-                    <span class="fas fa-star" aria-hidden="true"></span>
-                    <span class="fas fa-star" aria-hidden="true"></span>
-                    <span class="far fa-star" aria-hidden="true"></span>
-                    <span class="badge badge-success">61</span>
+                    <!-- <span class="sr-only">Four out of Five Stars</span> -->
+                    <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<productsObj.rating,'far':i>=productsObj.rating}" aria-hidden="true"></span>
+                    <span class="badge badge-success">{{productsObj.totalReview}}</span>
                 </div>
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 ">
                     <button class="review" (click)="scrollToRatingDiv()">Write a Review</button>
@@ -60,32 +48,32 @@
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 bottom-rule">
-                <h2 class="product-price">$129.00</h2>
+                <h2 class="product-price">{{productsObj.price | currency:'&#8377;'}}</h2>
             </div>
         </div>
         <!-- end row -->
 
         <div class="row add-to-cart">
             <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 product-qty">
-                <span class="btn btn-default btn-lg btn-qty btnIncDec">
-                    <span class="fas fa-minus" aria-hidden="true" (click)="decreaseQty($event)"></span>
+                <span>
+                    <button class="fas fa-minus btn-qty btnIncDec" (click)="decreaseQty($event)"></button>
                 </span>
-                <input class="btn btn-default btn-lg btn-qty" value="1" [(ngModel)]="qtyInput" />
-                <span class="btn btn-default btn-lg btn-qty btnIncDec">
-                    <span class="fas fa-plus" aria-hidden="true" (click)="increaseQty($event)"></span>
+                <input class="btn btn-default btn-lg btn-qty" [(ngModel)]="qtyInput" />
+                <span>
+                    <button class="fas fa-plus btn-qty btnIncDec" (click)="increaseQty($event)" [disabled]="qtyInput>productsObj.quantity || (addToCartText == 'Out of Stock')"></button>            
                 </span>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                <button class="btn btn-lg btn-primary btn-brand btn-full-width" [disabled]="qtyInput==0">
-                    Add to Cart
+                <button class="btn btn-lg btn-primary btn-brand btn-full-width" [disabled]="qtyInput==0 || (addToCartText == 'Out of Stock') || qtyInput>productsObj.quantity">
+                    {{addToCartText}}
                 </button>
             </div>
         </div>
         <!-- end row -->
 
-        <div class="row inStockMargin">
-            <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 text-center p-0">
-                <span class="monospaced text-success">In Stock</span>
+        <div class="row inStockMargin" [hidden]="addToCartText == 'Out of Stock'">
+            <div class="col-sm-12 col-xs-12 text-center p-0" [ngClass]="{'col-md-3 col-lg-3 text-success':inStockText=='In Stock','col-md-7 col-lg-7 text-danger':inStockText!='In Stock'}">
+                <span class="monospaced">{{inStockText}}</span>
             </div>
         </div>
         <!-- end row -->
@@ -148,18 +136,20 @@
         </div>
         <div class="cardLayout clearfix">
             <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of similarProductObjects">
-                <div class="card">
-                    <img class="card-img-top" [src]="product.products.imgUrl" alt="Card image cap">
-                    <div class="list-group list-group-flush">
-                        <div>Title : {{product.products.title}}</div>
-                        <div>Price : {{product.products.price | currency:'&#8377;'}}</div>
-                        <div>Rating : {{product.products.rating}}</div>
+                <a href="/products/categories/{{product.products.category | lowercase}}/{{product.id}}">
+                    <div class="card" id="{{product.products.category+'/'+product.id}}">
+                        <img class="card-img-top" [src]="product.products.imgUrl" alt="Card image cap">
+                        <div class="list-group list-group-flush">
+                            <div>Title : {{product.products.title}}</div>
+                            <div>Price : {{product.products.price | currency:'&#8377;'}}</div>
+                            <div>Rating : {{product.products.rating}}</div>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#">Buy Now</a>
+                            <a href="#">Add to Cart</a>
+                        </div>
                     </div>
-                    <div class="card-buttons">
-                        <a href="#">Buy Now</a>
-                        <a href="#">Add to Cart</a>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

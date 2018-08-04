@@ -62,6 +62,9 @@ transition: all ease 0.4s;
 .btnIncDec{
     font-size: 14px;
     vertical-align: sub;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 }
 .rating span.fa-star:hover{
     color:red;

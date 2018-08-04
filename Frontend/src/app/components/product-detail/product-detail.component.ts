@@ -1,6 +1,7 @@
-import { Component,Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
 import { ActivatedRoute } from "@angular/router";
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-product-detail',
     templateUrl: './product-detail.component.html',
@@ -14,6 +15,18 @@ export class ProductDetailComponent {
     qtyInput:number;
     itemImageUrl:string; 
     reviewObj :any;
+    outOfStock:boolean;
+    addToCartText:string;
+    inStockText:string;
+    productsObj : any = {
+        "title":"BICYCLE BIG BOX PLAYING CARDS",
+        "description":["Big Box cards are a super-sized alternative!","Want to be a hit at your next game night? Be sure to pick up Bicycle ® Big Box playing cards. A fun, super-sized alternative to regular cards."],
+        "specification":["Bicycle Big Box Playing Cards feature the classic rider back design","Big Box playing cards measure 7\" x 4.5\”","Available in red or blue","Perfect for all ages","Great for play, as a novelty item, for decorating, and more"],
+        "rating":4,
+        "totalReview":61,
+        "price":129,
+        "quantity":2
+    }
     commentObj: any = [
         {
             userName:"Rakesh",
@@ -29,6 +42,7 @@ export class ProductDetailComponent {
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Bicycle",
           "price": 250,
           "discount":10,
@@ -41,6 +55,7 @@ export class ProductDetailComponent {
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Spades",
           "price": 250,
           "discount":20,
@@ -53,6 +68,7 @@ export class ProductDetailComponent {
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Hearts",
           "price": 2500,
           "discount":30,
@@ -64,6 +80,7 @@ export class ProductDetailComponent {
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Diamond",
           "price": 250,
           "discount":40,
@@ -75,6 +92,7 @@ export class ProductDetailComponent {
       products:
         {
           "imgUrl": "assets/images/demo.jpg",
+          "category":"Cards",
           "title": "Ace",
           "price": 250,
           "discount":50.5,
@@ -83,9 +101,16 @@ export class ProductDetailComponent {
         }
     }];
     images:string[]=["assets/images/bicycleCards/BicycleCard1.jpg","assets/images/bicycleCards/BicycleCard2.jpg","assets/images/bicycleCards/BicycleCard1.jpg"];
-    constructor(private route:ActivatedRoute){
+    constructor(private route:ActivatedRoute,private router:Router){
         this.onStarClick=false;
+        this.inStockText = "In Stock";
         this.qtyInput=1;
+        this.addToCartText = "Add to Cart";
+        if (this.productsObj.quantity == 0) {
+            this.outOfStock =true;
+            this.qtyInput=0;
+            this.addToCartText = "Out of Stock"
+        }
         this.itemImageUrl = 'assets/images/bicycleCards/BicycleCard1.jpg';
         this.starRating =[0,1,2,3,4];
         this.rate=0;
@@ -135,17 +160,19 @@ export class ProductDetailComponent {
             }
         }]
     }
-    ngOnInit(){
-        var productId = (this.route.snapshot.params.id);
-        var productName= (this.route.snapshot.params.productName);
-        var productCatgeory=(this.route.snapshot.params.category);
-        //console.log(productId," ",productName," ",productCatgeory);
-     } 
     increaseQty(){
         ++this.qtyInput;
+        if(this.qtyInput>parseInt(this.productsObj.quantity))
+        {
+            this.inStockText ="Sorry, quantity is greater than available stock."
+        }       
     }
     decreaseQty(){
         this.qtyInput=this.qtyInput-1 < 0 ? 0 : --this.qtyInput;
+        if(this.qtyInput<=parseInt(this.productsObj.quantity)){
+            this.inStockText = "In Stock";
+        }
+        
     }   
     imageChange(value:any){
         this.itemImageUrl=value.path[0].src;
@@ -174,7 +201,7 @@ export class ProductDetailComponent {
         //     this.prodRatinObj = new ProductRating();
         //     this.prodRatinObj.comment.rating = this.rate;
         //     this.prodRatinObj.comment.title= this.commentObj.title!=undefined ?this.commentObj.title : "";
-        //     this.prodRatinObj.comment.description = this.commentObj.decription!=undefined?this.commentObj.decription:"";
+        //     this.prodRatinObj.comment.description = this.commentObj.decription!=undefined?// // this.commentObj.decription:"";
         //     console.log(this.prodRatinObj);
         // }
     }
