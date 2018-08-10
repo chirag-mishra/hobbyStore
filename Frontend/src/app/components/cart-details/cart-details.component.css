@@ -70,3 +70,20 @@
 .itemDetailsCart {
     padding: 5px;
 }
+
+.btnIncDecCart{
+    font-size: 11px;
+    vertical-align: sub;
+    padding: 0px;
+}
+
+.inputCartQnty{
+    width: 11%;
+    border: 1px solid;
+    padding: 0px;
+}
+
+.btnColor{
+    background-color:#ff0000;
+    border-color:#ff0000;
+ } 

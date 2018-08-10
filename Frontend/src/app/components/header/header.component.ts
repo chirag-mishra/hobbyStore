@@ -11,7 +11,7 @@ import { EventEmitter } from '@angular/core';
 
 export class HeaderComponent {
 
-  title: string = "HobbyBridge";
+  title: string = "Hobby Fare";
   categories: any[] = ["Premium Cards", "Close Up Magic", "Intermediate Tricks", "Beginner Tricks", "Street Magic", "Mentalism", "Stage Magic", "Accessories", "Books"];
   bestSellers: any[] = ["Huppin's", "Popjens", "Bicycle"];
 

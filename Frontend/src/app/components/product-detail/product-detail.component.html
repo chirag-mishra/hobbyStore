@@ -82,9 +82,9 @@
         <form (submit)="onCommentSubmit()" id="reviewForm">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 pull-left p-0">
-                    <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<rate,'far':i>=rate}" (mouseover)="onMouseOverRating($event)" 
-                        (mouseout)="onMouseOutRating($event)"
-                        (click)="onMouseClickRating($event)" aria-hidden="true"></span>
+                    <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<rate,'far':i>=rate}"
+                        (mouseover)="onMouseOverRating($event)" (mouseout)="onMouseOutRating($event)" (click)="onMouseClickRating($event)"
+                        aria-hidden="true"></span>
                     <span class="badge badge-success" name="rating">{{rate}}</span>
                 </div>
                 <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12 pull-left p-0">
@@ -95,8 +95,8 @@
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left">
                 <label for="title">Title:</label>
-                <input type="text" [(ngModel)]="commentObj.title"            
-                 class="form-control" name="title" id="titleRating" placeholder="" value="" required>
+                <input type="text" [(ngModel)]="commentObj.title" class="form-control" name="title" id="titleRating" placeholder="" value=""
+                    required>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left">
                 <label for="description">Description:</label>
@@ -106,7 +106,9 @@
         </form>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left" *ngFor="let review of reviewObj; let i=index">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left p-0 rating commentUser">
-                <h6><strong>{{review.comment.userName}}</strong></h6>
+                <h6>
+                    <strong>{{review.comment.userName}}</strong>
+                </h6>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left p-0 rating">
                 <label for="rating">Rating: </label>
@@ -118,16 +120,18 @@
                 </p>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left" [hidden]="review.comment.description==''">
-                <p>{{review.comment.description}}</p>                
+                <p>{{review.comment.description}}</p>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left">
                 <hr>
             </div>
         </div>
     </div>
-    <div  class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 similarProduct pull-left" id="similarProduct">
+    <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 similarProduct pull-left" id="similarProduct">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <h4><strong>Similar products</strong></h4>
+            <h4>
+                <strong>Similar products</strong>
+            </h4>
             <hr>
         </div>
         <div class="cardLayout clearfix">
