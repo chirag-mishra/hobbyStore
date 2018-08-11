@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RouterModule } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AdminComponent } from "./component/admin/admin.component";
@@ -9,6 +9,18 @@ import { StringFilterPipe } from './shared/string-filter.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from "./component/login/login.component";
+
+
+var routes = [{
+  path:"",
+  component:LoginComponent
+},
+{
+  path:"admin",
+  component:AdminComponent
+}
+]
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +33,8 @@ import { LoginComponent } from "./component/login/login.component";
     FormsModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
