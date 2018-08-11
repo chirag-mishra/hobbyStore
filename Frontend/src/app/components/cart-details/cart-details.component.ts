@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { transition } from '@angular/core/src/animation/dsl';
 import { Form } from '@angular/forms/src/directives/form_interface';
+import { parse } from 'url';
 
 @Component({
   selector: 'app-cart-details',
@@ -12,8 +13,11 @@ export class CartDetailsComponent {
 
   login: boolean;
   discount: number;
-  private isCheckOutBtn = false;
-  private GuestBtn = true;
+  isCheckOutBtn: boolean = false;
+  GuestBtn: boolean = true;
+  finalPrice: number = 0;
+  promocodeval: number = 20;
+  invalidPromocode: boolean;
 
   constructor() {
     this.isLoggedIn();
@@ -21,46 +25,68 @@ export class CartDetailsComponent {
       this.isCheckOutBtn = true;
       this.GuestBtn = false;
     }
+    this.CalculateTotal();
   }
   isLoggedIn() { this.login = true; }
 
   cartproductdetails: any = [
     {
-      id: "1",
+      productid: "1",
       imageurl: "assets/images/prod1.jpg",
       costprice: "350",
       markprice: "590",
       quantity: "1",
       title: "Bicycle Cards",
-      variant: "Blue"
+      variant: "Blue",
+      availablestock: "5"
     },
     {
-      id: "2",
+      productid: "2",
       imageurl: "assets/images/prod1.jpg",
       costprice: "100",
       markprice: "200",
       quantity: "1",
       title: "Bicycle Cards",
-      variant: "Blue"
+      variant: "Blue",
+      availablestock: "0"
     }
   ];
-  getdiscountValue(costprice1: number, markprice1: number) {
-    return this.discount = costprice1 / markprice1;
+  getdiscountValue(costprice: number, markprice1: number) {
+    return this.discount = costprice / markprice1;
   }
-  decreaseQty(quantityMod: number, index: number) {
+  decreaseQty(index: number) {
     if (this.cartproductdetails[index].quantity == 0) {
-      return this.cartproductdetails[index].quantity = 0;
+      this.cartproductdetails[index].quantity = 0;
     }
     else {
-      return --this.cartproductdetails[index].quantity;
+      this.cartproductdetails[index].quantity--;
+      this.CalculateTotal();
     }
   }
-  increaseQty(quantityMod: number, index: number) {
-    return ++this.cartproductdetails[index].quantity;
+  increaseQty(index: number) {
+    if (this.cartproductdetails[index].quantity > this.cartproductdetails[index].availablestock - 1) {
+      this.cartproductdetails[index].quantity = this.cartproductdetails[index].availablestock;
+    }
+    else {
+      this.cartproductdetails[index].quantity++;
+      this.CalculateTotal();
+    }
   }
-
-  onSubmit()
-  {
-    var forms = document.getElementsByClassName('needs-validation');
+  CalculateTotal() {
+    this.finalPrice = 0;
+    for (var value of this.cartproductdetails) {
+      this.finalPrice += (parseInt(value.costprice) * parseInt(value.quantity));
+    }
+    this.ValidatePromoCode();
+  }
+  ValidatePromoCode() {
+    if (false) { 
+      // this.invalidPromocode = false; 
+    }
+    else {
+    this.promocodeval = 0;
+    this.invalidPromocode = true;
+    }
+    this.finalPrice -= this.promocodeval;
   }
 }

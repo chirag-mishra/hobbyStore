@@ -20,24 +20,30 @@
                         </div>
                         <div class="product-qty">
                             <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
-                                <button class="fas fa-minus" aria-hidden="true" (click)="decreaseQty(productinfo.quantity,i)" [disabled]="productinfo.quantity == 0"></button>
+                                <button class="fas fa-minus" aria-hidden="true" (click)="decreaseQty(i)" [disabled]="productinfo.quantity == 0"></button>
                             </span>
                             <input class="btn btn-default btn-xs inputCartQnty btn-qty" value="productinfo.quantity" [(ngModel)]="productinfo.quantity"
                             />
                             <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
-                                <button class="fas fa-plus" aria-hidden="true" (click)="increaseQty(productinfo.quantity,i)"></button>
+                                <button class="fas fa-plus" aria-hidden="true" (click)="increaseQty(i)"></button>
                             </span>
+                        </div>
+                        <div class="row inStockMargin">
+                            <div class="text-center p-0" [ngClass]="{ 'text-success':productinfo.quantity<productinfo.availablestock}">
+                                <span class="monospaced">{{productinfo.quantity
+                                    <productinfo.availablestock? "In Stock": "Only "+productinfo.availablestock+ " in Stock"}}</span>
+                            </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="billingSection">
                     <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation" id="formBillingDetails" novalidate >
+                    <form class="needs-validation" id="formBillingDetails" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control is-valid" id="txtfirstName" placeholder="" value="" required="">
+                                <input type="text" class="form-control" id="txtfirstName" placeholder="" value="" required="">
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
@@ -95,29 +101,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mb-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="same-address">
-                            <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="save-info">
-                            <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                        </div>
-                        <hr class="mb-4">
-
-                        <h4 class="mb-3">Payment</h4>
-
-                        <div class="d-block my-3">
-                            <div class="custom-control custom-radio">
-                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-                                <label class="custom-control-label" for="credit">Paytm</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                                <label class="custom-control-label" for="debit">TEZ</label>
-                            </div>
-                        </div>
                     </form>
 
                 </div>
@@ -128,37 +111,25 @@
                     <span class="badge badge-secondary badge-pill">3</span>
                 </h4>
                 <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let productinfo of cartproductdetails;let i =index">
                         <div>
-                            <h6 class="my-0">Product name</h6>
-                            <small class="text-muted">Brief description</small>
+                            <h6 class="my-0">{{productinfo.title}}</h6>
+                            <!-- <small class="text-muted">Brief description</small> -->
                         </div>
-                        <span class="text-muted">$12</span>
+                        <span class="text-muted">{{productinfo.costprice * productinfo.quantity| currency:'&#8377;'}}</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Second product</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">$8</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Third item</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <span class="text-muted">$5</span>
-                    </li>
+                </ul>
+                <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between bg-light">
                         <div class="text-success">
                             <h6 class="my-0">Promo code</h6>
-                            <small>EXAMPLECODE</small>
                         </div>
-                        <span class="text-success">-$5</span>
+                        <span class="text-success">{{promocodeval|currency:'&#8377;'}}</span>
                     </li>
+
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong>$20</strong>
+                        <span>Total (INR)</span>
+                        <strong>{{finalPrice|currency:'&#8377;'}}</strong>
                     </li>
                 </ul>
 
@@ -166,14 +137,32 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Promo code">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-secondary">Redeem</button>
+                            <button (click)="ValidatePromoCode();" class="btn btn-secondary">Apply</button>
                         </div>
+                        <div class="invalid-promo" [ngClass]="{'invalid-promo visible':invalidPromocode,'ntvisible':!invalidPromocode}">
+                            Invalid Promo Code
+                         </div>
                     </div>
                 </form>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" *ngIf="this.isCheckOutBtn" (click)="onSubmit()">Continue to checkout</button>
-                <button class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#exampleModal" *ngIf="this.GuestBtn"  type="submit">SignUp</button>
-                <button class="btn btn-primary btn-lg btn-block btnColor" href="#" *ngIf="this.GuestBtn"  type="submit">Continue as Guest</button>
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                        <label class="custom-control-label" for="credit">Paytm</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="debit">TEZ</label>
+                    </div>
+                </div>
+                <hr class="mb-4">
+
+                <button class="btn btn-primary btn-lg btn-block" *ngIf="this.isCheckOutBtn">Continue to checkout</button>
+                <button class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#exampleModal" *ngIf="this.GuestBtn"
+                    type="submit">SignUp</button>
+                <button class="btn btn-primary btn-lg btn-block btnColor" href="#" *ngIf="this.GuestBtn" type="submit">Continue as Guest</button>
             </div>
         </div>
     </div>
