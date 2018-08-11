@@ -1,0 +1,61 @@
+
+.addQuantity{
+    padding: 10px 0;
+}
+.titleColor{
+    color: white;
+}
+.pull-left{
+    float: left;
+}
+.inline-block{
+    display: inline-block;
+}
+.pull-right{
+float: right;
+}
+.btnIncDec{
+    font-size: 14px;
+    vertical-align: sub;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.btn-qty {
+    width: 40%;
+}
+.w-70{
+    width: 70%;
+}
+.w-15{
+    width: 15%;
+}
+.tableBorder{
+    border:2px solid #dee2e6;
+    border-collapse: unset;
+}
+.center{
+    text-align: center;
+}
+.productItemFilter{
+    padding:5px;
+}
+.btnInc{
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    vertical-align: sub;
+}
+.form-border{
+    border: 2px solid #dee2e6;
+}
+.bottom-Padding{
+    padding-bottom: 2%;
+}
+.top-padding{
+    padding-top: 2%;
+}
+.tableHeader{
+    font-weight: bold;
+    font-size: 25px;
+}

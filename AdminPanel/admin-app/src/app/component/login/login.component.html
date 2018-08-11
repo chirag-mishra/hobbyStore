@@ -1,0 +1,15 @@
+<form>
+  
+    <div class="container header">
+        <h1>Welcome to HobbyFare!</h1>
+    </div>
+    <div class="container">
+      <label for="email"><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" [(ngModel)]="loginDetailsObj.userEmailId"  name="email" required>
+      <label for="errorEmail" class="errorEmail" [ngClass]="{'error':isValidEmail(loginDetailsObj.userEmailId)}">Email should be in proper format</label>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" [(ngModel)]="loginDetailsObj.userPassword" name="psw" required>
+          
+      <button type="submit" (click)="onLoginSubmit()">Login</button>
+    </div>
+  </form>
