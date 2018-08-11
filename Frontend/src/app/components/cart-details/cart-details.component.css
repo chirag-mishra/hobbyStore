@@ -87,3 +87,18 @@
     background-color:#ff0000;
     border-color:#ff0000;
  } 
+
+ .invalid-promo {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+  }
+
+  .visible{
+      display: inline-block;
+  }
+
+  .ntvisible{
+    display: none;
+}
