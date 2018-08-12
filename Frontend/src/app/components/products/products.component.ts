@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PaginationInstance } from '../../../../node_modules/ngx-pagination/dist/ngx-pagination.module';
 import { StringFilterPipe } from './../../shared/string-filter.pipe';
 import { OrderPipe } from 'ngx-order-pipe';
+import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -255,7 +256,7 @@ productObjects : any=
   };
   //sorting required inputs
   sortedCollection: any[];
-  constructor(private orderPipe: OrderPipe) {
+  constructor(private orderPipe: OrderPipe,private cartdata:CartsharedService) {
     this.sortedCollection = this.orderPipe.transform(this.productObjects, 'products.rating');
     this.productObjects = this.sortedCollection;
   }
@@ -300,5 +301,8 @@ productObjects : any=
     }
     this.order = value;
   }
-
+  AdditemtoCart()
+  {
+    this.cartdata.changecartvalue(1);
+  }
 }

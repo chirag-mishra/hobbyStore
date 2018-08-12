@@ -20,6 +20,10 @@ import { ProductDetailComponent } from "./components/product-detail/product-deta
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { CartsharedService } from './shared/cartsharedservice/cartshared.service';
+
 var routes = [{
   path: "",
   component: HomeComponent
@@ -54,9 +58,11 @@ var routes = [{
     FormsModule,
     OrderModule,
     RouterModule.forRoot(routes),
-    NgxTypeaheadModule
+    NgxTypeaheadModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot() 
   ],
-  providers: [],
+  providers: [CartsharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

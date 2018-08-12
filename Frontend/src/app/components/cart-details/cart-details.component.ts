@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { transition } from '@angular/core/src/animation/dsl';
-import { Form } from '@angular/forms/src/directives/form_interface';
-import { parse } from 'url';
+import { ToastrService } from 'ngx-toastr';
+import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 
 @Component({
   selector: 'app-cart-details',
@@ -18,15 +17,20 @@ export class CartDetailsComponent {
   finalPrice: number = 0;
   promocodeval: number = 20;
   invalidPromocode: boolean;
+  promocode: string;
+  unalterdPrice: number;
+  promoApply: boolean;
 
-  constructor() {
+  constructor(private toastr: ToastrService, private cartdata: CartsharedService) {
     this.isLoggedIn();
     if (this.login) {
       this.isCheckOutBtn = true;
       this.GuestBtn = false;
     }
+
     this.CalculateTotal();
   }
+
   isLoggedIn() { this.login = true; }
 
   cartproductdetails: any = [
@@ -34,8 +38,9 @@ export class CartDetailsComponent {
       productid: "1",
       imageurl: "assets/images/prod1.jpg",
       costprice: "350",
+      displayprice: "350",
       markprice: "590",
-      quantity: "1",
+      quantity: "6",
       title: "Bicycle Cards",
       variant: "Blue",
       availablestock: "5"
@@ -44,6 +49,7 @@ export class CartDetailsComponent {
       productid: "2",
       imageurl: "assets/images/prod1.jpg",
       costprice: "100",
+      displayprice: "100",
       markprice: "200",
       quantity: "1",
       title: "Bicycle Cards",
@@ -60,33 +66,60 @@ export class CartDetailsComponent {
     }
     else {
       this.cartproductdetails[index].quantity--;
+      this.toastr.warning(this.cartproductdetails[index].title, 'Quantity reduced Successfully!',{
+        timeOut: 30000
+      });
+      this.cartdata.changecartvalue(-1);
       this.CalculateTotal();
     }
   }
   increaseQty(index: number) {
     if (this.cartproductdetails[index].quantity > this.cartproductdetails[index].availablestock - 1) {
       this.cartproductdetails[index].quantity = this.cartproductdetails[index].availablestock;
+      this.toastr.error(this.cartproductdetails[index].title, 'Maximum available quantity reached!',{
+        timeOut: 30000
+      });
     }
     else {
       this.cartproductdetails[index].quantity++;
+      this.toastr.success(this.cartproductdetails[index].title, 'Quantity increased Successfully!',
+    {
+      timeOut: 30000
+    });
+      this.cartdata.changecartvalue(1);
       this.CalculateTotal();
     }
   }
   CalculateTotal() {
     this.finalPrice = 0;
     for (var value of this.cartproductdetails) {
+      value.costprice = value.availablestock == 0 ? 0 : value.costprice;
       this.finalPrice += (parseInt(value.costprice) * parseInt(value.quantity));
     }
-    this.ValidatePromoCode();
+    this.unalterdPrice = this.finalPrice;
+    this.ValidatePromoCode(this.promocode);
   }
-  ValidatePromoCode() {
-    if (false) { 
-      // this.invalidPromocode = false; 
+
+  ValidatePromoCode(promo: string) {
+    if (this.finalPrice != 0) {
+      this.promocode = promo;
+      if (this.promocode === "NEW50") {
+        this.promocodeval = 50 / 100 * this.unalterdPrice;
+        this.invalidPromocode = false;
+        this.finalPrice = this.unalterdPrice;
+        this.finalPrice -= this.promocodeval;
+      }
+      else {
+        this.promocodeval = 0;
+        this.invalidPromocode = true;
+        this.finalPrice = this.unalterdPrice;
+      }
     }
-    else {
-    this.promocodeval = 0;
-    this.invalidPromocode = true;
-    }
-    this.finalPrice -= this.promocodeval;
+  }
+  RemoveItem(index: number) {
+    var prodquantity = this.cartproductdetails[index].quantity;
+    this.cartproductdetails.splice(index, 1);
+    this.cartdata.changecartvalue(-1*prodquantity);
+    this.CalculateTotal();
   }
 }

@@ -1,5 +1,5 @@
 //product {"_id" : "id", "quantity" : "qty"}
-addToCart = (product) => {
+ addToCart = (product) => {
 
     if (!localStorage.getItem("cart")) {
         let cart = [];

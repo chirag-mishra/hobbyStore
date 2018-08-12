@@ -102,3 +102,9 @@
   .ntvisible{
     display: none;
 }
+
+.clearBtn{
+    position: relative;
+    right: 17px;
+    z-index: 9999;
+}

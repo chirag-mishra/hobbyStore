@@ -3,39 +3,44 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 order-md-1 cartProductList">
                 <div class="productInCart" *ngFor="let productinfo of cartproductdetails;let i =index">
-                    <div class="prodThumbnail">
-                        <img src="{{productinfo.imageurl}}" alt="Product1" class="img-thumbnail">
-                    </div>
-                    <div class="itemDetailsCart">
-                        <div class="itemName">
-                            <a href="#.">{{productinfo.title}}</a>
+                    <div>
+                        <div class="prodThumbnail">
+                            <img src="{{productinfo.imageurl}}" alt="Product1" class="img-thumbnail">
                         </div>
-                        <div class="itemDesc">
-                            {{productinfo.variant}}
-                        </div>
-                        <div class="itemPriceDesc">
-                            <div class="itemDiscountedPrice">{{productinfo.costprice | currency:'&#8377;'}}</div>
-                            <div class="itemActualPrice">{{productinfo.markprice | currency:'&#8377;'}}</div>
-                            <div class="itemDiscount">(-{{getdiscountValue(productinfo.costprice,productinfo.markprice) | percent:'2.0-2'}})</div>
-                        </div>
-                        <div class="product-qty">
-                            <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
-                                <button class="fas fa-minus" aria-hidden="true" (click)="decreaseQty(i)" [disabled]="productinfo.quantity == 0"></button>
-                            </span>
-                            <input class="btn btn-default btn-xs inputCartQnty btn-qty" value="productinfo.quantity" [(ngModel)]="productinfo.quantity"
-                            />
-                            <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
-                                <button class="fas fa-plus" aria-hidden="true" (click)="increaseQty(i)"></button>
-                            </span>
-                        </div>
-                        <div class="row inStockMargin">
-                            <div class="text-center p-0" [ngClass]="{ 'text-success':productinfo.quantity<productinfo.availablestock}">
-                                <span class="monospaced">{{productinfo.quantity
-                                    <productinfo.availablestock? "In Stock": "Only "+productinfo.availablestock+ " in Stock"}}</span>
+                        <div class="itemDetailsCart">
+                            <div class="itemName">
+                                <a href="#.">{{productinfo.title}}</a>
+                            </div>
+                            <div class="itemDesc">
+                                {{productinfo.variant}}
+                            </div>
+                            <div class="itemPriceDesc">
+                                <div class="itemDiscountedPrice">{{productinfo.displayprice | currency:'&#8377;'}}</div>
+                                <div class="itemActualPrice">{{productinfo.markprice | currency:'&#8377;'}}</div>
+                                <div class="itemDiscount">(-{{getdiscountValue(productinfo.displayprice,productinfo.markprice) | percent:'2.0-2'}})</div>
+                            </div>
+                            <div class="product-qty">
+                                <div [ngClass]="{'ntvisible':productinfo.availablestock == 0,'visible':productinfo.availablestock != 0}">
+                                    <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
+                                        <button class="fas fa-minus" aria-hidden="true" (click)="decreaseQty(i)" [disabled]="productinfo.quantity == 1 || productinfo.availablestock == 0"></button>
+                                    </span>
+                                    <input class="btn btn-default btn-xs inputCartQnty btn-qty" value="productinfo.quantity" [(ngModel)]="productinfo.quantity"
+                                    />
+                                    <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
+                                        <button class="fas fa-plus" aria-hidden="true" (click)="increaseQty(i)" [disabled]="productinfo.quantity > productinfo.availablestock || productinfo.availablestock == 0"></button>
+                                    </span>
+                                </div>
+                                <button (click)="RemoveItem(i);">Remove</button>
+                            </div>
+                            <div class="inStockMargin">
+                                <div class="p-0" [ngClass]="{ 'text-success':productinfo.quantity<productinfo.availablestock,'text-danger':productinfo.availablestock==0}">
+                                    <span class="monospaced">{{productinfo.quantity
+                                        <productinfo.availablestock? "In Stock": productinfo.availablestock==0 ? "Out of Stock": "Only "+productinfo.availablestock+
+                                            " in Stock"}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="billingSection">
                     <h4 class="mb-3">Billing address</h4>
@@ -108,13 +113,14 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your cart</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
+                    <!-- <span class="badge badge-secondary badge-pill">{{cartvalue}}</span> -->
                 </h4>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let productinfo of cartproductdetails;let i =index">
+                <ul class="list-group mb-3" *ngFor="let productinfo of cartproductdetails;let i =index">
+                    <li *ngIf="productinfo.availablestock != 0" class="list-group-item d-flex justify-content-between lh-condensed">
+
                         <div>
                             <h6 class="my-0">{{productinfo.title}}</h6>
-                            <!-- <small class="text-muted">Brief description</small> -->
+                            <small class="text-muted">{{productinfo.title + " x "+ productinfo.quantity}}</small>
                         </div>
                         <span class="text-muted">{{productinfo.costprice * productinfo.quantity| currency:'&#8377;'}}</span>
                     </li>
@@ -124,7 +130,7 @@
                         <div class="text-success">
                             <h6 class="my-0">Promo code</h6>
                         </div>
-                        <span class="text-success">{{promocodeval|currency:'&#8377;'}}</span>
+                        <span class="text-success">-{{promocodeval|currency:'&#8377;'}}</span>
                     </li>
 
                     <li class="list-group-item d-flex justify-content-between">
@@ -135,13 +141,19 @@
 
                 <form class="card p-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Promo code">
+                        <input name="promoVal" [disabled]="promoApply" [(ngModel)]="promoVal" type="text" class="form-control" placeholder="Promo code">
+                        <button type="button" *ngIf="promoApply" (click)="promoApply=false;promoVal=null" class="close clearBtn" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         <div class="input-group-append">
-                            <button (click)="ValidatePromoCode();" class="btn btn-secondary">Apply</button>
+                            <button (click)="ValidatePromoCode(promoVal);promoApply=true" class="btn btn-secondary">Apply</button>
                         </div>
-                        <div class="invalid-promo" [ngClass]="{'invalid-promo visible':invalidPromocode,'ntvisible':!invalidPromocode}">
+                        <div *ngIf="promoApply" [ngClass]="{'invalid-promo':invalidPromocode,'ntvisible':!invalidPromocode}">
                             Invalid Promo Code
-                         </div>
+                        </div>
+                        <div *ngIf="promoApply" [ngClass]="{'valid-feedback visible':!invalidPromocode,'ntvisible':invalidPromocode}">
+                            Promo code applied successfully !
+                        </div>
                     </div>
                 </form>
                 <hr class="mb-4">
@@ -159,7 +171,7 @@
                 </div>
                 <hr class="mb-4">
 
-                <button class="btn btn-primary btn-lg btn-block" *ngIf="this.isCheckOutBtn">Continue to checkout</button>
+                <button class="btn btn-primary btn-lg btn-block" [disabled]="finalPrice===0" *ngIf="this.isCheckOutBtn">Continue to checkout</button>
                 <button class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#exampleModal" *ngIf="this.GuestBtn"
                     type="submit">SignUp</button>
                 <button class="btn btn-primary btn-lg btn-block btnColor" href="#" *ngIf="this.GuestBtn" type="submit">Continue as Guest</button>

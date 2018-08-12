@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
+import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 @Component({
     selector: 'app-product-detail',
     templateUrl: './product-detail.component.html',
@@ -101,7 +102,7 @@ export class ProductDetailComponent {
         }
     }];
     images:string[]=["assets/images/bicycleCards/BicycleCard1.jpg","assets/images/bicycleCards/BicycleCard2.jpg","assets/images/bicycleCards/BicycleCard1.jpg"];
-    constructor(private route:ActivatedRoute,private router:Router){
+    constructor(private route:ActivatedRoute,private router:Router,private cartdata:CartsharedService){
         this.onStarClick=false;
         this.inStockText = "In Stock";
         this.qtyInput=1;
@@ -204,5 +205,13 @@ export class ProductDetailComponent {
         //     this.prodRatinObj.comment.description = this.commentObj.decription!=undefined?// // this.commentObj.decription:"";
         //     console.log(this.prodRatinObj);
         // }
+    }
+    AddTotalQuantitytoCart(productQuantity:number)
+    {console.log(productQuantity);
+        this.cartdata.changecartvalue(productQuantity);
+    }
+    addsimilarproducttocart()
+    {
+        this.cartdata.changecartvalue(1);
     }
 }

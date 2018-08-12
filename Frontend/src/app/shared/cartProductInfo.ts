@@ -1,6 +1,7 @@
 export class CartProductInfo {
     productid: number;
     imageurl: string;
+    displayprice:number;
     costprice: number;
     markprice: number;
     quantity: number;

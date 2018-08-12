@@ -5,5 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './footer.component.html'
 })
 export class FooterComponent {
-
+  scrollToHeader = () => {
+    document.querySelector('#header').scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
 }
