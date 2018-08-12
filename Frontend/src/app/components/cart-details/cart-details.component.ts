@@ -66,8 +66,8 @@ export class CartDetailsComponent {
     }
     else {
       this.cartproductdetails[index].quantity--;
-      this.toastr.warning(this.cartproductdetails[index].title, 'Quantity reduced Successfully!',{
-        timeOut: 30000
+      this.toastr.warning(this.cartproductdetails[index].title, 'Quantity reduced Successfully!', {
+        timeOut: 1500
       });
       this.cartdata.changecartvalue(-1);
       this.CalculateTotal();
@@ -76,16 +76,17 @@ export class CartDetailsComponent {
   increaseQty(index: number) {
     if (this.cartproductdetails[index].quantity > this.cartproductdetails[index].availablestock - 1) {
       this.cartproductdetails[index].quantity = this.cartproductdetails[index].availablestock;
-      this.toastr.error(this.cartproductdetails[index].title, 'Maximum available quantity reached!',{
-        timeOut: 30000
+      this.toastr.error(this.cartproductdetails[index].title, 'Maximum available quantity reached!', {
+        timeOut: 1500
       });
     }
     else {
       this.cartproductdetails[index].quantity++;
       this.toastr.success(this.cartproductdetails[index].title, 'Quantity increased Successfully!',
-    {
-      timeOut: 30000
-    });
+        {
+          timeOut: 1500
+        });
+
       this.cartdata.changecartvalue(1);
       this.CalculateTotal();
     }
@@ -119,7 +120,7 @@ export class CartDetailsComponent {
   RemoveItem(index: number) {
     var prodquantity = this.cartproductdetails[index].quantity;
     this.cartproductdetails.splice(index, 1);
-    this.cartdata.changecartvalue(-1*prodquantity);
+    this.cartdata.changecartvalue(-1 * prodquantity);
     this.CalculateTotal();
   }
 }

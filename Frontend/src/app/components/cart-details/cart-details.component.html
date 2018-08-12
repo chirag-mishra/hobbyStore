@@ -113,7 +113,6 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your cart</span>
-                    <!-- <span class="badge badge-secondary badge-pill">{{cartvalue}}</span> -->
                 </h4>
                 <ul class="list-group mb-3" *ngFor="let productinfo of cartproductdetails;let i =index">
                     <li *ngIf="productinfo.availablestock != 0" class="list-group-item d-flex justify-content-between lh-condensed">
@@ -172,9 +171,9 @@
                 <hr class="mb-4">
 
                 <button class="btn btn-primary btn-lg btn-block" [disabled]="finalPrice===0" *ngIf="this.isCheckOutBtn">Continue to checkout</button>
-                <button class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#exampleModal" *ngIf="this.GuestBtn"
+                <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" *ngIf="this.GuestBtn"
                     type="submit">SignUp</button>
-                <button class="btn btn-primary btn-lg btn-block btnColor" href="#" *ngIf="this.GuestBtn" type="submit">Continue as Guest</button>
+                <button class="btn btn-primary btn-lg btn-block btnColor" *ngIf="this.GuestBtn" type="submit">Continue as Guest</button>
             </div>
         </div>
     </div>
