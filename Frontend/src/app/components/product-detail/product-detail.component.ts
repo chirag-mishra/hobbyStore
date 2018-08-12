@@ -20,13 +20,14 @@ export class ProductDetailComponent {
     addToCartText:string;
     inStockText:string;
     productsObj : any = {
+        "_id":"5b65f05916fd446a62cae4b4",
         "title":"BICYCLE BIG BOX PLAYING CARDS",
         "description":["Big Box cards are a super-sized alternative!","Want to be a hit at your next game night? Be sure to pick up Bicycle ® Big Box playing cards. A fun, super-sized alternative to regular cards."],
         "specification":["Bicycle Big Box Playing Cards feature the classic rider back design","Big Box playing cards measure 7\" x 4.5\”","Available in red or blue","Perfect for all ages","Great for play, as a novelty item, for decorating, and more"],
         "rating":4,
         "totalReview":61,
         "price":129,
-        "quantity":2
+        "quantity":0
     }
     commentObj: any = [
         {
@@ -206,9 +207,9 @@ export class ProductDetailComponent {
         //     console.log(this.prodRatinObj);
         // }
     }
-    AddTotalQuantitytoCart(productQuantity:number)
-    {console.log(productQuantity);
-        this.cartdata.changecartvalue(productQuantity);
+    AddTotalQuantitytoCart()
+    {
+        this.cartdata.changecartvalue(1);
     }
     addsimilarproducttocart()
     {

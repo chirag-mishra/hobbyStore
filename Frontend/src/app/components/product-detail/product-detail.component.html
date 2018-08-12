@@ -53,7 +53,7 @@
         </div>
         <!-- end row -->
 
-        <div class="row add-to-cart">
+        <div class="row add-to-cart" *ngIf="productsObj.quantity >0">
             <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 product-qty">
                 <span>
                     <button class="fas fa-minus btn-qty btnIncDec" (click)="decreaseQty()"></button>
@@ -64,14 +64,16 @@
                 </span>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart(qtyInput);" [disabled]="qtyInput==0 || (addToCartText == 'Out of Stock') || qtyInput>productsObj.quantity">
+                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart();" [disabled]="qtyInput==0 || (addToCartText == 'Out of Stock') || qtyInput>productsObj.quantity">
                     {{addToCartText}}
                 </button>
             </div>
         </div>
         <!-- end row -->
-
-        <div class="row inStockMargin" [hidden]="addToCartText == 'Out of Stock'">
+        <div class="row inStockMargin text-danger" *ngIf="productsObj.quantity ==0">
+            <h4>Out Of Stock</h4>
+        </div>
+        <div class="row inStockMargin" *ngIf="productsObj.quantity >0" [hidden]="addToCartText == 'Out of Stock'">
             <div class="col-sm-12 col-xs-12 text-center p-0" [ngClass]="{'col-md-3 col-lg-3 text-success':inStockText=='In Stock','col-md-7 col-lg-7 text-danger':inStockText!='In Stock'}">
                 <span class="monospaced">{{inStockText}}</span>
             </div>
