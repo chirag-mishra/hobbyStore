@@ -36,6 +36,7 @@ export class CartDetailsComponent {
   cartproductdetails: any = [
     {
       productid: "1",
+      category: "Cards",
       imageurl: "assets/images/prod1.jpg",
       costprice: "350",
       displayprice: "350",
@@ -47,6 +48,7 @@ export class CartDetailsComponent {
     },
     {
       productid: "2",
+      category: "Cards",
       imageurl: "assets/images/prod1.jpg",
       costprice: "100",
       displayprice: "100",
