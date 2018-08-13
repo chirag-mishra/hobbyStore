@@ -23,7 +23,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CartsharedService } from './shared/cartsharedservice/cartshared.service';
-
+import { OrdersComponent } from "./components/orders/orders.component";
 var routes = [{
   path: "",
   component: HomeComponent
@@ -35,6 +35,10 @@ var routes = [{
 {
   path: "cart",
   component: CartDetailsComponent
+},
+{
+  path:"orders",
+  component:OrdersComponent
 }
 ];
 
@@ -50,7 +54,8 @@ var routes = [{
     StringFilterPipe,
     CartDetailsComponent,
     HomeComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

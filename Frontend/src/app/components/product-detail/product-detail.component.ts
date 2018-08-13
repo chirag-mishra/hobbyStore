@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
-import { ActivatedRoute } from "@angular/router";
-import { Router } from '@angular/router';
+
+import { Router,ActivatedRoute } from '@angular/router';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 @Component({
     selector: 'app-product-detail',
@@ -19,6 +19,11 @@ export class ProductDetailComponent {
     outOfStock:boolean;
     addToCartText:string;
     inStockText:string;
+    isLoggedIn:boolean;
+    addTocartProduct:any={
+        "_id":'',
+        "quantity":''
+    }
     productsObj : any = {
         "_id":"5b65f05916fd446a62cae4b4",
         "title":"BICYCLE BIG BOX PLAYING CARDS",
@@ -27,7 +32,8 @@ export class ProductDetailComponent {
         "rating":4,
         "totalReview":61,
         "price":129,
-        "quantity":0
+        "quantity":1,
+        "imgUrls":["assets/images/bicycleCards/BicycleCard1.jpg","assets/images/bicycleCards/BicycleCard2.jpg","assets/images/bicycleCards/BicycleCard1.jpg"]
     }
     commentObj: any = [
         {
@@ -40,22 +46,22 @@ export class ProductDetailComponent {
     similarProductObjects : any=
   [
     {
-      "id": 1,
       products:
-        {
+      {
+          "_id": "5b65f05916fd446a92cae4b4",
           "imgUrl": "assets/images/demo.jpg",
-          "category":"Cards",
+          "category": "Cards",
           "title": "Bicycle",
           "price": 250,
-          "discount":10,
+          "discount": 10,
           "rating": 5,
-          "date" : '2018-06-22'
-        }
+          "date": '2018-06-22'
+      }
     },
     {
-      "id": 2,
       products:
         {
+            "_id": "5b75f05916fd446a62cae4b4",
           "imgUrl": "assets/images/demo.jpg",
           "category":"Cards",
           "title": "Spades",
@@ -66,9 +72,10 @@ export class ProductDetailComponent {
         }
     },
     {
-      "id": 3,
+      
       products:
         {
+            "_id": "5b65f05816fd446a62cae4b4",
           "imgUrl": "assets/images/demo.jpg",
           "category":"Cards",
           "title": "Hearts",
@@ -78,9 +85,10 @@ export class ProductDetailComponent {
           "date" : '2018-05-24'
         }
     }, {
-      "id": 4,
+      
       products:
         {
+            "_id": "5h65f05916fd446a62cae4b4",
           "imgUrl": "assets/images/demo.jpg",
           "category":"Cards",
           "title": "Diamond",
@@ -90,9 +98,10 @@ export class ProductDetailComponent {
           "date" : '2018-06-13'
         }
     }, {
-      "id": 5,
+      
       products:
         {
+            "_id": "5765f05916fd446a62cae4b4",
           "imgUrl": "assets/images/demo.jpg",
           "category":"Cards",
           "title": "Ace",
@@ -102,7 +111,6 @@ export class ProductDetailComponent {
           "date" : '2018-05-22'
         }
     }];
-    images:string[]=["assets/images/bicycleCards/BicycleCard1.jpg","assets/images/bicycleCards/BicycleCard2.jpg","assets/images/bicycleCards/BicycleCard1.jpg"];
     constructor(private route:ActivatedRoute,private router:Router,private cartdata:CartsharedService){
         this.onStarClick=false;
         this.inStockText = "In Stock";
@@ -113,12 +121,14 @@ export class ProductDetailComponent {
             this.qtyInput=0;
             this.addToCartText = "Out of Stock"
         }
-        this.itemImageUrl = 'assets/images/bicycleCards/BicycleCard1.jpg';
+        this.itemImageUrl = this.productsObj.imgUrls[0];
         this.starRating =[0,1,2,3,4];
         this.rate=0;
+        this.isLoggedIn =false;
         this.reviewObj = [{
-            "id":1,
+            
             comment:{
+                "_id":1,
                 "userName":"Mark Buffon",
                 "rating":5,
                 "title":"Very Good!",
@@ -126,8 +136,9 @@ export class ProductDetailComponent {
             }
         },
         {
-            "id":2,
+            
             comment:{
+                "_id":2,
                 "userName":"Mark Buffon",
                 "rating":4,
                 "title":"Very Good, Awesome!",
@@ -135,8 +146,9 @@ export class ProductDetailComponent {
             }
         },
         {
-            "id":3,
+           
             comment:{
+                "_id":3,
                 "userName":"Anonymous",
                 "rating":3,
                 "title":"Nice product!",
@@ -144,8 +156,9 @@ export class ProductDetailComponent {
             }
         },
         {
-            "id":4,
+         
             comment:{
+                "_id":4,
                 "userName":"Anonymous",
                 "rating":2,
                 "title":"Very Good!",
@@ -153,8 +166,9 @@ export class ProductDetailComponent {
             }
         },
         {
-            "id":5,
+          
             comment:{
+                "_id":5,
                 "userName":"Vikram Yadav",
                 "rating":1,
                 "title":"",
@@ -209,7 +223,22 @@ export class ProductDetailComponent {
     }
     AddTotalQuantitytoCart()
     {
-        this.cartdata.changecartvalue(1);
+        let id = this.route.snapshot.params['id'];
+        
+        this.addTocartProduct={
+            "_id":"",
+            "quantity":""
+        }
+        if (this.isLoggedIn) {
+            //call api
+        }
+        else{
+            this.addTocartProduct._id=id;
+            this.addTocartProduct.quantity = this.qtyInput.toString();
+            localStorage.setItem('cart', JSON.stringify(this.addTocartProduct));
+            //this.cartdata.changecartvalue(1);
+        }
+        
     }
     addsimilarproducttocart()
     {

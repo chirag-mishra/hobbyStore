@@ -1,15 +1,15 @@
 import {Pipe} from "@angular/core";
-import { Product } from "./../shared/product";
+
 @Pipe({
     name: 'stringFilter'
 })
 export class StringFilterPipe {
 
-    transform(value: Product[], q: string) {
+    transform(value: any[], q: string) {
         if (!q || q === '') {
             return value;
         }
-        return value.filter(item => item.products.title.toLowerCase().indexOf(q.toLowerCase()) !== -1);
+        return value.filter(item => item.title.toLowerCase().indexOf(q.toLowerCase()) !== -1);
         //return value.filter(item => -1 < item.productItem.title.toLowerCase().indexOf(q.toLowerCase()));
     }
     // transform(items: Product[], filter: Product): Product[] {

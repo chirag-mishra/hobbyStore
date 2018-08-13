@@ -6,7 +6,7 @@
         </div>
         <div class="container-fluid">
             <ul class="productImages clearfix">
-                <li class="col-md-4 col-lg-4 col-sm-6 col-xs-6 singleImage p-0" (click)="imageChange($event)" *ngFor="let img of images;let i=index">
+                <li class="col-md-4 col-lg-4 col-sm-6 col-xs-6 singleImage p-0" (click)="imageChange($event)" *ngFor="let img of productsObj.imgUrls;let i=index">
                     <img [src]="img" alt="i" />
                 </li>
             </ul>
@@ -116,12 +116,12 @@
                 <label for="rating">Rating: </label>
                 <span class="badge badge-success">{{review.comment.rating}}</span>
             </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 p-0 pull-left" [hidden]="review.comment.title==''">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 p-0 pull-left" *ngIf="review.comment.title!=''">
                 <p>
                     <strong>{{review.comment.title}}</strong>
                 </p>
             </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left" [hidden]="review.comment.description==''">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left" *ngIf="review.comment.description!=''">
                 <p>{{review.comment.description}}</p>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left">
@@ -138,8 +138,8 @@
         </div>
         <div class="cardLayout clearfix">
             <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of similarProductObjects">
-                <a href="/products/{{product.products.category | lowercase}}/{{product.id}}">
-                    <div class="card" id="{{product.products.category+'/'+product.id}}">
+                <a href="/products/{{product.products.category | lowercase}}/{{product.products._id}}">
+                    <div class="card" id="{{product.products.category+'/'+product.products._id}}">
                         <img class="card-img-top" [src]="product.products.imgUrl" alt="Card image cap">
                         <div class="list-group list-group-flush">
                             <div>Title : {{product.products.title}}</div>

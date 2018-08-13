@@ -38,7 +38,7 @@ export class AdminComponent{
         this.incInputTag=0;
         this.inputTags.push(this.incInputTag);
         var parent = this;
-        fetch('http://192.168.0.107:3000/products/magic')
+        fetch('http://e513d579.ngrok.io/products/magic')
         .then(function(response) {
           return response.json();
         })
@@ -94,8 +94,9 @@ export class AdminComponent{
       this.toastr.success('Products updated successfully!', '', {
         timeOut: 3000
       });
+      this.updatedProductIds=[];
     }
-      //console.log(this.updatedProductItems);
+    console.log(this.updatedProductItems);
       
   }
   updatedProducts(id:any){
