@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
-import { ActivatedRoute } from "@angular/router";
-import { Router } from '@angular/router';
+
+import { Router, ActivatedRoute } from '@angular/router';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 @Component({
     selector: 'app-product-detail',
@@ -19,15 +19,17 @@ export class ProductDetailComponent {
     outOfStock: boolean;
     addToCartText: string;
     inStockText: string;
-    productsObj: any = {
+    productsObj: any={
+        "_id": "5b65f05916fd446a62cae4b4",
         "title": "BICYCLE BIG BOX PLAYING CARDS",
         "description": ["Big Box cards are a super-sized alternative!", "Want to be a hit at your next game night? Be sure to pick up Bicycle ® Big Box playing cards. A fun, super-sized alternative to regular cards."],
         "specification": ["Bicycle Big Box Playing Cards feature the classic rider back design", "Big Box playing cards measure 7\" x 4.5\”", "Available in red or blue", "Perfect for all ages", "Great for play, as a novelty item, for decorating, and more"],
         "rating": 4,
         "totalReview": 61,
         "price": 129,
-        "quantity": 2
-    }
+        "quantity": 2,
+        "imgUrls": ["assets/images/bicycleCards/BicycleCard1.jpg", "assets/images/bicycleCards/BicycleCard2.jpg", "assets/images/bicycleCards/BicycleCard1.jpg"]
+    };
     commentObj: any = [
         {
             userName: "Rakesh",
@@ -39,69 +41,53 @@ export class ProductDetailComponent {
     similarProductObjects: any =
         [
             {
-                "id": 1,
-                products:
-                    {
-                        "imgUrl": "assets/images/demo.jpg",
-                        "category": "Cards",
-                        "title": "Bicycle",
-                        "price": 250,
-                        "discount": 10,
-                        "rating": 5,
-                        "date": '2018-06-22'
-                    }
+                "_id": "5b65f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
             },
             {
-                "id": 2,
-                products:
-                    {
-                        "imgUrl": "assets/images/demo.jpg",
-                        "category": "Cards",
-                        "title": "Spades",
-                        "price": 250,
-                        "discount": 20,
-                        "rating": 4.4,
-                        "date": '2018-06-02'
-                    }
+                "_id": "5b612f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
             },
             {
-                "id": 3,
-                products:
-                    {
-                        "imgUrl": "assets/images/demo.jpg",
-                        "category": "Cards",
-                        "title": "Hearts",
-                        "price": 2500,
-                        "discount": 30,
-                        "rating": 3.5,
-                        "date": '2018-05-24'
-                    }
+                "_id": "5b65f0521916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
             }, {
-                "id": 4,
-                products:
-                    {
-                        "imgUrl": "assets/images/demo.jpg",
-                        "category": "Cards",
-                        "title": "Diamond",
-                        "price": 250,
-                        "discount": 40,
-                        "rating": 2.3,
-                        "date": '2018-06-13'
-                    }
+                "_id": "11165f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
             }, {
-                "id": 5,
-                products:
-                    {
-                        "imgUrl": "assets/images/demo.jpg",
-                        "category": "Cards",
-                        "title": "Ace",
-                        "price": 250,
-                        "discount": 50.5,
-                        "rating": 1,
-                        "date": '2018-05-22'
-                    }
+                "_id": "512265f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
             }];
-    images: string[] = ["assets/images/bicycleCards/BicycleCard1.jpg", "assets/images/bicycleCards/BicycleCard2.jpg", "assets/images/bicycleCards/BicycleCard1.jpg"];
     constructor(private route: ActivatedRoute, private router: Router, private cartdata: CartsharedService) {
         this.onStarClick = false;
         this.inStockText = "In Stock";
@@ -112,53 +98,48 @@ export class ProductDetailComponent {
             this.qtyInput = 0;
             this.addToCartText = "Out of Stock"
         }
-        this.itemImageUrl = 'assets/images/bicycleCards/BicycleCard1.jpg';
+        this.itemImageUrl = this.productsObj.imgUrls[0];
         this.starRating = [0, 1, 2, 3, 4];
         this.rate = 0;
         this.reviewObj = [{
-            "id": 1,
-            comment: {
-                "userName": "Mark Buffon",
-                "rating": 5,
-                "title": "Very Good!",
-                "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
-            }
+            "_id": 1,
+            "userName": "Mark Buffon",
+            "rating": 5,
+            "title": "Very Good!",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
+
         },
         {
-            "id": 2,
-            comment: {
-                "userName": "Mark Buffon",
-                "rating": 4,
-                "title": "Very Good, Awesome!",
-                "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec."
-            }
+            "_id": 2,
+            "userName": "Mark Buffon",
+            "rating": 4,
+            "title": "Very Good, Awesome!",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec."
+
         },
         {
-            "id": 3,
-            comment: {
-                "userName": "Anonymous",
-                "rating": 3,
-                "title": "Nice product!",
-                "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
-            }
+            "_id": 3,
+            "userName": "Anonymous",
+            "rating": 3,
+            "title": "Nice product!",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
+
         },
         {
-            "id": 4,
-            comment: {
-                "userName": "Anonymous",
-                "rating": 2,
-                "title": "Very Good!",
-                "description": ""
-            }
+            "_id": 4,
+            "userName": "Anonymous",
+            "rating": 2,
+            "title": "Very Good!",
+            "description": ""
+
         },
         {
-            "id": 5,
-            comment: {
-                "userName": "Vikram Yadav",
-                "rating": 1,
-                "title": "",
-                "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum."
-            }
+            "_id": 5,
+            "userName": "Vikram Yadav",
+            "rating": 1,
+            "title": "",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum."
+
         }]
     }
     increaseQty() {
