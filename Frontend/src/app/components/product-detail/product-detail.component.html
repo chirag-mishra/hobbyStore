@@ -16,7 +16,7 @@
         <div class="productDescription">
             <h2>{{productsObj.title}}
                 <!-- <sup class="mediumSup">®</sup> -->
-                </h2>
+            </h2>
         </div>
         <div>
             <h5>
@@ -38,7 +38,8 @@
             <div class="row">
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 p-0">
                     <!-- <span class="sr-only">Four out of Five Stars</span> -->
-                    <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<productsObj.rating,'far':i>=productsObj.rating}" aria-hidden="true"></span>
+                    <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<productsObj.rating,'far':i>=productsObj.rating}"
+                        aria-hidden="true"></span>
                     <span class="badge badge-success">{{productsObj.totalReview}}</span>
                 </div>
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 ">
@@ -60,7 +61,7 @@
                 </span>
                 <input class="btn btn-default btn-lg btn-qty" [(ngModel)]="qtyInput" />
                 <span>
-                    <button class="fas fa-plus btn-qty btnIncDec" (click)="increaseQty()" [disabled]="qtyInput>productsObj.quantity || (addToCartText == 'Out of Stock')"></button>            
+                    <button class="fas fa-plus btn-qty btnIncDec" (click)="increaseQty()" [disabled]="qtyInput>productsObj.quantity || (addToCartText == 'Out of Stock')"></button>
                 </span>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
@@ -138,20 +139,25 @@
         </div>
         <div class="cardLayout clearfix">
             <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of similarProductObjects">
-                <a href="/products/{{product.products.category | lowercase}}/{{product.products._id}}">
-                    <div class="card" id="{{product.products.category+'/'+product.products._id}}">
-                        <img class="card-img-top" [src]="product.products.imgUrl" alt="Card image cap">
-                        <div class="list-group list-group-flush">
-                            <div>Title : {{product.products.title}}</div>
-                            <div>Price : {{product.products.price | currency:'&#8377;'}}</div>
-                            <div>Rating : {{product.products.rating}}</div>
+
+                <div class="card">
+                    <a href="/products/{{product.products.category | lowercase}}/{{product.products._id}}">
+                        <div id="{{product.products.category+'/'+product.products._id}}">
+                            <img class="card-img-top" [src]="product.products.imgUrl" alt="Card image cap">
+                            <div class="list-group list-group-flush">
+                                <div>Title : {{product.products.title}}</div>
+                                <div>Price : {{product.products.price | currency:'&#8377;'}}</div>
+                                <div>Rating : {{product.products.rating}}</div>
+                            </div>
                         </div>
-                        <div class="card-buttons">
-                            <a href="#">Buy Now</a>
-                            <a href="#" (click)="addsimilarproducttocart();">Add to Cart</a>
-                        </div>
+                    </a>
+                    <div class="card-buttons">
+                        <a href="#">Buy Now</a>
+                        <a (click)="addsimilarproducttocart();">Add to Cart</a>
                     </div>
-                </a>
+
+                </div>
+
             </div>
         </div>
     </div>
