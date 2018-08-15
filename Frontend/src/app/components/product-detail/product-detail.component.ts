@@ -189,9 +189,12 @@ export class ProductDetailComponent {
     }
     AddTotalQuantitytoCart()
     {
-
-        
+        let id = this.route.snapshot.params['id'];
+        console.log({ "_id": id, "quantity": this.qtyInput });
+        localStorageWrapper.addToCart({ "_id": id, "quantity": this.qtyInput })
+        this.cartdata.changecartvalue(1);
     }
+    
     addsimilarproducttocart()
     {
         this.cartdata.changecartvalue(1);
