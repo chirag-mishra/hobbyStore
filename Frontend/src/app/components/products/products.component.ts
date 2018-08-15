@@ -275,12 +275,12 @@ orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price
   sortedCollection: any[];
   constructor(private orderPipe: OrderPipe,private cartdata:CartsharedService) {
     var parent = this;
-    fetch('http://e513d579.ngrok.io/products/magic')
+    fetch('http://648c2ada.ngrok.io/products/magic')
         .then(function(response) {
           return response.json();
         })
         .then(function(myJson) {
-          parent.productObjects=(myJson);
+           parent.productObjects= (myJson);
         });
     this.sortedCollection = this.orderPipe.transform(this.productObjects, 'rating');
     this.productObjects = this.sortedCollection;

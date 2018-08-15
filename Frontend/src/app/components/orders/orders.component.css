@@ -1,0 +1,20 @@
+.pull-right{
+    float: right;
+}
+.pull-left{
+    float: left;
+}
+.label-Opacity{
+    opacity: 0.5;
+    margin-bottom: 0;
+}
+.labelProgress{
+    width: 25%;
+}
+.progressPadding{
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.fontColor{
+    color: #007bff;
+}
