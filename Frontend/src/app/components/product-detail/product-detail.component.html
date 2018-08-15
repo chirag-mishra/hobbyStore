@@ -110,20 +110,20 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left" *ngFor="let review of reviewObj; let i=index">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left p-0 rating commentUser">
                 <h6>
-                    <strong>{{review.comment.userName}}</strong>
+                    <strong>{{review.userName}}</strong>
                 </h6>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left p-0 rating">
                 <label for="rating">Rating: </label>
-                <span class="badge badge-success">{{review.comment.rating}}</span>
+                <span class="badge badge-success">{{review.rating}}</span>
             </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 p-0 pull-left" *ngIf="review.comment.title!=''">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 p-0 pull-left" *ngIf="review.title!=''">
                 <p>
-                    <strong>{{review.comment.title}}</strong>
+                    <strong>{{review.title}}</strong>
                 </p>
             </div>
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left" *ngIf="review.comment.description!=''">
-                <p>{{review.comment.description}}</p>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left" *ngIf="review.description!=''">
+                <p>{{review.description}}</p>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  p-0 pull-left">
                 <hr>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
 
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 @Component({
     selector: 'app-product-detail',
@@ -9,32 +9,27 @@ import { CartsharedService } from '../../shared/cartsharedservice/cartshared.ser
     styleUrls:['./product-detail.component.css']
 })
 export class ProductDetailComponent {
-    public prodRatinObj:ProductRating;
-    rate:number;
-    onStarClick:boolean;
-    starRating:number[];
-    qtyInput:number;
-    itemImageUrl:string; 
-    reviewObj :any;
-    outOfStock:boolean;
-    addToCartText:string;
-    inStockText:string;
-    isLoggedIn:boolean;
-    addTocartProduct:any={
-        "_id":'',
-        "quantity":''
-    }
-    productsObj : any = {
-        "_id":"5b65f05916fd446a62cae4b4",
-        "title":"BICYCLE BIG BOX PLAYING CARDS",
-        "description":["Big Box cards are a super-sized alternative!","Want to be a hit at your next game night? Be sure to pick up Bicycle ® Big Box playing cards. A fun, super-sized alternative to regular cards."],
-        "specification":["Bicycle Big Box Playing Cards feature the classic rider back design","Big Box playing cards measure 7\" x 4.5\”","Available in red or blue","Perfect for all ages","Great for play, as a novelty item, for decorating, and more"],
-        "rating":4,
-        "totalReview":61,
-        "price":129,
-        "quantity":1,
-        "imgUrls":["assets/images/bicycleCards/BicycleCard1.jpg","assets/images/bicycleCards/BicycleCard2.jpg","assets/images/bicycleCards/BicycleCard1.jpg"]
-    }
+    public prodRatinObj: ProductRating;
+    rate: number;
+    onStarClick: boolean;
+    starRating: number[];
+    qtyInput: number;
+    itemImageUrl: string;
+    reviewObj: any;
+    outOfStock: boolean;
+    addToCartText: string;
+    inStockText: string;
+    productsObj: any={
+        "_id": "5b65f05916fd446a62cae4b4",
+        "title": "BICYCLE BIG BOX PLAYING CARDS",
+        "description": ["Big Box cards are a super-sized alternative!", "Want to be a hit at your next game night? Be sure to pick up Bicycle ® Big Box playing cards. A fun, super-sized alternative to regular cards."],
+        "specification": ["Bicycle Big Box Playing Cards feature the classic rider back design", "Big Box playing cards measure 7\" x 4.5\”", "Available in red or blue", "Perfect for all ages", "Great for play, as a novelty item, for decorating, and more"],
+        "rating": 4,
+        "totalReview": 61,
+        "price": 129,
+        "quantity": 2,
+        "imgUrls": ["assets/images/bicycleCards/BicycleCard1.jpg", "assets/images/bicycleCards/BicycleCard2.jpg", "assets/images/bicycleCards/BicycleCard1.jpg"]
+    };
     commentObj: any = [
         {
             userName:"Rakesh",
@@ -43,76 +38,58 @@ export class ProductDetailComponent {
             decription:''
         }
     ];
-    similarProductObjects : any=
-  [
-    {
-      products:
-      {
-          "_id": "5b65f05916fd446a92cae4b4",
-          "imgUrl": "assets/images/demo.jpg",
-          "category": "Cards",
-          "title": "Bicycle",
-          "price": 250,
-          "discount": 10,
-          "rating": 5,
-          "date": '2018-06-22'
-      }
-    },
-    {
-      products:
-        {
-            "_id": "5b75f05916fd446a62cae4b4",
-          "imgUrl": "assets/images/demo.jpg",
-          "category":"Cards",
-          "title": "Spades",
-          "price": 250,
-          "discount":20,
-          "rating": 4.4,
-          "date" : '2018-06-02'
-        }
-    },
-    {
-      
-      products:
-        {
-            "_id": "5b65f05816fd446a62cae4b4",
-          "imgUrl": "assets/images/demo.jpg",
-          "category":"Cards",
-          "title": "Hearts",
-          "price": 2500,
-          "discount":30,
-          "rating": 3.5,
-          "date" : '2018-05-24'
-        }
-    }, {
-      
-      products:
-        {
-            "_id": "5h65f05916fd446a62cae4b4",
-          "imgUrl": "assets/images/demo.jpg",
-          "category":"Cards",
-          "title": "Diamond",
-          "price": 250,
-          "discount":40,
-          "rating": 2.3,
-          "date" : '2018-06-13'
-        }
-    }, {
-      
-      products:
-        {
-            "_id": "5765f05916fd446a62cae4b4",
-          "imgUrl": "assets/images/demo.jpg",
-          "category":"Cards",
-          "title": "Ace",
-          "price": 250,
-          "discount":50.5,
-          "rating": 1,
-          "date" : '2018-05-22'
-        }
-    }];
-    constructor(private route:ActivatedRoute,private router:Router,private cartdata:CartsharedService){
-        this.onStarClick=false;
+    similarProductObjects: any =
+        [
+            {
+                "_id": "5b65f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
+            },
+            {
+                "_id": "5b612f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
+            },
+            {
+                "_id": "5b65f0521916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
+            }, {
+                "_id": "11165f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
+            }, {
+                "_id": "512265f05916fd446a92cae4b4",
+                "imgUrl": "assets/images/demo.jpg",
+                "category": "Cards",
+                "title": "Bicycle",
+                "price": 250,
+                "discount": 10,
+                "rating": 5,
+                "date": '2018-06-22'
+            }];
+    constructor(private route: ActivatedRoute, private router: Router, private cartdata: CartsharedService) {
+        this.onStarClick = false;
         this.inStockText = "In Stock";
         this.qtyInput=1;
         this.addToCartText = "Add to Cart";
@@ -122,58 +99,47 @@ export class ProductDetailComponent {
             this.addToCartText = "Out of Stock"
         }
         this.itemImageUrl = this.productsObj.imgUrls[0];
-        this.starRating =[0,1,2,3,4];
-        this.rate=0;
-        this.isLoggedIn =false;
+        this.starRating = [0, 1, 2, 3, 4];
+        this.rate = 0;
         this.reviewObj = [{
-            
-            comment:{
-                "_id":1,
-                "userName":"Mark Buffon",
-                "rating":5,
-                "title":"Very Good!",
-                "description":"Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
-            }
+            "_id": 1,
+            "userName": "Mark Buffon",
+            "rating": 5,
+            "title": "Very Good!",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
+
         },
         {
-            
-            comment:{
-                "_id":2,
-                "userName":"Mark Buffon",
-                "rating":4,
-                "title":"Very Good, Awesome!",
-                "description":"Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec."
-            }
+            "_id": 2,
+            "userName": "Mark Buffon",
+            "rating": 4,
+            "title": "Very Good, Awesome!",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec."
+
         },
         {
-           
-            comment:{
-                "_id":3,
-                "userName":"Anonymous",
-                "rating":3,
-                "title":"Nice product!",
-                "description":"Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
-            }
+            "_id": 3,
+            "userName": "Anonymous",
+            "rating": 3,
+            "title": "Nice product!",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
+
         },
         {
-         
-            comment:{
-                "_id":4,
-                "userName":"Anonymous",
-                "rating":2,
-                "title":"Very Good!",
-                "description":""
-            }
+            "_id": 4,
+            "userName": "Anonymous",
+            "rating": 2,
+            "title": "Very Good!",
+            "description": ""
+
         },
         {
-          
-            comment:{
-                "_id":5,
-                "userName":"Vikram Yadav",
-                "rating":1,
-                "title":"",
-                "description":"Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum."
-            }
+            "_id": 5,
+            "userName": "Vikram Yadav",
+            "rating": 1,
+            "title": "",
+            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum."
+
         }]
     }
     increaseQty(){
@@ -223,21 +189,7 @@ export class ProductDetailComponent {
     }
     AddTotalQuantitytoCart()
     {
-        let id = this.route.snapshot.params['id'];
-        
-        this.addTocartProduct={
-            "_id":"",
-            "quantity":""
-        }
-        if (this.isLoggedIn) {
-            //call api
-        }
-        else{
-            this.addTocartProduct._id=id;
-            this.addTocartProduct.quantity = this.qtyInput.toString();
-            localStorage.setItem('cart', JSON.stringify(this.addTocartProduct));
-            //this.cartdata.changecartvalue(1);
-        }
+
         
     }
     addsimilarproducttocart()
