@@ -6,7 +6,7 @@ import { CartsharedService } from '../../shared/cartsharedservice/cartshared.ser
 @Component({
     selector: 'app-product-detail',
     templateUrl: './product-detail.component.html',
-    styleUrls:['./product-detail.component.css']
+    styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent {
     public prodRatinObj: ProductRating;
@@ -32,10 +32,10 @@ export class ProductDetailComponent {
     };
     commentObj: any = [
         {
-            userName:"Rakesh",
-            rating:'',
-            title:'',
-            decription:''
+            userName: "Rakesh",
+            rating: '',
+            title: '',
+            decription: ''
         }
     ];
     similarProductObjects: any =
@@ -91,11 +91,11 @@ export class ProductDetailComponent {
     constructor(private route: ActivatedRoute, private router: Router, private cartdata: CartsharedService) {
         this.onStarClick = false;
         this.inStockText = "In Stock";
-        this.qtyInput=1;
+        this.qtyInput = 1;
         this.addToCartText = "Add to Cart";
         if (this.productsObj.quantity == 0) {
-            this.outOfStock =true;
-            this.qtyInput=0;
+            this.outOfStock = true;
+            this.qtyInput = 0;
             this.addToCartText = "Out of Stock"
         }
         this.itemImageUrl = this.productsObj.imgUrls[0];
@@ -142,43 +142,42 @@ export class ProductDetailComponent {
 
         }]
     }
-    increaseQty(){
+    increaseQty() {
         ++this.qtyInput;
-        if(this.qtyInput>parseInt(this.productsObj.quantity))
-        {
-            this.inStockText ="Sorry, quantity is greater than available stock."
-        }       
+        if (this.qtyInput > parseInt(this.productsObj.quantity)) {
+            this.inStockText = "Sorry, quantity is greater than available stock."
+        }
     }
-    decreaseQty(){
-        this.qtyInput=this.qtyInput-1 < 0 ? 0 : --this.qtyInput;
-        if(this.qtyInput<=parseInt(this.productsObj.quantity)){
+    decreaseQty() {
+        this.qtyInput = this.qtyInput - 1 < 0 ? 0 : --this.qtyInput;
+        if (this.qtyInput <= parseInt(this.productsObj.quantity)) {
             this.inStockText = "In Stock";
         }
-        
-    }   
-    imageChange(value:any){
-        this.itemImageUrl=value.path[0].src;
+
     }
-    onMouseOverRating(value:any){
-        if(!this.onStarClick){
-            this.rate=parseInt(value.target.id);
+    imageChange(value: any) {
+        this.itemImageUrl = value.path[0].src;
+    }
+    onMouseOverRating(value: any) {
+        if (!this.onStarClick) {
+            this.rate = parseInt(value.target.id);
         }
     }
-    onMouseClickRating(value:any){
-        this.onStarClick=!this.onStarClick;
-        this.rate=parseInt(value.target.id);
+    onMouseClickRating(value: any) {
+        this.onStarClick = !this.onStarClick;
+        this.rate = parseInt(value.target.id);
     }
-    onMouseOutRating(value:any){
+    onMouseOutRating(value: any) {
         if (!this.onStarClick) {
-            this.rate=0;
-        } 
+            this.rate = 0;
+        }
     }
-    scrollToRatingDiv (){
+    scrollToRatingDiv() {
         document.querySelector('#reviewForm').scrollIntoView({
-          behavior: 'smooth'
+            behavior: 'smooth'
         });
-      };
-    onCommentSubmit(){
+    };
+    onCommentSubmit() {
         // if(this.rate>0){
         //     this.prodRatinObj = new ProductRating();
         //     this.prodRatinObj.comment.rating = this.rate;
@@ -187,16 +186,14 @@ export class ProductDetailComponent {
         //     console.log(this.prodRatinObj);
         // }
     }
-    AddTotalQuantitytoCart()
-    {
+    AddTotalQuantitytoCart(productQuantity: number) {
         let id = this.route.snapshot.params['id'];
+
         console.log({ "_id": id, "quantity": this.qtyInput });
         localStorageWrapper.addToCart({ "_id": id, "quantity": this.qtyInput })
-        this.cartdata.changecartvalue(1);
+
     }
-    
-    addsimilarproducttocart()
-    {
+    addsimilarproducttocart() {
         this.cartdata.changecartvalue(1);
     }
 }
