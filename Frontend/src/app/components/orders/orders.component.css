@@ -18,3 +18,9 @@
 .fontColor{
     color: #007bff;
 }
+.bg-progress{
+    background-color: #007bff;
+}
+.bg-inProgress{
+    background-color: #e9ecef;
+}
