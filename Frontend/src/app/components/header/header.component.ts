@@ -27,17 +27,4 @@ export class HeaderComponent {
     });
   }
 
-  public url = '//suggestqueries.google.com/complete/search';
-  public params = {
-    hl: 'en',
-    ds: 'yt',
-    xhr: 't',
-    client: 'youtube'
-  };
-  public query = '';
-
-  handleResultSelected(result) {
-    this.query = result;
-    this.scrollToDiv("productsCatalogue");
-  }
 }
