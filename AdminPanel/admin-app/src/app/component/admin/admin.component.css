@@ -24,7 +24,7 @@ float: right;
 .btn-qty {
     width: 40%;
 }
-.w-70{
+.w-55{
     width: 70%;
 }
 .w-15{
@@ -58,4 +58,7 @@ float: right;
 .tableHeader{
     font-weight: bold;
     font-size: 25px;
+}
+.centerAlign{
+    text-align: center;
 }

@@ -17,24 +17,31 @@
                 <tr>
                     <th class="w-70">Title&nbsp;</th>
                     <th class="w-15">Price&nbsp;</th>
+                    <th class="w-15">Discount&nbsp;</th>
                     <th class="w-15">Stock&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of productItems | stringFilter:filter | paginate: config;let i=index">
-                    <td class="w-70">{{item.title}}</td>
+                <tr *ngFor="let j of obj_updatedProducts| stringFilter:filter | paginate: config;">
+                    <td class="w-70">{{j.title}}</td>            
                     <td class="w-15">
-                        <input class="btn btn-default p-0" [(ngModel)]="item.price" (ngModelChange)="updatedProducts(i)" />
+                        <input class="btn btn-default p-0" [(ngModel)]="j.price" (ngModelChange)="updatedProducts(j._id)" />
                     </td>
                     <td class="w-15">
-                        <span>
-                            <button class="fas fa-minus btnIncDec" (click)="decreaseQty(i)"></button>
-                        </span>
-                        <input class="btn btn-default btn-qty p-0" [(ngModel)]="item.stock" (ngModelChange)="updatedProducts(i)" value="{{item.stock}}"
-                        />
-                        <span>
-                            <button class="fas fa-plus btnIncDec" (click)="increaseQty(i)"></button>
-                        </span>
+                        <input class="btn btn-default p-0" [(ngModel)]="j.discount" (ngModelChange)="updatedProducts(j._id)" />
+                    </td>
+                    <td class="w-15">
+                        <div class="centerAlign"><label for="tableStock">{{j.oldStock}}</label></div>  
+                        <div class="centerAlign">
+                                <span>
+                                        <button class="fas fa-minus btnIncDec" (click)="decreaseQty(j._id)"></button>
+                                    </span>
+                                    <input class="btn btn-default btn-qty p-0" [(ngModel)]="j.newStock" (ngModelChange)="updatedProducts(j._id)"
+                                    />
+                                    <span>
+                                        <button class="fas fa-plus btnIncDec" (click)="increaseQty(j._id)"></button>
+                                    </span>
+                        </div>                                                  
                     </td>
                 </tr>
 
@@ -80,15 +87,28 @@
 
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left">
+                <label for="category">Category:</label>
+                <span>
+                    <button class="fas fa-plus btnInc" (click)="increaseCategory()"></button>
+                </span>
+                <div *ngFor="let item of categoryInputTags;let i=index">
+                    <input type="text" class="form-control" name="category{{i}}" [(ngModel)]="addProduct.category[i]" value="{{addProduct.category[i]}}"
+                        id="category{{i}}" required>
+                    <br>
+                </div>
+
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left">
                 <label for="fileUpload">File Upload:</label>
                 <input type="file" id="uploadFile" name="uploadFile" multiple (change)="onChange($event)" />
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 pull-left bottom-Padding">
-
+                <label for="price">Genre:</label>
+                <input type="text" class="form-control" name="genre" id="genre"  [(ngModel)]="addProduct.genre" required>
                 <label for="price">Price:</label>
                 <input type="number" class="form-control" name="price" id="price"  [(ngModel)]="addProduct.price" required>
-                <label for="quantity">Quantity:</label>
-                <input type="number" class="form-control" name="quantity"  [(ngModel)]="addProduct.quantity" id="quantity"
+                <label for="stock">Stock:</label>
+                <input type="number" class="form-control" name="stock"  [(ngModel)]="addProduct.stock" id="stock"
                     required>
                 <label for="discount">Discount:</label>
                 <input type="number" class="form-control" name="discount"  [(ngModel)]="addProduct.discount" id="discount"

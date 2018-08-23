@@ -4,10 +4,12 @@ export class AddProduct{
         public description:Array<string>,
         public files:Array<string>,
         public rating:number,
-        public quantity:number,
+        public stock:number,
         public price:number,
         public discount:number,
-        public date:string
+        public date:string,
+        public genre:string,
+        public category:Array<string>
     ){
     }
 }

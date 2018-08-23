@@ -9,7 +9,7 @@ import { StringFilterPipe } from './shared/string-filter.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from "./component/login/login.component";
-
+import { DatePipe } from '@angular/common'
 
 var routes = [{
   path:"",
@@ -36,7 +36,7 @@ var routes = [{
     ToastrModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
