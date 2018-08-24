@@ -17,7 +17,7 @@ import { StringFilterPipe } from './shared/string-filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
 import { HomeComponent } from "./components/home/home.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
-import { NgxTypeaheadModule } from 'ngx-typeahead';
+
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -63,7 +63,6 @@ var routes = [{
     FormsModule,
     OrderModule,
     RouterModule.forRoot(routes),
-    NgxTypeaheadModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot() 
   ],
