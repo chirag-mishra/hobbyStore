@@ -47,3 +47,7 @@ body a:hover{
     top : 40px;
     font-size: 14px;
 }
+
+#goUpLink {
+    cursor: pointer;
+}

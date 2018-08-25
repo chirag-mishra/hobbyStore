@@ -24,3 +24,20 @@
 .bg-inProgress{
     background-color: #e9ecef;
 }
+
+.card button:hover {
+    text-decoration: none;
+}
+
+.ordersContainer {
+    padding: 20px;
+    background: #ffffff;
+}
+
+.card-header{
+    cursor: pointer;
+}
+
+.card {
+    margin: 15px 0;
+}

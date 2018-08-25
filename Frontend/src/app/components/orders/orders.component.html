@@ -1,15 +1,15 @@
-<div class="container-fluid">
+<div class="container-fluid ordersContainer">
   <div class="accordion" id="accordionExample">
     <div class="card" *ngFor="let item of orders;let i=index">
-      <div class="card-header" id="heading{{i}}">
+      <div class="card-header" id="heading{{i}}" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="false"
+      [attr.aria-controls]="'collapse'+i">
         <div class="pull-left">
-          <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="false"
-            [attr.aria-controls]="'collapse'+i">
+          <button class="btn" type="button">
             Order No. : {{item.orderId}}
           </button>
         </div>
 
-        <div class="pull-right">{{item.orderStatus[0].date}}</div>
+        <div class="pull-right">Ordered on : {{item.orderStatus[0].date}}</div>
       </div>
 
       <div id="collapse{{i}}" class="collapse" [attr.aria-labelledby]="'heading'+i" data-parent="#accordionExample">
