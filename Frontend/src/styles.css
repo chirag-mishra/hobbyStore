@@ -42,3 +42,8 @@ body a:hover{
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { .ta-results{width: 75%;}}
+
+.ta-results {
+    top : 40px;
+    font-size: 14px;
+}

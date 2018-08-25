@@ -191,7 +191,6 @@ export class ProductDetailComponent {
 
         console.log({ "_id": id, "quantity": this.qtyInput });
         localStorageWrapper.addToCart({ "_id": id, "quantity": this.qtyInput })
-
     }
     addsimilarproducttocart() {
         this.cartdata.changecartvalue(1);

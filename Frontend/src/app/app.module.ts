@@ -17,13 +17,14 @@ import { StringFilterPipe } from './shared/string-filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
 import { HomeComponent } from "./components/home/home.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
-import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CartsharedService } from './shared/cartsharedservice/cartshared.service';
 import { OrdersComponent } from "./components/orders/orders.component";
+import { NgxTypeaheadModule } from 'ngx-typeahead';
+
 var routes = [{
   path: "",
   component: HomeComponent
@@ -63,9 +64,9 @@ var routes = [{
     FormsModule,
     OrderModule,
     RouterModule.forRoot(routes),
-    NgxTypeaheadModule,
     BrowserAnimationsModule, 
-    ToastrModule.forRoot() 
+    ToastrModule.forRoot() ,
+    NgxTypeaheadModule
   ],
   providers: [CartsharedService],
   bootstrap: [AppComponent]

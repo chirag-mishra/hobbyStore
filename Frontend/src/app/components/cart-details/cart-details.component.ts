@@ -20,6 +20,7 @@ export class CartDetailsComponent {
   promocode: string;
   unalterdPrice: number;
   promoApply: boolean;
+  promoVal:string;
 
   constructor(private toastr: ToastrService, private cartdata: CartsharedService) {
     this.isLoggedIn();

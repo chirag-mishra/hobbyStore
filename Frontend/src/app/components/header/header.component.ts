@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
+import { Observable } from 'rxjs';
+import { of as staticOf } from 'rxjs/observable/of';
+import { mergeMap } from 'rxjs/operators';
+import { from } from 'rxjs/observable/from';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Component({
   selector: 'app-header',
@@ -15,8 +21,18 @@ export class HeaderComponent {
   bestSellers: any[] = ["Huppin's", "Popjens", "Bicycle"];
   cartvalue: number = 2;
 
-  constructor(private data: CartsharedService) { }
+  constructor(private data: CartsharedService) {
+    
+  }
 
+  public url = 'http://085852fa.ngrok.io/partialTextSearch';
+  public query = '';
+
+  handleHttpResultSelected(result: any) {
+    console.log(result);
+    this.query = result;
+  }
+   
   ngOnInit() {
     this.data.currentvalue.subscribe(quantity => this.cartvalue += quantity);
   }

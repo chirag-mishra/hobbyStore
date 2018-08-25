@@ -1,13 +1,13 @@
 <div class="cart-container">
     <div class="cart-content">
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 order-md-1 cartProductList">
-                <div class="productInCart" *ngFor="let productinfo of cartproductdetails;let i =index">
+        <div class="row-fluid clearfix">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cartProductList">
+                <div class="productInCart clearfix" *ngFor="let productinfo of cartproductdetails;let i =index">
                     <div>
-                        <div class="prodThumbnail">
+                        <div class="prodThumbnail col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-left">
                             <img src="{{productinfo.imageurl}}" alt="Product1" class="img-thumbnail">
                         </div>
-                        <div class="itemDetailsCart">
+                        <div class="itemDetailsCart col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-left">
                             <div class="itemName">
                                 <a href="/products/{{productinfo.category | lowercase}}/{{productinfo.productid}}">{{productinfo.title}}</a>
                             </div>
@@ -30,7 +30,7 @@
                                         <button class="fas fa-plus" aria-hidden="true" (click)="increaseQty(i)" [disabled]="productinfo.quantity > productinfo.availablestock || productinfo.availablestock == 0"></button>
                                     </span>
                                 </div>
-                                <button (click)="RemoveItem(i);">Remove</button>
+                                <a (click)="RemoveItem(i);" class="removeLink btn btn-info">Remove</a>                                
                             </div>
                             <div class="inStockMargin">
                                 <div class="p-0" [ngClass]="{ 'text-success':productinfo.quantity<productinfo.availablestock,'text-danger':productinfo.availablestock==0}">
@@ -110,7 +110,7 @@
 
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 order-md-2 mb-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 billSection">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your cart</span>
                 </h4>
