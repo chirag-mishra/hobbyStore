@@ -44,11 +44,11 @@
                 </div>
                 <div class="billingSection">
                     <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation" id="formBillingDetails" novalidate>
+                    <form class="needs-validation" #formBillingDetails id="formBillingDetails">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control" id="txtfirstName" placeholder="" value="" required="">
+                                <input type="text" class="form-control" (ngModel)="abc" id="txtfirstName" placeholder="" value="" required="">
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
@@ -170,10 +170,9 @@
                 </div>
                 <hr class="mb-4">
 
-                <button class="btn btn-primary btn-lg btn-block" [disabled]="finalPrice===0" *ngIf="this.isCheckOutBtn">Continue to checkout</button>
-                <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" *ngIf="this.GuestBtn"
-                    type="submit">SignUp</button>
-                <button class="btn btn-primary btn-lg btn-block btnColor" *ngIf="this.GuestBtn" type="submit">Continue as Guest</button>
+                <button class="btn btn-primary btn-lg btn-block" [disabled]="finalPrice===0" (click)="test(formBillingDetails)" *ngIf="isCheckOutBtn">Continue to checkout</button>
+                
+                <button class="btn btn-primary btn-lg btn-block btnColor" *ngIf="GuestBtn">Continue as Guest</button>
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@ export class HeaderComponent {
     
   }
 
-  public url = 'http://085852fa.ngrok.io/partialTextSearch';
+  public url = 'http://7c492ffb.ngrok.io/partialTextSearch';
   public query = '';
 
   handleHttpResultSelected(result: any) {

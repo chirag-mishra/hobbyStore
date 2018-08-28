@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
+import { Form } from '@angular/forms/src/directives/form_interface';
 
 @Component({
   selector: 'app-cart-details',
@@ -125,5 +126,9 @@ export class CartDetailsComponent {
     this.cartproductdetails.splice(index, 1);
     this.cartdata.changecartvalue(-1 * prodquantity);
     this.CalculateTotal();
+  }
+  test(ffo:Form)
+  {
+    console.log(ffo);
   }
 }
