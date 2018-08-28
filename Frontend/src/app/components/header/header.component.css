@@ -17,5 +17,27 @@
 
 .cartButton{
     color: antiquewhite;
-    border-color: aqua;
+    /* border-color: aqua; */
+}
+.pull-right{
+    float: right;
+}
+.pull-left{
+    float: left;
+}
+.inline-block{
+    display: inline-block;
+}
+.display-none{
+    display: none;
+}
+.bg-color{
+    background-color: #666666;
+}
+.login-btn{
+    color: antiquewhite;
+}
+.fit-image{
+    width: 100%;
+    object-fit: cover;
 }
