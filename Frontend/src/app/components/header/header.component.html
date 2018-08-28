@@ -48,35 +48,35 @@
     </div>
   </div>
 </nav> -->
-<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 inline-block bg-color p-2">
+<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 inline-block bg-color clearfix header">
   <div class="col-md-2 col-lg-2 col-xs-2 col-sm-4 pull-left">
-    <a href="/"><img src="assets/images/HoppyFare_FinalLogo-DarkBlueFormat.png" class="img-responsive fit-image" alt="Card image cap"></a>      
+    <a href="/" class="logoLink">
+      <img src="assets/images/HoppyFare_FinalLogo-DarkBlueFormat.png" class="img-responsive fit-image" alt="Card image cap">
+    </a>
   </div>
-  <div class="col-md-6 col-lg-8 col-xs-8 col-sm-4 pull-left">
-    <form class="form-inline pull-right ">
+  <div class="col-md-10 col-lg-10 col-xs-10 col-sm-8 headerToolbar">
+
+    <div class="navIcons">
       <pre class="card card-block card-header display-none">{{asyncSelected | json}}</pre>
-      <div>
-          <input type="text" class="p-1" [value]="query" placeholder="type to see http response"
-          ngxTypeahead
-          [taUrl]="url"
-          [taParams]="params"
-          [taApi]="api"
-          (taSelected)="handleHttpResultSelected($event)"
-        >
-      </div>   
-      <span><button class="btn btn-md login-btn bg-color" type="submit"><span class="fas fa-search"></span></button></span> 
-       
-     </form>
-  </div>
-  <div class="col-md-4 col-lg-2 col-xs-2 col-sm-4 pull-left">
-    <div class="pull-right">
-        <div class="btn btn-md login-btn bg-color"><span class="fas fa-bars"></span></div>
-        <a href="#" class="btn btn-md cartButton" [routerLink]="['cart']">
-            <span class="fas fa-shopping-cart"></span>
-            <span>{{cartvalue}}</span>
-          </a>
-          <button class="btn btn-md login-btn bg-color" href="#" data-toggle="modal" data-target="#exampleModal"><span class="fas fa-user-plus"></span></button>
+      <input type="text" class="p-1" [value]="query" placeholder="type to see http response" ngxTypeahead [taUrl]="url" [taParams]="params"
+        [taApi]="api" (taSelected)="handleHttpResultSelected($event)">
+      <span>
+        <button class="btn btn-md login-btn bg-color">
+          <span class="fas fa-search"></span>
+        </button>
+      </span>
+      <a class="btn btn-md login-btn bg-color">
+        <span class="fas fa-bars"></span>
+      </a>
+      <a href="#" class="btn btn-md cartButton" [routerLink]="['cart']">
+        <span class="fas fa-shopping-cart"></span>
+        <span>{{cartvalue}}</span>
+      </a>
+      <button class="btn btn-md login-btn bg-color" href="#" data-toggle="modal" data-target="#exampleModal">
+        <span class="fas fa-user-plus"></span>
+      </button>
     </div>
   </div>
+
 </div>
 <modal-popup></modal-popup>
