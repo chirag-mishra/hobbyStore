@@ -127,8 +127,8 @@ export class CartDetailsComponent {
     this.cartdata.changecartvalue(-1 * prodquantity);
     this.CalculateTotal();
   }
-  test(ffo:Form)
-  {
-    console.log(ffo);
-  }
+  submituserdetails()
+  {}
+  validateuserdetails()
+  {}
 }
