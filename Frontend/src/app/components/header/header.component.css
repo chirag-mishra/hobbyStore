@@ -72,3 +72,24 @@
 li.nav-item{
     display: inline-block;
 }
+.align-center{
+    text-align: center;
+}
+.category-items{
+    transition: all ease 0.5s;
+}
+.category-items:hover {
+    padding-left: 10px;
+}
+.category-bg-Color{
+    background-color:#f2f3f5;
+}
+a div {
+    color: #000;
+}
+.category-section{
+    position: absolute;
+    z-index: 10;
+    background-color: #ffffff;
+    text-align: center;
+}
