@@ -48,35 +48,65 @@
     </div>
   </div>
 </nav> -->
-<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 inline-block bg-color clearfix header">
-  <div class="col-md-2 col-lg-2 col-xs-2 col-sm-4 pull-left">
-    <a href="/" class="logoLink">
-      <img src="assets/images/HoppyFare_FinalLogo-DarkBlueFormat.png" class="img-responsive fit-image" alt="Card image cap">
-    </a>
+<nav class="navbar navbar-expand-lg bg-color">
+  <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+      <a href="/" class=" navbar-brand">
+        <img src="assets/images/HoppyFare_FinalLogo-DarkBlueFormat.png" class="fit-image" alt="Card image cap">
+      </a>  
   </div>
-  <div class="col-md-10 col-lg-10 col-xs-10 col-sm-8 headerToolbar">
+  
+  <button class="navbar-toggler col-xs-2" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon fa fa-bars"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar">
+    <ul class="navbar-nav mr-auto navList">
+      <li class="nav-item active">
+        <pre class="card card-block card-header display-none">{{asyncSelected | json}}</pre>
+        <input type="text" class="p-1" [value]="query" placeholder="type to see http response" ngxTypeahead [taUrl]="url" [taParams]="params"
+          [taApi]="api" (taSelected)="handleHttpResultSelected($event)">
+        <span>
+          <button class="btn btn-md login-btn bg-color">
+            <span class="fas fa-search"></span>
+          </button>
+        </span>
+      </li>
 
-    <div class="navIcons">
-      <pre class="card card-block card-header display-none">{{asyncSelected | json}}</pre>
-      <input type="text" class="p-1" [value]="query" placeholder="type to see http response" ngxTypeahead [taUrl]="url" [taParams]="params"
-        [taApi]="api" (taSelected)="handleHttpResultSelected($event)">
-      <span>
-        <button class="btn btn-md login-btn bg-color">
-          <span class="fas fa-search"></span>
+      <li class="nav-item">
+        <a class="btn btn-md login-btn bg-color">
+          <span class="fas fa-bars"></span>
+        </a>
+      </li>
+
+      <!-- <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> -->
+
+      <li class="nav-item">
+        <a href="#" class="btn btn-md cartButton" [routerLink]="['cart']">
+          <span class="fas fa-shopping-cart"></span>
+          <span>{{cartvalue}}</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <button class="btn btn-md login-btn bg-color" href="#" data-toggle="modal" data-target="#exampleModal">
+          <span class="fas fa-user-plus"></span>
         </button>
-      </span>
-      <a class="btn btn-md login-btn bg-color">
-        <span class="fas fa-bars"></span>
-      </a>
-      <a href="#" class="btn btn-md cartButton" [routerLink]="['cart']">
-        <span class="fas fa-shopping-cart"></span>
-        <span>{{cartvalue}}</span>
-      </a>
-      <button class="btn btn-md login-btn bg-color" href="#" data-toggle="modal" data-target="#exampleModal">
-        <span class="fas fa-user-plus"></span>
-      </button>
-    </div>
-  </div>
+      </li>
 
-</div>
+    </ul>
+
+  </div>
+</nav>
+
 <modal-popup></modal-popup>
