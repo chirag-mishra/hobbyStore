@@ -50,11 +50,11 @@
 </nav> -->
 <nav class="navbar navbar-expand-lg bg-color" id="navigationBar">
   <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-      <a href="/" class=" navbar-brand">
-        <img src="assets/images/HoppyFare_FinalLogo-DarkBlueFormat.png" class="fit-image" alt="Card image cap">
-      </a>  
+    <a href="/" class=" navbar-brand">
+      <img src="assets/images/HoppyFare_FinalLogo-DarkBlueFormat.png" class="fit-image" alt="Card image cap">
+    </a>
   </div>
-  
+
   <button class="navbar-toggler col-xs-2" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon fa fa-bars"></span>
@@ -72,10 +72,82 @@
         </span>
       </li>
 
-      <li class="nav-item">
-        <a class="btn btn-md login-btn bg-color">
-          <span class="fas fa-bars"></span>
-        </a>
+      <li class="nav-item dropdownTrigger">
+        <div class="btn btn-md login-btn bg-color">
+          <span class="fas fa-bars" (click)="onMouseClick($event)"></span>
+          <div id="Category" class="col-md-12 col-lg-12 col-sm-12 col-xs-12 category-section display-none dropdownContent">
+            <div class="row">
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
+                <div class="thumbnail">
+                  <a href="/">
+                    <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
+                    <div>
+                      <h5>
+                        <b>Category</b>
+                      </h5>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 category-bg-Color p-4">
+                <h5>
+                  <b>Category</b>
+                </h5>
+                <div class="category-items" *ngFor="let item of toolbarInfo.toolbarDetails">
+                  <a title="{{item.toolbarName}}" href="#">{{item.toolbarName}}</a>
+                </div>
+              </div>
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
+                <div class="thumbnail">
+                  <a href="/">
+                    <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
+                    <div>
+                      <h5>
+                        <b>Category</b>
+                      </h5>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
+                <div class="thumbnail">
+                  <a href="/">
+                    <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
+                    <div class="caption">
+                      <h5>
+                        <b>Category</b>
+                      </h5>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
+                <div class="thumbnail">
+                  <a href="/">
+                    <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
+                    <div>
+                      <h5>
+                        <b>Category</b>
+                      </h5>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
+                <div class="thumbnail">
+                  <a href="/">
+                    <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
+                    <div>
+                      <h5>
+                        <b>Category</b>
+                      </h5>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
 
       <!-- <li class="nav-item">
@@ -102,11 +174,12 @@
         <button class="btn btn-md login-btn bg-color" href="#" data-toggle="modal" data-target="#exampleModal">
           <span class="fas fa-user-plus"></span>
         </button>
+
       </li>
 
     </ul>
-
   </div>
 </nav>
+
 
 <modal-popup></modal-popup>

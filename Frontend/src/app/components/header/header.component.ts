@@ -20,9 +20,43 @@ export class HeaderComponent {
   categories: any[] = ["Premium Cards", "Close Up Magic", "Intermediate Tricks", "Beginner Tricks", "Street Magic", "Mentalism", "Stage Magic", "Accessories", "Books"];
   bestSellers: any[] = ["Huppin's", "Popjens", "Bicycle"];
   cartvalue: number = 2;
-
+  display:boolean;
+  toolbarInfo: any = {
+    toolbarDetails: [
+      {
+        "id": 1,
+        "title": "Cards",
+        "toolbarName": "Cards"
+      },
+      {
+        "id": 2,
+        "title": "Beginner Cards",
+        "toolbarName": "Beginner Cards"
+      },
+      {
+        "id": 3,
+        "title": "Intermmediate Cards",
+        "toolbarName": "Intermmediate Cards"
+      },
+      {
+        "id": 4,
+        "title": "Premium Cards",
+        "toolbarName": "Premium Cards"
+      },
+      {
+        "id": 5,
+        "title": "Royal Cards",
+        "toolbarName": "Royal Cards"
+      },
+      {
+        "id": 6,
+        "title": "Tuple Cards",
+        "toolbarName": "Tuple Cards"
+      },
+    ]
+  };
   constructor(private data: CartsharedService) {
-    
+    this.display=false;
   }
 
   public url = 'http://7c492ffb.ngrok.io/partialTextSearch';
@@ -42,5 +76,27 @@ export class HeaderComponent {
       behavior: 'smooth'
     });
   }
-
+  // onMouseOver(event:any){
+  //   document.getElementById("Category").classList.remove('display-none');
+  // }
+  // onMouseOut(event:any){
+  //   document.getElementById("Category").classList.add('display-none');
+  // }
+  onMouseOver(event:any){
+    if (!this.display) {
+      document.getElementById("Category").classList.remove('display-none');
+    }    
+  }
+  onMouseOut(event:any){
+    if (!this.display) {
+      document.getElementById("Category").classList.add('display-none');
+    }    
+  }
+  onMouseClick(event:any){
+    this.display=!this.display;
+    if(this.display)
+    {
+      document.getElementById("Category").classList.remove('display-none');      
+    }
+  }
 }

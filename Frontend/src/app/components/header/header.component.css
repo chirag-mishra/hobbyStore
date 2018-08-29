@@ -76,3 +76,35 @@ li.nav-item{
 #navigationBar {
     padding: 0;
 }
+.align-center{
+    text-align: center;
+}
+.category-items{
+    transition: all ease 0.5s;
+}
+.category-items:hover {
+    padding-left: 10px;
+}
+.category-bg-Color{
+    background-color:#f5f5f5;
+}
+a div {
+    color: #000;
+}
+.category-section{
+    position: absolute;
+    right: 0;
+    top : 40px;
+    z-index: 1;
+    background-color: #ffffff;
+    text-align: center;
+    color : #999999;
+}
+
+#navbar {
+    position: relative;
+}
+
+.dropdownTrigger:hover .dropdownContent {
+    display: block;
+}
