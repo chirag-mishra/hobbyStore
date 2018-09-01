@@ -45,6 +45,7 @@
 .markerContent{
     float: left;
     padding: 8px;
+    text-align: center;
 }
 .markerText{
     font-size: medium;
@@ -56,4 +57,19 @@
     color:antiquewhite;
 }
 
+.markerContent button {
+    border-radius: 20px;
+}
 
+
+
+.subCategoryIcon {
+    float: left;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.about-container {
+    padding: 30px 0;
+}
