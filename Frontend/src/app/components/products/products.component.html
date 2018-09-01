@@ -33,9 +33,10 @@
                     <div [routerLink]="['products/',product.category[1] | lowercase,product._id]">
                         <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
                         <div class="list-group list-group-flush">
-                            <div>Title : {{product.title}}</div>
-                            <div>Price : {{product.price | currency:'&#8377;'}}</div>
-                            <div>Rating : {{product.rating}}</div>
+                            <div><span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
+                            aria-hidden="true"></span></div>
+                            <div class="title"><h5>{{product.title}}</h5></div>
+                            <div>{{product.price | currency:'&#8377;'}}</div>                            
                         </div>
                     </div>
                     <div class="card-buttons">
@@ -46,9 +47,10 @@
             </div>
         </div>
     </div>
-    <div class="has-text-centered paginationComponent">
-        <pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide" [previousLabel]="labels.previousLabel"
+    <div class="paginationComponent">
+        <div class="paginationTemplate col-sm-12 col-md-6 col-lg-6 col-xs-12"><pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide" [previousLabel]="labels.previousLabel"
             [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel" [screenReaderPageLabel]="labels.screenReaderPageLabel"
-            [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)"></pagination-controls>
+            [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)"></pagination-controls></div>
+  
     </div>
 </div>
