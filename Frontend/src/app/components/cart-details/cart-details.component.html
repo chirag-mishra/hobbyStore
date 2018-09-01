@@ -7,6 +7,11 @@
                         <div class="prodThumbnail col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-left">
                             <img src="{{productinfo.imageurl}}" alt="Product1" class="img-thumbnail">
                         </div>
+                        <div class="circularBadge">
+                            <span>
+                                -25%
+                            </span>
+                        </div>
                         <div class="itemDetailsCart col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-left">
                             <div class="itemName">
                                 <a href="/products/{{productinfo.category | lowercase}}/{{productinfo.productid}}">{{productinfo.title}}</a>
@@ -33,63 +38,41 @@
                                 <a (click)="RemoveItem(i);" class="removeLink btn btn-info">Remove</a>
                             </div>
                             <div class="inStockMargin">
-                                <div class="p-0" [ngClass]="{ 'text-success':productinfo.quantity<productinfo.availablestock,'text-danger':productinfo.availablestock==0}">
-                                    <span class="monospaced">{{productinfo.quantity
-                                        <productinfo.availablestock? "In Stock": productinfo.availablestock==0 ? "Out of Stock": "Only "+productinfo.availablestock+
-                                            " in Stock"}}</span>
+                                <div class="p-0" [ngClass]="{ 'text-success':availabilityCheck(i),'text-danger':productinfo.availablestock==0}">
+                                    <span class="monospaced">{{availabilityCheck(i)? "In Stock": productinfo.availablestock==0 ? "Out of Stock": "Only
+                                        "+productinfo.availablestock+ " in Stock"}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h5>Saved addresses : </h5>
-                    <div class="divaddreselect col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="cardaddress">
-                            <div class="cardbodyaddress">
-                                <h5 class="card-subtitle mb-2">Home</h5>
-                                <p class="card-title">firstName lastName</p>
-                                <p class="card-text">Address 1, Address 2</p>
-                                <p class="card-text">City, State</p>
-                                <p class="card-text">Pincode</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divaddreselect col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="cardaddress">
-                            <div class="cardbodyaddress">
-                                <h5 class="card-subtitle mb-2">Work</h5>
-                                <p class="card-title">firstName lastName</p>
-                                <p class="card-text">Address 1, Address 2</p>
-                                <p class="card-text">City, State</p>
-                                <p class="card-text">Pincode</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="divaddreselect col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="cardaddress">
-                            <div class="cardbodyaddress">
-                                <h5 class="card-subtitle mb-2">Maandu ka ghar</h5>
-                                <p class="card-title">firstName lastName</p>
-                                <p class="card-text">Address 1, Address 2</p>
-                                <p class="card-text">City, State</p>
-                                <p class="card-text">Pincode</p>
-                            </div>
+                <div class="accordion" id="savedAddressesAccordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#savedAddressCollapse" aria-expanded="true"
+                            aria-controls="savedAddressCollapse">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button">
+                                    Saved Addresses
+                                </button>
+                            </h5>
                         </div>
-                    </div>
-                    <div class="divaddreselect col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="cardaddress">
-                            <div class="cardbodyaddress">
-                                <h5 class="card-subtitle mb-2">Office</h5>
-                                <p class="card-title">firstName lastName</p>
-                                <p class="card-text">Address 1, Address 2</p>
-                                <p class="card-text">City, State</p>
-                                <p class="card-text">Pincode</p>
-                            </div>
-                        </div>
-                    </div>
 
+                        <div id="savedAddressCollapse" class="collapse" aria-labelledby="headingOne" data-parent="#savedAddressesAccordion">
+                            <div class="divaddreselect col-lg-6 col-md-6 col-sm-12 col-12" *ngFor="let savedaddresses of userdetails.addresses;let i=index">
+
+                                <div class="cardbodyaddress" (click)="selectBillingAddress(i)">
+                                    <h5 class="card-subtitle mb-2 text">{{savedaddresses.title}}</h5>
+                                    <p class="card-title">{{userdetails.firstname}} {{userdetails.lastname}}</p>
+                                    <p class="card-text">{{savedaddresses.address}}</p>
+                                    <p class="card-text">{{savedaddresses.landmark}}</p>
+                                    <p class="card-text text">{{savedaddresses.city}}, {{savedaddresses.state}}</p>
+                                    <p class="card-text">{{savedaddresses.pincode}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="billingSection">
                     <h4 class="mb-3">Billing address</h4>
@@ -115,17 +98,24 @@
 
                         <div class="mb-3">
                             <label for="txtemail">Email
-                                <span class="text-muted">(Optional)</span>
                             </label>
                             <input type="email" name="txtemail" id="txtemail" class="form-control" [(ngModel)]="userdetails.email" placeholder="you@example.com">
                             <div [ngClass]="{'invalidentry':invalidelement==='email','ntvisible':invalidelement !=='email'}">
                                 Please enter a valid email address for shipping updates.
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="txtaddress">Address Title</label>
+                            <input type="text" class="form-control" name="txtaddress" id="txtaddress" [(ngModel)]="addresstitle" placeholder="Home, Work, etc"
+                                required="">
+                            <div [ngClass]="{'invalidentry':invalidelement==='title','ntvisible':invalidelement !=='title'}">
+                                Please enter your address title.
+                            </div>
+                        </div>
 
                         <div class="mb-3">
-                            <label for="txtaddress1">Address</label>
-                            <input type="text" class="form-control" name="txtaddress1" id="txtaddress1" [(ngModel)]="userdetails.address1" placeholder="1234 Main St"
+                            <label for="txtaddress">Address</label>
+                            <input type="text" class="form-control" name="txtaddress" id="txtaddress" [(ngModel)]="address" placeholder="1234, ABC Apartment"
                                 required="">
                             <div [ngClass]="{'invalidentry':invalidelement==='address','ntvisible':invalidelement !=='address'}">
                                 Please enter your shipping address.
@@ -136,21 +126,31 @@
                             <label for="txtlandmark">Landmark
                                 <span class="text-muted">(Optional)</span>
                             </label>
-                            <input type="text" class="form-control" name="txtlandmark" id="txtlandmark" [(ngModel)]="userdetails.landmark" placeholder="Apartment or suite">
+                            <input type="text" class="form-control" name="txtlandmark" id="txtlandmark" [(ngModel)]="landmark" placeholder="JP Marg">
                         </div>
 
                         <div class="mb-3">
                             <label for="txtcontactno">Phone Number</label>
                             <div>
-                                <input type="=text" class="phonecode" value="+91" disabled="disabled"><span>-</span>
-                                <input type="text" class="form-control" name="txtcontactno" id="txtcontactno" [(ngModel)]="userdetails.contactno" placeholder="Apartment or suite">
+                                <input type="text" class="phonecode" value="+91" disabled="disabled">
+                                <span class="mrgn">
+                                    <strong>-</strong>
+                                </span>
+                                <input type="text" name="txtcontactno" class="form-control" id="txtcontactno" [(ngModel)]="contact">
                             </div>
                         </div>
 
                         <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="txtcity">City</label>
+                                <input type="text" class="form-control" name="txtcity" [(ngModel)]="city" placeholder="Hyderabad" required="" id="txtcity">
+                                <div [ngClass]="{'invalidentry':invalidelement==='city','ntvisible':invalidelement !=='city'}">
+                                    City required.
+                                </div>
+                            </div>
                             <div class="col-md-4 mb-3">
                                 <label for="ddlstate">State</label>
-                                <select class="custom-select d-block w-100" name="ddlstate" id="ddlstate" [(ngModel)]="userdetails.state" required="">
+                                <select class="custom-select d-block w-100" name="ddlstate" id="ddlstate" [(ngModel)]="state" required="">
                                     <option value="Andaman &amp; Nicobar Islands">Andaman &amp; Nicobar Islands</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -193,12 +193,12 @@
                                     Please provide a valid state.
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="txtzip">PinCode</label>
-                                <input type="text" class="form-control" name="txtzip" [(ngModel)]="userdetails.zip" placeholder="" required="" id="txtzip">
-                                <div [ngClass]="{'invalidentry':invalidelement==='zip','ntvisible':invalidelement !=='pincode'}">
-                                    Pincode required.
-                                </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtpincode">PinCode</label>
+                            <input type="text" class="form-control" name="txtpincode" [(ngModel)]="pincode" placeholder="" required="" id="txtpincode">
+                            <div [ngClass]="{'invalidentry':invalidelement==='pincode','ntvisible':invalidelement !=='pincode'}">
+                                Pincode required.
                             </div>
                         </div>
                     </form>

@@ -23,6 +23,9 @@ export class CartDetailsComponent {
   promoApply: boolean;
   promoVal: string;
   invalidelement: string = "";
+  addresstitle: string=""; contact: number; address: string=""; 
+  landmark: string=""; city: string=""; state: string=""; pincode: string="";
+
 
   constructor(private toastr: ToastrService, private cartdata: CartsharedService) {
     this.isLoggedIn();
@@ -35,55 +38,65 @@ export class CartDetailsComponent {
   }
 
   isLoggedIn() { this.login = true; }
-  userdetails: any = [
+  userdetails: any =
     {
-      userid: "1234",
+      userid: 1234,
       firstname: "anonymous",
       lastname: "anonymous",
       email: "anonymous@gmail.com",
-      addresses : [
+      addresses: [
         {
-          "title" : "home",
-          "name" : "abhiram",
-          "contact":9581248172,
-          "address" : "406, sun valley apartment",
-          "landmark":"near maharshi vidya mandir school",
-          "city" : "hyderabad",
-          "state" : "telangana",
-          "pincode" : 500084
+          "title": "home",
+          "name": "abhiram",
+          "contact": 9581248172,
+          "address": "406, sun valley apartment",
+          "landmark": "near maharshi vidya mandir school",
+          "city": "hyderabad",
+          "state": "telangana",
+          "pincode": 500084
+        },
+        {
+          "title": "work",
+          "name": "abhiram",
+          "contact": 9581248172,
+          "address": "406, sun valley apartment",
+          "landmark": "near maharshi vidya mandir school",
+          "city": "hyderabad",
+          "state": "telangana",
+          "pincode": 500084
         }
       ]
     }
-  ]
+
 
   cartproductdetails: any = [
     {
-      productid: "1",
+      productid: 1,
       category: "Cards",
       imageurl: "assets/images/prod1.jpg",
-      costprice: "350",
-      displayprice: "350",
-      markprice: "590",
-      quantity: "6",
+      costprice: 350,
+      displayprice: 350,
+      markprice: 590,
+      quantity: 6,
       title: "Bicycle Cards",
       variant: "Blue",
-      availablestock: "5"
+      availablestock: 5
     },
     {
-      productid: "2",
+      productid: 2,
       category: "Cards",
       imageurl: "assets/images/prod1.jpg",
-      costprice: "100",
-      displayprice: "100",
-      markprice: "200",
-      quantity: "1",
+      costprice: 100,
+      displayprice: 100,
+      markprice: 200,
+      quantity: 1,
       title: "Bicycle Cards",
       variant: "Blue",
-      availablestock: "0"
+      availablestock: 0
     }
   ];
-  getdiscountValue(costprice: number, markprice1: number) {
-    return this.discount = costprice / markprice1;
+  getdiscountValue(costprice: number, markprice: number) {
+    return this.discount = (markprice - costprice) / markprice;
   }
   decreaseQty(index: number) {
     if (this.cartproductdetails[index].quantity == 0) {
@@ -153,36 +166,57 @@ export class CartDetailsComponent {
   }
   validateuserdetails() {
     if (this.userdetails.firstname == "" || this.userdetails.firstname == null) {
-      console.log("fast");
       this.invalidelement = "firstname";
       return false;
     }
     if (this.userdetails.lastname == "" || this.userdetails.lastname == null) {
-      console.log("la");
       this.invalidelement = "lastname";
       return false;
     }
     var emailre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var pincodere= /^[1-9][0-9]{5}$/;
-    if(!emailre.test(String(this.userdetails.email).toLowerCase())){
+    var pincodere = /^[1-9][0-9]{5}$/;
+    if (!emailre.test(String(this.userdetails.email).toLowerCase())) {
       this.invalidelement = "email";
       return false;
-      }
-
-    if (this.userdetails.address1 == "" || this.userdetails.address1 == null) {
+    }
+    if (this.addresstitle == "" || this.addresstitle == null) {
+      this.invalidelement = "title";
+      return false;
+    }
+    if (this.address == "" || this.address == null) {
       this.invalidelement = "address";
       return false;
     }
-    if (this.userdetails.state == "" || this.userdetails.state == null) {
+    if (this.contact == undefined || this.contact == null) {
+      this.invalidelement = "contact";
+      return false;
+    }
+    if (this.city == "" || this.city == null) {
+      this.invalidelement = "city";
+      return false;
+    }
+    if (this.state == "" || this.state == null) {
       this.invalidelement = "state";
       return false;
     }
-    if (this.userdetails.zip == "" || this.userdetails.zip == null || String(this.userdetails.zip).length != 6) {
-     if(!pincodere.test(String(this.userdetails.email).toLowerCase()))
-      this.invalidelement = "pincode";
+    if (this.pincode == undefined || this.pincode == null) {
+      if (!pincodere.test(String(this.pincode).toLowerCase()))
+        this.invalidelement = "pincode";
       return false;
     }
     this.invalidelement = "";
     return true;
+  }
+  availabilityCheck(index: number) {
+    return this.cartproductdetails[index].quantity <= this.cartproductdetails[index].availablestock ? true : false;
+  }
+  selectBillingAddress(index: number) {
+    this.addresstitle = this.userdetails.addresses[index].title;
+    this.contact = this.userdetails.addresses[index].contact;
+    this.address = this.userdetails.addresses[index].address;
+    this.landmark = this.userdetails.addresses[index].landmark;
+    this.city = this.userdetails.addresses[index].city;
+    this.state = this.userdetails.addresses[index].state;
+    this.pincode = this.userdetails.addresses[index].pincode;
   }
 }

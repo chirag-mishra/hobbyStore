@@ -135,7 +135,11 @@ font-size: 80%;
 color: #dc3545;
 }
 
-.cardaddress{
+
+.cardbodyaddress{
+    padding: 1.25rem;
+    transition: all ease .3s;
+    cursor: pointer;
     display: inline-block;
     width: 100%;
     word-wrap: break-word;
@@ -143,12 +147,6 @@ color: #dc3545;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
-}
-
-.cardbodyaddress{
-    padding: 1.25rem;
-    transition: all ease .3s;
-    cursor: pointer;
 }
 
 .cardbodyaddress:hover{
@@ -185,4 +183,44 @@ color: #dc3545;
 
 .product-qty input {
     vertical-align: sub; 
+}
+.mrgn{
+    margin: 0px 6px 0px 9px;
+
+}
+
+#savedAddressesAccordion button {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#headingOne {
+    background: #ff7200d6;
+    cursor: pointer;
+}
+
+.circularBadge {
+    display: inline-block;
+    border-radius: 50%;
+    background: #ff7200;
+    padding: 5px;
+}
+
+.circularBadge span {
+    padding: 20px 15px;
+    border-radius: 50%;
+    width: 100%;
+    display: inline-block;
+    border: 1px dashed #fff;
+    color: #fff;
+    font-style: italic;
+    font-weight: 600;
+}
+.text
+{
+    text-transform: capitalize;
+}
+#txtcontactno.form-control{
+    display: inline-block;
+    width: 20%;
 }
