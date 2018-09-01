@@ -5,7 +5,7 @@
     </a>
   </div>
 
-  <button class="navbar-toggler col-xs-2" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent"
+  <button class="navbar-toggler col-2" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon fa fa-bars"></span>
   </button>
@@ -23,13 +23,14 @@
       </li>
 
       <li class="nav-item dropdownTrigger">
-            <button class="btn btn-md login-btn bg-color" (click)="onMouseClick($event)">
-                <span class="fas fa-bars login-btn bg-color"></span>
-            </button>          
-          <div id="Category" class="col-md-12 col-lg-12 col-sm-12 col-xs-12 category-section display-none dropdownContent">
-            <div class="row">
-              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
-                <div class="thumbnail">
+        <button class="btn btn-md login-btn bg-color" (click)="onMouseClick($event)">
+          <span class="fas fa-bars login-btn bg-color"></span>
+        </button>
+        <div id="Category" class="col-md-12 col-lg-12 col-sm-12 col-12 category-section dropdownContent">
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+              <div class="flipper">
+                <div class="thumbnail frontSide">
                   <a href="/">
                     <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
                     <div>
@@ -39,17 +40,22 @@
                     </div>
                   </a>
                 </div>
-              </div>
-              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 category-bg-Color p-4">
-                <h5>
-                  <b>Category</b>
-                </h5>
-                <div class="category-items" *ngFor="let item of toolbarInfo.toolbarDetails">
-                  <a title="{{item.toolbarName}}" href="#">{{item.toolbarName}}</a>
+                <div class="backSide">
+                  Finest Street Magic Trick collections
                 </div>
               </div>
-              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
-                <div class="thumbnail">
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 category-bg-Color p-4 categoryIcon">
+              <h5>
+                <b>Category</b>
+              </h5>
+              <div class="category-items" *ngFor="let item of toolbarInfo.toolbarDetails">
+                <a title="{{item.toolbarName}}" href="#">{{item.toolbarName}}</a>
+              </div>
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+              <div class="flipper">
+                <div class="thumbnail frontSide">
                   <a href="/">
                     <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
                     <div>
@@ -59,21 +65,14 @@
                     </div>
                   </a>
                 </div>
-              </div>
-              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
-                <div class="thumbnail">
-                  <a href="/">
-                    <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
-                    <div class="caption">
-                      <h5>
-                        <b>Category</b>
-                      </h5>
-                    </div>
-                  </a>
+                <div class="backSide">
+                  Finest Street Magic Trick collections
                 </div>
               </div>
-              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
-                <div class="thumbnail">
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+              <div class="flipper">
+                <div class="thumbnail frontSide">
                   <a href="/">
                     <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
                     <div>
@@ -83,9 +82,14 @@
                     </div>
                   </a>
                 </div>
+                <div class="backSide">
+                  Finest Street Magic Trick collections
+                </div>
               </div>
-              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 p-4">
-                <div class="thumbnail">
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+              <div class="flipper">
+                <div class="thumbnail frontSide">
                   <a href="/">
                     <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
                     <div>
@@ -94,10 +98,31 @@
                       </h5>
                     </div>
                   </a>
+                </div>
+                <div class="backSide">
+                  Finest Street Magic Trick collections
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+              <div class="flipper">
+                <div class="thumbnail frontSide">
+                  <a href="/">
+                    <img src="assets/images/demo.jpg" alt="Lights" style="width:100%">
+                    <div>
+                      <h5>
+                        <b>Category</b>
+                      </h5>
+                    </div>
+                  </a>
+                </div>
+                <div class="backSide">
+                  Finest Street Magic Trick collections
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </li>
       <li class="nav-item">
         <a href="#" class="btn btn-md cartButton" [routerLink]="['cart']">

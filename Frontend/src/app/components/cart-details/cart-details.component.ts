@@ -41,10 +41,18 @@ export class CartDetailsComponent {
       firstname: "anonymous",
       lastname: "anonymous",
       email: "anonymous@gmail.com",
-      address1: "anonymous street",
-      address2: "",
-      state: "Telegana",
-      zip: "500084"
+      addresses : [
+        {
+          "title" : "home",
+          "name" : "abhiram",
+          "contact":9581248172,
+          "address" : "406, sun valley apartment",
+          "landmark":"near maharshi vidya mandir school",
+          "city" : "hyderabad",
+          "state" : "telangana",
+          "pincode" : 500084
+        }
+      ]
     }
   ]
 
@@ -154,27 +162,26 @@ export class CartDetailsComponent {
       this.invalidelement = "lastname";
       return false;
     }
-    if (this.userdetails.email == "" || this.userdetails.email == null) {
-      console.log("em");
+    var emailre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var pincodere= /^[1-9][0-9]{5}$/;
+    if(!emailre.test(String(this.userdetails.email).toLowerCase())){
       this.invalidelement = "email";
       return false;
-    }
+      }
+
     if (this.userdetails.address1 == "" || this.userdetails.address1 == null) {
-      console.log("add");
       this.invalidelement = "address";
       return false;
     }
     if (this.userdetails.state == "" || this.userdetails.state == null) {
-      console.log("st");
       this.invalidelement = "state";
       return false;
     }
-    if (this.userdetails.zip == "" || this.userdetails.zip == null) {
-      console.log("zip");
-      this.invalidelement = "zip";
+    if (this.userdetails.zip == "" || this.userdetails.zip == null || String(this.userdetails.zip).length != 6) {
+     if(!pincodere.test(String(this.userdetails.email).toLowerCase()))
+      this.invalidelement = "pincode";
       return false;
     }
-    console.log("no");
     this.invalidelement = "";
     return true;
   }

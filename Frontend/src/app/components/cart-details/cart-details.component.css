@@ -136,9 +136,8 @@ color: #dc3545;
 }
 
 .cardaddress{
-    position: relative;
     display: inline-block;
-    min-width: 0;
+    width: 100%;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
@@ -147,11 +146,43 @@ color: #dc3545;
 }
 
 .cardbodyaddress{
-padding: 1.25rem;
+    padding: 1.25rem;
+    transition: all ease .3s;
+    cursor: pointer;
 }
+
+.cardbodyaddress:hover{
+    transform: scale(1.08);
+}
+.phonecode{
+    width: 5%;
+}
+
+.card-subtitle {
+    color: #ff7200;
+}
+
+.cardbodyaddress p {
+    font-size: 12px;
+}
+
 .radioaddress{
     display: inline-block;
 }
 .divaddreselect{
     display: inline-block;
+    float: left;
+    margin: 10px 0;
+}
+
+.product-qty button {
+    border: 0;
+    background: #ff7200;
+    border-radius: 50%;
+    padding: 5px;
+    color: #ffffff;
+}
+
+.product-qty input {
+    vertical-align: sub; 
 }

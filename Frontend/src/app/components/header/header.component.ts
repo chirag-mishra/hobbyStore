@@ -59,7 +59,7 @@ export class HeaderComponent {
     this.display=false;
   }
 
-  public url = 'http://7c492ffb.ngrok.io/partialTextSearch';
+  public url = 'http://c24bf496.ngrok.io/partialTextSearch';
   public query = '';
 
   handleHttpResultSelected(result: any) {
