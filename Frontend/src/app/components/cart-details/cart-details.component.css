@@ -128,3 +128,30 @@ a.removeLink:hover {
     display: inline-block;
     float: left;
 }
+.invalidentry{
+width: 100%;
+margin-top: .25rem;
+font-size: 80%;
+color: #dc3545;
+}
+
+.cardaddress{
+    position: relative;
+    display: inline-block;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.cardbodyaddress{
+padding: 1.25rem;
+}
+.radioaddress{
+    display: inline-block;
+}
+.divaddreselect{
+    display: inline-block;
+}

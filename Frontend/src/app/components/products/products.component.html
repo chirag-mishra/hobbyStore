@@ -1,52 +1,54 @@
-<ul>
-        <li>All Items</li>
-        <li>All Items</li>
-        <li>All Items</li>
-        <li>All Items</li>
-        <li>All Items</li>
-        <li>All Items</li>
-        <li>All Items</li>
+<div class="">
+    <ul class="topMenu clearfix">
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6 active">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
     </ul>
-<div class="catalogue" id="productsCatalogue">
-    <div class="catalogue-controls">
-        <div class="catalogueControlItem">
-            <label for="sortBy">Sort By </label>
-            <select name="sortBy" id="ddOrderByItems" [(ngModel)]="sortProperty" (ngModelChange)="setOrder($event)">
-                <option *ngFor="let item of orderByItems" [value]="item">{{item}}</option>
-            </select>
-        </div>
+    <hr class="underline"/>
+    <div class="catalogue" id="productsCatalogue">
+        <div class="catalogue-controls">
+            <div class="catalogueControlItem">
+                <label for="sortBy">Sort By </label>
+                <select name="sortBy" id="ddOrderByItems" [(ngModel)]="sortProperty" (ngModelChange)="setOrder($event)">
+                    <option *ngFor="let item of orderByItems" [value]="item">{{item}}</option>
+                </select>
+            </div>
 
-        <div class="catalogueControlItem">
-            <label for="showingItems">Items per page </label>
-            <select name="showingItems" id="ddItemsPerPage" [(ngModel)]="totalItemPerPage" (ngModelChange)="onItemChange($event)">
-                <option *ngFor="let item of itemsPerPage" [value]="item">{{item}}</option>
-            </select>
+            <div class="catalogueControlItem">
+                <label for="showingItems">Items per page </label>
+                <select name="showingItems" id="ddItemsPerPage" [(ngModel)]="totalItemPerPage" (ngModelChange)="onItemChange($event)">
+                    <option *ngFor="let item of itemsPerPage" [value]="item">{{item}}</option>
+                </select>
+            </div>
+            <div class="catalogueControlItem">
+                <input type="text" class="input productItemFilter" placeholder="filter by title" [(ngModel)]="filter">
+            </div>
         </div>
-        <div class="catalogueControlItem">
-            <input type="text" class="input productItemFilter" placeholder="filter by title" [(ngModel)]="filter">
-        </div>
-    </div>
-    <div class="cardLayout clearfix">
-        <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of (productObjects |  orderBy: order:reverse:'case-insensitive' | stringFilter:filter) | paginate: config">
-            <div class="card">
-                <div [routerLink]="['products/',product.category[1] | lowercase,product._id]">
-                    <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
-                    <div class="list-group list-group-flush">
-                        <div>Title : {{product.title}}</div>
-                        <div>Price : {{product.price | currency:'&#8377;'}}</div>
-                        <div>Rating : {{product.rating}}</div>
+        <div class="cardLayout clearfix">
+            <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of (productObjects |  orderBy: order:reverse:'case-insensitive' | stringFilter:filter) | paginate: config">
+                <div class="card">
+                    <div [routerLink]="['products/',product.category[1] | lowercase,product._id]">
+                        <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
+                        <div class="list-group list-group-flush">
+                            <div>Title : {{product.title}}</div>
+                            <div>Price : {{product.price | currency:'&#8377;'}}</div>
+                            <div>Rating : {{product.rating}}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="card-buttons">
-                    <a>Buy Now</a>
-                    <a (click)="AdditemtoCart();">Add to Cart</a>
+                    <div class="card-buttons">
+                        <a>Buy Now</a>
+                        <a (click)="AdditemtoCart();">Add to Cart</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="has-text-centered paginationComponent">
-    <pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide" [previousLabel]="labels.previousLabel"
-        [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel" [screenReaderPageLabel]="labels.screenReaderPageLabel"
-        [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)"></pagination-controls>
+    <div class="has-text-centered paginationComponent">
+        <pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide" [previousLabel]="labels.previousLabel"
+            [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel" [screenReaderPageLabel]="labels.screenReaderPageLabel"
+            [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)"></pagination-controls>
+    </div>
 </div>

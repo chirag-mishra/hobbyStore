@@ -21,7 +21,8 @@ export class CartDetailsComponent {
   promocode: string;
   unalterdPrice: number;
   promoApply: boolean;
-  promoVal:string;
+  promoVal: string;
+  invalidelement: string = "";
 
   constructor(private toastr: ToastrService, private cartdata: CartsharedService) {
     this.isLoggedIn();
@@ -34,6 +35,18 @@ export class CartDetailsComponent {
   }
 
   isLoggedIn() { this.login = true; }
+  userdetails: any = [
+    {
+      userid: "1234",
+      firstname: "anonymous",
+      lastname: "anonymous",
+      email: "anonymous@gmail.com",
+      address1: "anonymous street",
+      address2: "",
+      state: "Telegana",
+      zip: "500084"
+    }
+  ]
 
   cartproductdetails: any = [
     {
@@ -127,8 +140,42 @@ export class CartDetailsComponent {
     this.cartdata.changecartvalue(-1 * prodquantity);
     this.CalculateTotal();
   }
-  submituserdetails()
-  {}
-  validateuserdetails()
-  {}
+  submituserdetails() {
+    this.validateuserdetails();
+  }
+  validateuserdetails() {
+    if (this.userdetails.firstname == "" || this.userdetails.firstname == null) {
+      console.log("fast");
+      this.invalidelement = "firstname";
+      return false;
+    }
+    if (this.userdetails.lastname == "" || this.userdetails.lastname == null) {
+      console.log("la");
+      this.invalidelement = "lastname";
+      return false;
+    }
+    if (this.userdetails.email == "" || this.userdetails.email == null) {
+      console.log("em");
+      this.invalidelement = "email";
+      return false;
+    }
+    if (this.userdetails.address1 == "" || this.userdetails.address1 == null) {
+      console.log("add");
+      this.invalidelement = "address";
+      return false;
+    }
+    if (this.userdetails.state == "" || this.userdetails.state == null) {
+      console.log("st");
+      this.invalidelement = "state";
+      return false;
+    }
+    if (this.userdetails.zip == "" || this.userdetails.zip == null) {
+      console.log("zip");
+      this.invalidelement = "zip";
+      return false;
+    }
+    console.log("no");
+    this.invalidelement = "";
+    return true;
+  }
 }
