@@ -13,13 +13,11 @@ footer {
 }
 
 .main-container{
-    padding: 20px;
+    /* padding: 20px; */
     background-color: #f2f3f5;
 }
-
 .main-content{
     margin: 0 auto;
-    display: inline-block;
 }
 
 body{
