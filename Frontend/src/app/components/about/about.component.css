@@ -1,0 +1,59 @@
+.header{
+    color:#ff7f00;
+    text-align: center;
+}
+.aboutTitle{
+    color:#ff7f00;
+    text-align: center;
+}
+.circularBadge {
+    display: inline-block;
+    border-radius: 50%;
+    background: #ff7200;
+    padding: 6px;
+}
+
+.circularBadge span {
+    padding: 5px 10px;
+    border-radius: 50%;
+    display: inline-block;
+    color: #fff;
+}
+.fas{
+    font-size:x-large;
+}
+.location{
+    font-size: xx-large;
+    position: relative;
+    top: 10px;
+    color: white;
+}
+.category{
+    padding: 0;
+    display: inline-block;
+}
+.subCategory{
+    float: left;
+    padding: 0;
+    display: inline-block;
+}
+.mapMarker{
+    padding: 0;
+    display: inline-block;
+    float: left;
+}
+.markerContent{
+    float: left;
+    padding: 8px;
+}
+.markerText{
+    font-size: medium;
+    font-weight: bold;
+    color: antiquewhite;
+}
+.markerSubText{
+    font-size: small;
+    color:antiquewhite;
+}
+
+
