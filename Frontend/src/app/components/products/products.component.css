@@ -8,6 +8,7 @@
 .card {
     padding: 5px;
     background: #fafafa;
+    color: #212529;
 }
 
 .cardContainer{
@@ -186,6 +187,7 @@ ul li:hover{
 .paginationTemplate{
     margin: 0 auto;
     display: inline-block;
+    padding : 5px 20px;
 }
 .paginationTemplate pagination-controls /deep/ ul.ngx-pagination {
     background-color: #ff7f00;

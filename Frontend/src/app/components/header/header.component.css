@@ -148,3 +148,7 @@ a div {
 .categoryIcon:hover .flipper{
     transform: rotateY(180deg);
 }
+
+.navbar-brand{
+    padding: 0;
+}
