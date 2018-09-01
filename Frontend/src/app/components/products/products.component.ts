@@ -26,6 +26,7 @@ orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price
     id: 'advanced',
     itemsPerPage: 8,
     currentPage: 1
+    
   };
   public labels: any = {
     previousLabel: 'Previous',
@@ -34,9 +35,11 @@ orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price
     screenReaderPageLabel: 'page',
     screenReaderCurrentLabel: `You're on page`
   };
+  starRating: number[];
   //sorting required inputs
   sortedCollection: any[];
   constructor(private orderPipe: OrderPipe,private cartdata:CartsharedService) {
+    this.starRating = [0, 1, 2, 3, 4];
     var parent = this;
     fetch('http://c24bf496.ngrok.io/products/magic')
         .then(function(response) {
