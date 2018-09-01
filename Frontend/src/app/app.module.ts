@@ -24,7 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CartsharedService } from './shared/cartsharedservice/cartshared.service';
 import { OrdersComponent } from "./components/orders/orders.component";
 import { NgxTypeaheadModule } from 'ngx-typeahead';
-
+import { AboutComponent } from "./components/about/about.component";
 var routes = [{
   path: "",
   component: HomeComponent
@@ -56,7 +56,8 @@ var routes = [{
     CartDetailsComponent,
     HomeComponent,
     ProductDetailComponent,
-    OrdersComponent
+    OrdersComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
