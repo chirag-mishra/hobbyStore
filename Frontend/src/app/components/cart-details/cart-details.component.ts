@@ -22,8 +22,9 @@ export class CartDetailsComponent {
   promoApply: boolean;
   promoVal: string;
   invalidelement: string = "";
-  addresstitle: string = ""; contact: number; address: string = "";
-  landmark: string = ""; city: string = ""; state: string = ""; pincode: string = "";
+  firstname: string = ""; lastname: string = ""; email: string = ""; addresstitle: string = ""; 
+  contact: number; address: string = "";landmark: string = ""; city: string = ""; 
+  state: string = ""; pincode: string = "";
   selectedIndex: number;
 
 
@@ -75,14 +76,14 @@ export class CartDetailsComponent {
   isLoggedIn() { this.login = true; }
   userdetails: any =
     {
-      userid: 1234,
-      firstname: "anonymous",
-      lastname: "anonymous",
-      email: "anonymous@gmail.com",
-      addresses: [
+      "userid": 1234,
+
+      "addresses": [
         {
           "title": "home",
-          "name": "abhiram",
+          "firstname": "Sanat",
+          "lastname": "Samantray",
+          "email": "anonymous@gmail.com",
           "contact": 9581248172,
           "address": "406, sun valley apartment",
           "landmark": "near maharshi vidya mandir school",
@@ -92,7 +93,9 @@ export class CartDetailsComponent {
         },
         {
           "title": "work",
-          "name": "abhiram",
+          "firstname": "Chirag",
+          "lastname": "Mishra",
+          "email": "anonymous@gmail.com",
           "contact": 9581248172,
           "address": "406, sun valley apartment",
           "landmark": "near maharshi vidya mandir school",
@@ -100,62 +103,61 @@ export class CartDetailsComponent {
           "state": "OR",
           "pincode": 500084
         }
+      ],
+      cartproductdetails: [
+        {
+          "productid": 1,
+          "category": "Cards",
+          "imageurl": "assets/images/prod1.jpg",
+          "costprice": 350,
+          "displayprice": 350,
+          "markprice": 590,
+          "quantity": 6,
+          "title": "Bicycle Cards",
+          "variant": "Blue",
+          "availablestock": 5
+        },
+        {
+          "productid": 2,
+          "category": "Cards",
+          "imageurl": "assets/images/prod1.jpg",
+          "costprice": 100,
+          "displayprice": 100,
+          "markprice": 200,
+          "quantity": 1,
+          "title": "Bicycle Cards",
+          "variant": "Blue",
+          "availablestock": 0
+        }
       ]
     }
 
-
-  cartproductdetails: any = [
-    {
-      productid: 1,
-      category: "Cards",
-      imageurl: "assets/images/prod1.jpg",
-      costprice: 350,
-      displayprice: 350,
-      markprice: 590,
-      quantity: 6,
-      title: "Bicycle Cards",
-      variant: "Blue",
-      availablestock: 5
-    },
-    {
-      productid: 2,
-      category: "Cards",
-      imageurl: "assets/images/prod1.jpg",
-      costprice: 100,
-      displayprice: 100,
-      markprice: 200,
-      quantity: 1,
-      title: "Bicycle Cards",
-      variant: "Blue",
-      availablestock: 0
-    }
-  ];
   getdiscountValue(costprice: number, markprice: number) {
     return this.discount = (markprice - costprice) / markprice;
   }
   decreaseQty(index: number) {
-    if (this.cartproductdetails[index].quantity == 0) {
-      this.cartproductdetails[index].quantity = 0;
+    if (this.userdetails.cartproductdetails[index].quantity == 0) {
+      this.userdetails.cartproductdetails[index].quantity = 0;
     }
     else {
-      this.cartproductdetails[index].quantity--;
+      this.userdetails.cartproductdetails[index].quantity--;
       this.cartdata.changecartvalue(-1);
       this.CalculateTotal();
     }
   }
   increaseQty(index: number) {
-    if (this.cartproductdetails[index].quantity > this.cartproductdetails[index].availablestock - 1) {
-      this.cartproductdetails[index].quantity = this.cartproductdetails[index].availablestock;
+    if (this.userdetails.cartproductdetails[index].quantity > this.userdetails.cartproductdetails[index].availablestock - 1) {
+      this.userdetails.cartproductdetails[index].quantity = this.userdetails.cartproductdetails[index].availablestock;
     }
     else {
-      this.cartproductdetails[index].quantity++;
+      this.userdetails.cartproductdetails[index].quantity++;
       this.cartdata.changecartvalue(1);
       this.CalculateTotal();
     }
   }
   CalculateTotal() {
     this.finalPrice = 0;
-    for (var value of this.cartproductdetails) {
+    for (var value of this.userdetails.cartproductdetails) {
       value.costprice = value.availablestock == 0 ? 0 : value.costprice;
       this.finalPrice += (parseInt(value.costprice) * parseInt(value.quantity));
     }
@@ -181,8 +183,8 @@ export class CartDetailsComponent {
     }
   }
   RemoveItem(index: number) {
-    var prodquantity = this.cartproductdetails[index].quantity;
-    this.cartproductdetails.splice(index, 1);
+    var prodquantity = this.userdetails.cartproductdetails[index].quantity;
+    this.userdetails.cartproductdetails.splice(index, 1);
     this.cartdata.changecartvalue(-1 * prodquantity);
     this.CalculateTotal();
   }
@@ -240,10 +242,13 @@ export class CartDetailsComponent {
     return true;
   }
   availabilityCheck(index: number) {
-    return this.cartproductdetails[index].quantity <= this.cartproductdetails[index].availablestock ? true : false;
+    return this.userdetails.cartproductdetails[index].quantity <= this.userdetails.cartproductdetails[index].availablestock ? true : false;
   }
   selectBillingAddress(index: number) {
     this.selectedIndex = index;
+    this.firstname = this.userdetails.addresses[index].firstname;
+    this.lastname = this.userdetails.addresses[index].lastname;
+    this.email = this.userdetails.addresses[index].email;
     this.addresstitle = this.userdetails.addresses[index].title;
     this.contact = this.userdetails.addresses[index].contact;
     this.address = this.userdetails.addresses[index].address;
