@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 import { Form } from '@angular/forms/src/directives/form_interface';
 
@@ -64,7 +63,7 @@ export class CartDetailsComponent {
   { id: 'DL', value: 'Delhi' },
   { id: 'PY', value: 'Puducherry' }];
 
-  constructor(private toastr: ToastrService, private cartdata: CartsharedService) {
+  constructor(private cartdata: CartsharedService) {
     this.isLoggedIn();
     if (this.login) {
       this.isCheckOutBtn = true;
@@ -140,9 +139,6 @@ export class CartDetailsComponent {
     }
     else {
       this.cartproductdetails[index].quantity--;
-      this.toastr.warning(this.cartproductdetails[index].title, 'Quantity reduced Successfully!', {
-        timeOut: 1500
-      });
       this.cartdata.changecartvalue(-1);
       this.CalculateTotal();
     }
@@ -150,17 +146,9 @@ export class CartDetailsComponent {
   increaseQty(index: number) {
     if (this.cartproductdetails[index].quantity > this.cartproductdetails[index].availablestock - 1) {
       this.cartproductdetails[index].quantity = this.cartproductdetails[index].availablestock;
-      this.toastr.error(this.cartproductdetails[index].title, 'Maximum available quantity reached!', {
-        timeOut: 1500
-      });
     }
     else {
       this.cartproductdetails[index].quantity++;
-      this.toastr.success(this.cartproductdetails[index].title, 'Quantity increased Successfully!',
-        {
-          timeOut: 1500
-        });
-
       this.cartdata.changecartvalue(1);
       this.CalculateTotal();
     }
