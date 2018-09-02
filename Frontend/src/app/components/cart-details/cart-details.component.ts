@@ -23,9 +23,46 @@ export class CartDetailsComponent {
   promoApply: boolean;
   promoVal: string;
   invalidelement: string = "";
-  addresstitle: string=""; contact: number; address: string=""; 
-  landmark: string=""; city: string=""; state: string=""; pincode: string="";
+  addresstitle: string = ""; contact: number; address: string = "";
+  landmark: string = ""; city: string = ""; state: string = ""; pincode: string = "";
+  selectedIndex: number;
 
+
+  indianStates: any = [{ id: 'AR', value: 'Arunachal Pradesh' },
+  { id: 'AS', value: 'Assam' },
+  { id: 'BR', value: 'Bihar' },
+  { id: 'CT', value: 'Chhattisgarh' },
+  { id: 'GA', value: 'Goa' },
+  { id: 'GJ', value: 'Gujarat' },
+  { id: 'HR', value: 'Haryana' },
+  { id: 'HP', value: 'Himachal Pradesh' },
+  { id: 'JK', value: 'Jammu and Kashmir' },
+  { id: 'JH', value: 'Jharkhand' },
+  { id: 'KA', value: 'Karnataka' },
+  { id: 'KL', value: 'Kerala' },
+  { id: 'MP', value: 'Madhya Pradesh' },
+  { id: 'MH', value: 'Maharashtra' },
+  { id: 'MN', value: 'Manipur' },
+  { id: 'ML', value: 'Meghalaya' },
+  { id: 'MZ', value: 'Mizoram' },
+  { id: 'NL', value: 'Nagaland' },
+  { id: 'OR', value: 'Odisha' },
+  { id: 'PB', value: 'Punjab' },
+  { id: 'RJ', value: 'Rajasthan' },
+  { id: 'SK', value: 'Sikkim' },
+  { id: 'TN', value: 'Tamil Nadu' },
+  { id: 'TG', value: 'Telangana' },
+  { id: 'TR', value: 'Tripura' },
+  { id: 'UP', value: 'Uttar Pradesh' },
+  { id: 'UT', value: 'Uttarakhand' },
+  { id: 'WB', value: 'West Bengal' },
+  { id: 'AN', value: 'Andaman and Nicobar Islands' },
+  { id: 'CH', value: 'Chandigarh' },
+  { id: 'DN', value: 'Dadra and Nagar Haveli' },
+  { id: 'DD', value: 'Daman and Diu' },
+  { id: 'LD', value: 'Lakshadweep' },
+  { id: 'DL', value: 'Delhi' },
+  { id: 'PY', value: 'Puducherry' }];
 
   constructor(private toastr: ToastrService, private cartdata: CartsharedService) {
     this.isLoggedIn();
@@ -33,7 +70,6 @@ export class CartDetailsComponent {
       this.isCheckOutBtn = true;
       this.GuestBtn = false;
     }
-
     this.CalculateTotal();
   }
 
@@ -52,7 +88,7 @@ export class CartDetailsComponent {
           "address": "406, sun valley apartment",
           "landmark": "near maharshi vidya mandir school",
           "city": "hyderabad",
-          "state": "telangana",
+          "state": "TG",
           "pincode": 500084
         },
         {
@@ -62,7 +98,7 @@ export class CartDetailsComponent {
           "address": "406, sun valley apartment",
           "landmark": "near maharshi vidya mandir school",
           "city": "hyderabad",
-          "state": "telangana",
+          "state": "OR",
           "pincode": 500084
         }
       ]
@@ -142,8 +178,9 @@ export class CartDetailsComponent {
   ValidatePromoCode(promo: string) {
     if (this.finalPrice != 0) {
       this.promocode = promo;
-      if (this.promocode === "NEW50") {
-        this.promocodeval = 50 / 100 * this.unalterdPrice;
+      if (this.promocode === "NEW20") {
+        var discountpercent = 20;
+        this.promocodeval = discountpercent / 100 * this.unalterdPrice;
         this.invalidPromocode = false;
         this.finalPrice = this.unalterdPrice;
         this.finalPrice -= this.promocodeval;
@@ -162,9 +199,17 @@ export class CartDetailsComponent {
     this.CalculateTotal();
   }
   submituserdetails() {
-    this.validateuserdetails();
+    var validate = this.validateuserdetails();
+    if (!validate) {
+      commonWrapper.test();
+      commonWrapper.scrollToElement('billingsection');
+    }
   }
   validateuserdetails() {
+    var emailreg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var pincodereg = /^[1-9][0-9]{5}$/;
+    var phonereg = /^[6-9]\d{9}$/;
+
     if (this.userdetails.firstname == "" || this.userdetails.firstname == null) {
       this.invalidelement = "firstname";
       return false;
@@ -173,9 +218,7 @@ export class CartDetailsComponent {
       this.invalidelement = "lastname";
       return false;
     }
-    var emailre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var pincodere = /^[1-9][0-9]{5}$/;
-    if (!emailre.test(String(this.userdetails.email).toLowerCase())) {
+    if (!emailreg.test(String(this.userdetails.email).toLowerCase())) {
       this.invalidelement = "email";
       return false;
     }
@@ -187,7 +230,7 @@ export class CartDetailsComponent {
       this.invalidelement = "address";
       return false;
     }
-    if (this.contact == undefined || this.contact == null) {
+    if (!phonereg.test(String(this.contact).toLowerCase())) {
       this.invalidelement = "contact";
       return false;
     }
@@ -199,11 +242,12 @@ export class CartDetailsComponent {
       this.invalidelement = "state";
       return false;
     }
-    if (this.pincode == undefined || this.pincode == null) {
-      if (!pincodere.test(String(this.pincode).toLowerCase()))
-        this.invalidelement = "pincode";
+
+    if (!pincodereg.test(String(this.pincode).toLowerCase())) {
+      this.invalidelement = "pincode";
       return false;
     }
+
     this.invalidelement = "";
     return true;
   }
@@ -211,6 +255,7 @@ export class CartDetailsComponent {
     return this.cartproductdetails[index].quantity <= this.cartproductdetails[index].availablestock ? true : false;
   }
   selectBillingAddress(index: number) {
+    this.selectedIndex = index;
     this.addresstitle = this.userdetails.addresses[index].title;
     this.contact = this.userdetails.addresses[index].contact;
     this.address = this.userdetails.addresses[index].address;
@@ -218,5 +263,14 @@ export class CartDetailsComponent {
     this.city = this.userdetails.addresses[index].city;
     this.state = this.userdetails.addresses[index].state;
     this.pincode = this.userdetails.addresses[index].pincode;
+    this.selectedIndex = index;
+  }
+  stateName(index: number) {
+
+    for (let i = 0; i < this.indianStates.length; i++) {
+      if (this.indianStates[i].id.toLowerCase().indexOf(this.userdetails.addresses[index].state.toLowerCase()) > -1)
+        return this.indianStates[i].value;
+
+    }
   }
 }

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   scrollToHeader = () => {
-    document.querySelector('#header').scrollIntoView({
+    document.querySelector('#navigationBar').scrollIntoView({
       behavior: 'smooth'
     });
   }

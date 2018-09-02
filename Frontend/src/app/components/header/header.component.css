@@ -108,6 +108,7 @@ a div {
 .dropdownContent {
     display: none;
     transition: all ease 0.5s;
+    z-index: 20;
 }
 
 .dropdownTrigger:hover .dropdownContent {
@@ -120,9 +121,13 @@ a div {
     perspective: 500px;
 }
 
+.categoryIcon h5{
+    margin: 20px;
+}
+
 .frontSide, .backSide {
     backface-visibility: hidden;
-    position: absolute;
+    position: relative;
     top : 0;
     left: 0;
     width: 100%;
@@ -133,6 +138,7 @@ a div {
 .backSide {
     transform: rotateY(180deg);
     color: #ff7f00;
+    position: absolute;
 }
 
 .flipper {

@@ -95,7 +95,7 @@
   }
 
   .visible{
-      display: inline-block;
+      display: inline-block !important;
   }
 
   .ntvisible{
@@ -199,28 +199,20 @@ color: #dc3545;
     cursor: pointer;
 }
 
-.circularBadge {
-    display: inline-block;
-    border-radius: 50%;
-    background: #ff7200;
-    padding: 5px;
-}
-
-.circularBadge span {
-    padding: 20px 15px;
-    border-radius: 50%;
-    width: 100%;
-    display: inline-block;
-    border: 1px dashed #fff;
-    color: #fff;
-    font-style: italic;
-    font-weight: 600;
-}
 .text
 {
     text-transform: capitalize;
+    display: inline-block;
 }
 #txtcontactno.form-control{
     display: inline-block;
     width: 20%;
+}
+.width{width: 20%}
+.circularTick{
+    font-size:17px;
+    color:rgb(0, 128, 0);
+    position:relative;
+    left:243px;
+    display: none;
 }
