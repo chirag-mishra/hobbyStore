@@ -19,8 +19,6 @@ import { HomeComponent } from "./components/home/home.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { CartsharedService } from './shared/cartsharedservice/cartshared.service';
 import { OrdersComponent } from "./components/orders/orders.component";
 import { NgxTypeaheadModule } from 'ngx-typeahead';
@@ -67,9 +65,7 @@ var routes = [{
     NgxPaginationModule,
     FormsModule,
     OrderModule,
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule, 
-    ToastrModule.forRoot() ,
+    RouterModule.forRoot(routes), 
     NgxTypeaheadModule
   ],
   providers: [CartsharedService,DatePipe],
