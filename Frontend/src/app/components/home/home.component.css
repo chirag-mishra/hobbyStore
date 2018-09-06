@@ -14,4 +14,10 @@
     background-color: black;
     padding: 40px 0;
 }
-
+.newProduct-content{
+    display: inline-block;
+    padding: 0;
+}
+.banner{
+    padding: 0;
+}

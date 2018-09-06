@@ -1,0 +1,35 @@
+.newProductContainer{
+    display: inline-block;
+    padding:20px;
+}
+.content{
+    display: inline-block;
+    padding: 5px;
+    float: left;
+}
+.cardContent{
+ background-color: #f5f5f5;
+ display: inline-block;
+}
+.img{
+    float: left;
+    padding: 5px;
+}
+.text{
+    float: left;
+    word-wrap: break-word;
+}
+.textInfo{
+    font-size: small;
+}
+.textHeader{
+    font-size: medium;
+    font-weight: bold;
+}
+.text button{
+    border-radius: 20px;
+    font-size: small;
+    font-weight: bold;
+    color: antiquewhite;
+    background-color: #ff7f00;
+}

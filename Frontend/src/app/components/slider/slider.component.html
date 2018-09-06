@@ -5,11 +5,51 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item" *ngFor="let item of sliderObject.images;let i=index" [class.active]="i == 0">
+        <div id="dealsOfTheDay{{i+1}}" *ngIf="i==0">
+          <div class="col-md-12 col-lg-12 col-12 col-sm-12 dealsHeader">
+            <div class="col-md-6 col-lg-6 col-12 col-sm-12 dealsHeaderTitle">
+                <h6>June-July 2018</h6>
+                <h2>
+                    <b style="color:#212529">Deals of the day</b>.</h2>
+            </div>
+            <div class="col-md-6 col-lg-6 col-12 col-sm-12 dealsHeaderText">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                    magna aliqua.</p>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-12 col-12 col-sm-12 timerContent">
+              <h2 style="margin-bottom: 0"><b>{{time}}</b></h2>
+              <h5><span>DAYS</span><span>  :  </span><span>HOURS</span><span>  :  </span><span>MINS</span><span>  :  </span><span>SECS</span></h5>
+          </div>
+          <div class="col-md-12 col-lg-12 col-12 col-sm-12 content">
+            <div class="col-md-8 col-lg-8 col-12 col-sm-12" style="margin: 0 auto;">
+              <div class="cardContainer col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngFor="let product of products">
+                  <div class="card">
+                      <div [routerLink]="['products/',product.category[1] | lowercase,product._id]">
+                          <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
+                          <div class="list-group list-group-flush">
+                              <div><span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
+                              aria-hidden="true"></span></div>
+                              <div class="title"><h5>{{product.title}}</h5></div>
+                              <div>{{product.price | currency:'&#8377;'}}</div>                            
+                          </div>
+                      </div>
+                      <div class="card-buttons">
+                          <a>Buy Now</a>
+                          <a (click)="AdditemtoCart();">Add to Cart</a>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div id="dealsOfTheDay{{i+1}}" *ngIf="i>0">
       <img class="d-block w-100" [src]="item.imgUrl" alt="{{item.imgTag}}">
       <div class="carousel-caption d-none d-md-block">
         <h3>{{item.imgTag}}</h3>
         <p>{{item.imgDescription}}</p>
       </div>
+    </div>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

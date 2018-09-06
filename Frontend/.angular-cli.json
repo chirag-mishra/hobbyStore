@@ -28,7 +28,8 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "app/shared/localStorageWrapper.js",
-        "app/shared/commonWrapper.js"
+        "app/shared/commonWrapper.js",
+        "app/shared/countDownTimer.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

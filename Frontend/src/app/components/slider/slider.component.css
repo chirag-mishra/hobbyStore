@@ -1,0 +1,122 @@
+.dealsHeader{
+    display: inline-block;
+    padding: 0;
+}
+.dealsHeaderText{
+    float: left;
+    text-align: left;
+    font-size: small;
+}
+.dealsHeaderTitle{
+    float: left;
+    color:#ff7f00;
+    text-align: right;
+}
+.timerContent{
+    display: inline-block;
+    padding: 0;
+    text-align: center;
+}
+.carousel-indicators{
+    display: none;
+}
+.content{
+    display: inline-block;
+    padding: 0;
+}
+.card {
+    padding: 5px;
+    background: #fafafa;
+    color: #212529;
+}
+.card img {
+    border-bottom: 1px solid #f2f3f5;
+    padding: 10px;
+}
+.list-group.list-group-flush{
+    text-align: center;
+}
+.starRating{
+    color: #ffc107;
+}
+.fa-star{
+    font-size: small;
+}
+.title{
+    color: black;
+    font-weight: bold;
+}
+.card-buttons{
+    border-top : 1px solid #f2f3f5;
+}
+
+.card-buttons a{
+    display: inline-block;
+    width : 50%;
+    float: left;
+    padding: 2px;
+    text-align: center;
+}
+
+.card-buttons a:hover{
+    text-decoration: none;
+}
+
+.card-buttons a:first-child {
+    border-right: 1px solid #f2f3f5;
+}
+
+.card-buttons a{
+    font-size: 14px;
+    font-weight: 600;
+    transition: all ease 0.5s;
+    text-transform: capitalize;
+}
+
+.card-buttons a:hover {
+    background: #007bff;
+    color: white;
+}
+
+.cardContainer{
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    float: left;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.cardContainer:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cardContainer img {
+    transition: all ease 0.4s;
+}
+
+.cardContainer:hover img {
+    transform: scale(1.08);
+}
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {.dealsHeaderText{text-align: center;}
+.dealsHeaderText p{width: 100%;}
+.dealsHeaderTitle{text-align: center;}} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) {
+.dealsHeaderText{text-align: center;}
+.dealsHeaderText p{width: 100%;}
+.dealsHeaderTitle{text-align: center;}
+} 
+  /* Medium devices (desktops, 992px and up) */
+@media (min-width: 768px) { 
+    .dealsHeaderText{text-align: left;}
+    .dealsHeaderText p{width: 50%;}
+    .dealsHeaderTitle{text-align: right;}}
+
+    
+    /* Large devices (large desktops, 1200px and up) */
+ @media (min-width: 1200px) { .dealsHeaderText{text-align: left;}
+ .dealsHeaderText p{width: 50%;}
+    .dealsHeaderTitle{text-align: right;}}

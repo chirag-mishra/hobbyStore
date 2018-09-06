@@ -5,3 +5,4 @@ declare var commonWrapper:any;
 interface NodeModule {
   id: string;
 }
+declare var countDownTimer:any;

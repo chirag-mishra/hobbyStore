@@ -25,6 +25,8 @@ import { CartsharedService } from './shared/cartsharedservice/cartshared.service
 import { OrdersComponent } from "./components/orders/orders.component";
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { AboutComponent } from "./components/about/about.component";
+import { DatePipe } from '@angular/common';
+import { NewProductsComponent } from "./components/new-products/new-products.component";
 var routes = [{
   path: "",
   component: HomeComponent
@@ -57,7 +59,8 @@ var routes = [{
     HomeComponent,
     ProductDetailComponent,
     OrdersComponent,
-    AboutComponent
+    AboutComponent,
+    NewProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,7 @@ var routes = [{
     ToastrModule.forRoot() ,
     NgxTypeaheadModule
   ],
-  providers: [CartsharedService],
+  providers: [CartsharedService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
