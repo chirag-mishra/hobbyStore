@@ -10,7 +10,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from "./component/login/login.component";
 import { DatePipe } from '@angular/common'
-
+import { CommentsComponent } from "./component/comments/comments.component";
+import { OrderByPipe } from './shared/orderBy.pipe';
+import { HeaderComponent } from "./component/header/header.component";
 var routes = [{
   path:"",
   component:LoginComponent
@@ -18,6 +20,10 @@ var routes = [{
 {
   path:"admin",
   component:AdminComponent
+},
+{
+  path:"comments",
+  component:CommentsComponent
 }
 ]
 
@@ -26,7 +32,10 @@ var routes = [{
     AppComponent,
     AdminComponent,
     StringFilterPipe,
-    LoginComponent
+    LoginComponent,
+    CommentsComponent,
+    OrderByPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

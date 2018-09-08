@@ -1,0 +1,16 @@
+.btn-comment{
+    text-align: center;
+}  
+.btn-accept{
+    background-color:#ff7f00;
+}
+.commentContainer{
+    display: inline-block;
+    border: 1px solid #6f6f6f;
+}
+.btn-sort{
+    float: right;
+}
+.sort-content{
+    display: inline-block;
+}

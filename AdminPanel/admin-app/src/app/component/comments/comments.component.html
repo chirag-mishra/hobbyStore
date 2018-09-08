@@ -1,0 +1,47 @@
+<div class="container-fluid clearfix p-2">
+    <div class="col-md-12 col-12 col-lg-12 col-sm-12 sort-content p-0">
+        <div class="btn-sort">
+               <b> Sort By: </b>
+                <select name="sortBy" id="commentsSortBy" [(ngModel)]="orderBy" (ngModelChange)="sortBy($event)">
+                        <option *ngFor="let item of sortByItems" [value]="item">{{item}}</option>
+                </select>
+        </div>
+       
+    </div>
+    <div *ngFor="let comment of comments | orderBy:order:ascending" class="commentContainer p-2">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-12">
+            <h4>
+                <b>{{comment.productName}}</b>
+            </h4>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 col-12">
+            <h5>
+                <b>Name :</b>
+            </h5>
+            <p>{{comment.name}}</p>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 col-12">
+            <h5>
+                <b>Title :</b>
+            </h5>
+            <p>{{comment.title}}</p>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 col-12">
+            <h5>
+                <b>Description :</b>
+            </h5>
+            <p>{{comment.description}}</p>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 col-12">
+                <h5>
+                        <b>Rating :</b>
+                    </h5>
+                <span>{{comment.rating}}</span>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 col-12 btn-comment">
+            <button class="btn btn-accept" type="submit" (click)="acceptComment(comment._id)">Accept</button>  
+            <button class="btn btn-accept" type="submit" (click)="rejectComment(comment._id)">Reject</button>  
+        </div>
+
+    </div>
+</div>
