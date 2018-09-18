@@ -1,3 +1,11 @@
+.shownInline{
+    display: inline-block;
+}
+
+.hidden{
+  display: none;
+}
+
 .cart-container{
     padding: 20px;
     background-color: #f2f3f5;
@@ -94,14 +102,6 @@
     color: #dc3545;
   }
 
-  .visible{
-      display: inline-block !important;
-  }
-
-  .ntvisible{
-    display: none;
-}
-
 .clearBtn{
     position: relative;
     right: 17px;
@@ -184,10 +184,6 @@ color: #dc3545;
 .product-qty input {
     vertical-align: sub; 
 }
-.mrgn{
-    margin: 0px 6px 0px 9px;
-
-}
 
 #savedAddressesAccordion button {
     text-decoration: none;
@@ -199,20 +195,44 @@ color: #dc3545;
     cursor: pointer;
 }
 
-.text
+.camelCaseText
 {
     text-transform: capitalize;
     display: inline-block;
 }
-#txtcontactno.form-control{
+
+#contactDetails .form-control {
     display: inline-block;
+}
+
+#txtcontactno.form-control{
+    width: 25%;
+}
+
+#phonecode.form-control {
+    width: 10%;
+}
+
+.width-20{
     width: 20%;
 }
-.width{width: 20%}
+
 .circularTick{
     font-size:17px;
     color:rgb(0, 128, 0);
-    position:relative;
-    left:243px;
+    float: right;
     display: none;
 }
+
+i.shownInline{
+    display: inline-block;
+}
+
+#phoneDash {
+    margin : auto 10px;
+}
+
+.inStockMargin span {
+    font-size: 12px;
+}
+

@@ -158,3 +158,7 @@ a div {
 .navbar-brand{
     padding: 0;
 }
+
+#searchBar{
+    min-width: 250px;
+}

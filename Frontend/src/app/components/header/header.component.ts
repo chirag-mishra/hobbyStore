@@ -19,8 +19,8 @@ export class HeaderComponent {
   title: string = "Hobby Fare";
   categories: any[] = ["Premium Cards", "Close Up Magic", "Intermediate Tricks", "Beginner Tricks", "Street Magic", "Mentalism", "Stage Magic", "Accessories", "Books"];
   bestSellers: any[] = ["Huppin's", "Popjens", "Bicycle"];
-  cartvalue: number = 2;
-  display:boolean;
+  cartvalue: number = 0;
+  display: boolean;
   toolbarInfo: any = {
     toolbarDetails: [
       {
@@ -56,19 +56,19 @@ export class HeaderComponent {
     ]
   };
   constructor(private data: CartsharedService) {
-    this.display=false;
+    this.display = false;
   }
 
-  public url = 'http://c24bf496.ngrok.io/partialTextSearch';
+  public url = commonWrapper.apiRoot + '/partialTextSearch';
   public query = '';
 
   handleHttpResultSelected(result: any) {
     console.log(result);
     this.query = result;
   }
-   
+
   ngOnInit() {
-    this.data.currentvalue.subscribe(quantity => this.cartvalue += quantity);
+    this.data.currentvalue.subscribe(quantity => this.cartvalue < quantity ? 0 : this.cartvalue += quantity);
   }
 
   scrollToDiv = (id) => {
@@ -82,21 +82,20 @@ export class HeaderComponent {
   // onMouseOut(event:any){
   //   document.getElementById("Category").classList.add('display-none');
   // }
-  onMouseOver(event:any){
+  onMouseOver(event: any) {
     if (!this.display) {
       document.getElementById("Category").classList.remove('display-none');
-    }    
+    }
   }
-  onMouseOut(event:any){
+  onMouseOut(event: any) {
     if (!this.display) {
       document.getElementById("Category").classList.add('display-none');
-    }    
+    }
   }
-  onMouseClick(event:any){
-    this.display=!this.display;
-    if(this.display)
-    {
-      document.getElementById("Category").classList.remove('display-none');      
+  onMouseClick(event: any) {
+    this.display = !this.display;
+    if (this.display) {
+      document.getElementById("Category").classList.remove('display-none');
     }
   }
 }

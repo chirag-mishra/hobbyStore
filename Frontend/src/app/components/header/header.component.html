@@ -13,8 +13,8 @@
     <ul class="navbar-nav mr-auto navList">
       <li class="nav-item active">
         <pre class="card card-block card-header display-none">{{asyncSelected | json}}</pre>
-        <input type="text" class="p-1" [value]="query" placeholder="type to see http response" ngxTypeahead [taUrl]="url" [taParams]="params"
-          [taApi]="api" (taSelected)="handleHttpResultSelected($event)">
+        <input type="text" class="p-1" [value]="query" placeholder="Search" ngxTypeahead [taUrl]="url" [taParams]="params"
+          [taApi]="api" (taSelected)="handleHttpResultSelected($event)" id="searchBar">
         <span>
           <button class="btn btn-md login-btn bg-color">
             <span class="fas fa-search"></span>

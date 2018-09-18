@@ -1,4 +1,7 @@
-
+isLoggedIn= () =>{
+  let userID ="";
+  return userID;
+}
 
 scrollToElement = (id) => {
     document.querySelector('#'+id).scrollIntoView({
@@ -6,9 +9,10 @@ scrollToElement = (id) => {
     });
   }
 
+var apiRoot = "http://50fc6186.ngrok.io"
+
 commonWrapper = {
   scrollToElement,
-  test : function () {
-    console.log("tested");
-  }
+  isLoggedIn,
+  apiRoot
 }
