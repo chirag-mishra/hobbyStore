@@ -12,10 +12,7 @@ export class ModalPopupComponent {
   
   private scope = [
     'profile',
-    'email',
-    'https://www.googleapis.com/auth/plus.me',
-    'https://www.googleapis.com/auth/contacts.readonly',
-    'https://www.googleapis.com/auth/admin.directory.user.readonly'
+    'email'
   ].join(' ');
 
   public auth2: any;
@@ -27,7 +24,8 @@ export class ModalPopupComponent {
         cookiepolicy: 'single_host_origin',
         scope: that.scope
       });
-      that.attachSignin(that.element.nativeElement.firstChild);
+      var el = document.getElementById('googleBtn');
+      that.attachSignin(el);
     });
   }
   public attachSignin(element) {
