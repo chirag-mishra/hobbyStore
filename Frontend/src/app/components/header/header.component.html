@@ -131,11 +131,18 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <button class="btn btn-md login-btn bg-color" href="#" data-toggle="modal" data-target="#exampleModal">
+      <li class="nav-item signInContent">
+        <button class="btn btn-md login-btn bg-color" (mouseover)="mouseOver($event)" (mouseout)="mouseOut($event)" id="loginBtn" href="#" data-toggle="modal" data-target="#exampleModal">
           <span class="fas fa-user-plus"></span>
         </button>
-
+        
+        <div class="dropdown-content" [ngClass]="[(signInModalHide && mouseOverOut)? 'profileShowDropDown' : 'profileHideDropDown']"
+          (mouseover)="mouseOver($event)" (mouseout)="mouseOut($event)">
+          <p class="loginCaret"><i class="fas fa-caret-up"></i></p>
+          <div><i class="fas fa-user-circle icon"></i><span><a href="#">My Profile</a></span></div>
+          <div><i class="fas fa-luggage-cart icon"></i><span><a href="/orders">Orders</a></span></div>
+          <div> <i class="fas fa-power-off icon"></i><span><a class="pointer" (click)="logOut()">Logout</a></span></div>
+        </div>
       </li>
 
     </ul>
@@ -143,4 +150,4 @@
 </nav>
 
 
-<modal-popup></modal-popup>
+<modal-popup (messageEvent)="recieveMessage($event)"></modal-popup>

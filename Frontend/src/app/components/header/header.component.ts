@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
-import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
+import { Component,AfterViewInit} from '@angular/core';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
-import { Observable } from 'rxjs';
-import { of as staticOf } from 'rxjs/observable/of';
-import { mergeMap } from 'rxjs/operators';
-import { from } from 'rxjs/observable/from';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { resetFakeAsyncZone } from '@angular/core/testing';
+declare const gapi: any;
 
 @Component({
   selector: 'app-header',
@@ -14,7 +8,7 @@ import { resetFakeAsyncZone } from '@angular/core/testing';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements AfterViewInit {
 
   title: string = "Hobby Fare";
   categories: any[] = ["Premium Cards", "Close Up Magic", "Intermediate Tricks", "Beginner Tricks", "Street Magic", "Mentalism", "Stage Magic", "Accessories", "Books"];
@@ -55,8 +49,12 @@ export class HeaderComponent {
       },
     ]
   };
+  loginDetails:any={};
+  signInModalHide:boolean;
+  mouseOverOut:boolean;
   constructor(private data: CartsharedService) {
     this.display = false;
+    this.mouseOverOut=false;
   }
 
   public url = commonWrapper.apiRoot + '/partialTextSearch';
@@ -96,6 +94,48 @@ export class HeaderComponent {
     this.display = !this.display;
     if (this.display) {
       document.getElementById("Category").classList.remove('display-none');
+    }
+  }
+  recieveMessage($event){
+    let that=this;
+    that.loginDetails=JSON.parse($event);
+    if(Object.keys(that.loginDetails).length != 0)
+    {
+      var el = document.getElementById("loginBtn");
+      el.dataset.toggle="";
+      that.signInModalHide=true;
+      that.mouseOverOut=true;
+      localStorage.setItem('googleLoginDetails',JSON.stringify(that.loginDetails));
+    }
+  }
+  logOut(){
+    var el = document.getElementById("loginBtn");
+      el.dataset.toggle="modal";
+      this.loginDetails={};
+      this.signInModalHide=false;
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+      localStorage.setItem('googleLoginDetails',null);
+      console.log('User signed out.');
+    });
+  }
+  mouseOver($event){
+    this.mouseOverOut=true;
+  }
+  mouseOut($event){
+    this.mouseOverOut=false;
+  }
+  ngAfterViewInit(){
+    let logindata = localStorage.getItem('googleLoginDetails');
+    var el = document.getElementById("loginBtn");
+    if(JSON.parse(logindata)!= null && JSON.parse(logindata) !=undefined && JSON.parse(logindata) != '{}'){
+      this.loginDetails = JSON.parse(logindata);
+      this.signInModalHide=true;
+      el.dataset.toggle="";
+    }
+    else{
+      this.signInModalHide=false;
+      el.dataset.toggle="modal";
     }
   }
 }
