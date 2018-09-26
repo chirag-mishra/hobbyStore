@@ -6,7 +6,7 @@
         </div>
         <div class="container-fluid">
             <ul class="productImages clearfix">
-                <li class="col-md-4 col-lg-4 col-sm-6 col-xs-6 singleImage p-0" (click)="imageChange($event)" *ngFor="let img of productsObj.imgUrls;let i=index">
+                <li class="col-md-4 col-lg-4 col-sm-6 col-xs-6 singleImage p-0" (click)="imageChange($event)" *ngFor="let img of productsObj?.imgUrls;let i=index">
                     <img [src]="img" alt="i" />
                 </li>
             </ul>
@@ -34,7 +34,7 @@
                 <li class="p1" *ngFor="let productSpec of productsObj.specification">{{productSpec}}</li>
             </ul>
         </div>
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 inStockMargin">
             <div class="row">
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 p-0">
                     <!-- <span class="sr-only">Four out of Five Stars</span> -->
@@ -48,13 +48,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 bottom-rule">
+            <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 bottom-rule">
                 <h2 class="product-price">{{productsObj.price | currency:'&#8377;'}}</h2>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart();" [disabled]="qtyInput>productsObj.stock">
+                    Add To Cart
+                </button>
             </div>
         </div>
         <!-- end row -->
 
-        <div class="row add-to-cart" *ngIf="productsObj.quantity >0">
+        <!-- <div class="row add-to-cart" *ngIf="productsObj.stock >0">
             <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 product-qty">
                 <span>
                     <button class="fas fa-minus btn-qty btnIncDec" (click)="decreaseQty()"></button>
@@ -65,11 +70,11 @@
                 </span>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart();" [disabled]="qtyInput==0 || (addToCartText == 'Out of Stock') || qtyInput>productsObj.quantity">
-                    {{addToCartText}}
+                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart();" [disabled]="qtyInput==0 || qtyInput>productsObj.stock">
+                    Add To Cart
                 </button>
             </div>
-        </div>
+        </div> -->
         <!-- end row -->
         <div class="row inStockMargin text-danger" *ngIf="productsObj.quantity ==0">
             <h4>Out Of Stock</h4>
@@ -141,9 +146,9 @@
             <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of similarProductObjects">
 
                 <div class="card">
-                    <a href="/products/{{product.category | lowercase}}/{{product._id}}">
+                    <a href="/products/{{product.category[1] | lowercase}}/{{product._id}}">
                         <div id="{{product.category+'/'+product._id}}">
-                            <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
+                            <img class="card-img-top" src="{{product?.imgUrl}}" alt="Card image cap">
                             <div class="list-group list-group-flush">
                                 <div>Title : {{product.title}}</div>
                                 <div>Price : {{product.price | currency:'&#8377;'}}</div>

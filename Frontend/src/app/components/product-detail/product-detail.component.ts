@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,7 +8,7 @@ import { CartsharedService } from '../../shared/cartsharedservice/cartshared.ser
     templateUrl: './product-detail.component.html',
     styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
     public prodRatinObj: ProductRating;
     rate: number;
     onStarClick: boolean;
@@ -19,17 +19,7 @@ export class ProductDetailComponent {
     outOfStock: boolean;
     addToCartText: string;
     inStockText: string;
-    productsObj: any={
-        "_id": "5b65f05916fd446a62cae4b4",
-        "title": "BICYCLE BIG BOX PLAYING CARDS",
-        "description": ["Big Box cards are a super-sized alternative!", "Want to be a hit at your next game night? Be sure to pick up Bicycle ® Big Box playing cards. A fun, super-sized alternative to regular cards."],
-        "specification": ["Bicycle Big Box Playing Cards feature the classic rider back design", "Big Box playing cards measure 7\" x 4.5\”", "Available in red or blue", "Perfect for all ages", "Great for play, as a novelty item, for decorating, and more"],
-        "rating": 4,
-        "totalReview": 61,
-        "price": 129,
-        "quantity": 2,
-        "imgUrls": ["assets/images/bicycleCards/BicycleCard1.jpg", "assets/images/bicycleCards/BicycleCard2.jpg", "assets/images/bicycleCards/BicycleCard1.jpg"]
-    };
+    productsObj: any;
     commentObj: any = [
         {
             userName: "Rakesh",
@@ -38,122 +28,82 @@ export class ProductDetailComponent {
             decription: ''
         }
     ];
-    similarProductObjects: any =
-        [
-            {
-                "_id": "5b65f05916fd446a92cae4b4",
-                "imgUrl": "assets/images/demo.jpg",
-                "category": "Cards",
-                "title": "Bicycle",
-                "price": 250,
-                "discount": 10,
-                "rating": 5,
-                "date": '2018-06-22'
-            },
-            {
-                "_id": "5b612f05916fd446a92cae4b4",
-                "imgUrl": "assets/images/demo.jpg",
-                "category": "Cards",
-                "title": "Bicycle",
-                "price": 250,
-                "discount": 10,
-                "rating": 5,
-                "date": '2018-06-22'
-            },
-            {
-                "_id": "5b65f0521916fd446a92cae4b4",
-                "imgUrl": "assets/images/demo.jpg",
-                "category": "Cards",
-                "title": "Bicycle",
-                "price": 250,
-                "discount": 10,
-                "rating": 5,
-                "date": '2018-06-22'
-            }, {
-                "_id": "11165f05916fd446a92cae4b4",
-                "imgUrl": "assets/images/demo.jpg",
-                "category": "Cards",
-                "title": "Bicycle",
-                "price": 250,
-                "discount": 10,
-                "rating": 5,
-                "date": '2018-06-22'
-            }, {
-                "_id": "512265f05916fd446a92cae4b4",
-                "imgUrl": "assets/images/demo.jpg",
-                "category": "Cards",
-                "title": "Bicycle",
-                "price": 250,
-                "discount": 10,
-                "rating": 5,
-                "date": '2018-06-22'
-            }];
+    similarProductObjects: any ;
+    
     constructor(private route: ActivatedRoute, private router: Router, private cartdata: CartsharedService) {
         this.onStarClick = false;
+        this.itemImageUrl="";
         this.inStockText = "In Stock";
         this.qtyInput = 1;
         this.addToCartText = "Add to Cart";
-        if (this.productsObj.quantity == 0) {
-            this.outOfStock = true;
-            this.qtyInput = 0;
-            this.addToCartText = "Out of Stock"
-        }
-        this.itemImageUrl = this.productsObj.imgUrls[0];
         this.starRating = [0, 1, 2, 3, 4];
         this.rate = 0;
-        this.reviewObj = [{
-            "_id": 1,
-            "userName": "Mark Buffon",
-            "rating": 5,
-            "title": "Very Good!",
-            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
-
-        },
-        {
-            "_id": 2,
-            "userName": "Mark Buffon",
-            "rating": 4,
-            "title": "Very Good, Awesome!",
-            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec."
-
-        },
-        {
-            "_id": 3,
-            "userName": "Anonymous",
-            "rating": 3,
-            "title": "Nice product!",
-            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum. In et amet ut nunc ipsum, viverra nonummy et, scelerisque leo in nunc velit nec, ultricies vel eros sed potenti condimentum, hendrerit elit curabitur maecenas. Tortor arcu vestibulum et maecenas vivamus integer, sapien eu malesuada vitae pede cursus, sed eu magna gravida dolor."
-
-        },
-        {
-            "_id": 4,
-            "userName": "Anonymous",
-            "rating": 2,
-            "title": "Very Good!",
-            "description": ""
-
-        },
-        {
-            "_id": 5,
-            "userName": "Vikram Yadav",
-            "rating": 1,
-            "title": "",
-            "description": "Lorem ipsum dolor sit amet, amet condimentum montes ac voluptatum."
-
+        this.productsObj={
+            "_id":"",
+            "title":"",
+            "description":[],
+            "specification":[],
+            "imgUrls":[],
+            "rating":0,
+            "price":0,
+            "discount":0,
+            "category":[],
+            "genre":"",
+            "stock":0,
+            "date":"",
+            "reviews":[
+                {"userName": "",
+                "rating": 0,
+                "title": "",
+                "description": ""}
+            ]
+        }
+        this.similarProductObjects=[{
+            category: [],
+            date: "",
+            discount: 0,
+            genre: "",
+            imgUrl: "",
+            price: 0,
+            rating: 0,
+            stock: 0,
+            title: "",
+            _id: ""
         }]
     }
-    increaseQty() {
-        ++this.qtyInput;
-        if (this.qtyInput > parseInt(this.productsObj.quantity)) {
-            this.inStockText = "Sorry, quantity is greater than available stock."
+    ngOnInit(){
+        var parent = this;
+        let id  = this.route.snapshot.params["id"];  
+        fetch(commonWrapper.apiRoot + '/getProductById/5b96bba1355e53554ba9d6c6')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(myJson) {
+           parent.productsObj= (myJson);
+            let bodyObject = {
+             "category":parent.productsObj.category[0]
+           }
+            fetch(commonWrapper.apiRoot + '/getProductsForCategory/', {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(bodyObject)
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                console.log(data);
+                parent.similarProductObjects=data;
+            });
+        if (parent.productsObj.stock == 0) {
+            parent.outOfStock = true;
+            parent.qtyInput = 0;
+            parent.addToCartText = "Out of Stock"
         }
-    }
-    decreaseQty() {
-        this.qtyInput = this.qtyInput - 1 < 0 ? 0 : --this.qtyInput;
-        if (this.qtyInput <= parseInt(this.productsObj.quantity)) {
-            this.inStockText = "In Stock";
-        }
-
+        parent.itemImageUrl = parent.productsObj.imgUrls[0];
+        parent.reviewObj = parent.productsObj.reviews;
+        });
+        
     }
     imageChange(value: any) {
         this.itemImageUrl = value.path[0].src;
