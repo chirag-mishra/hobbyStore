@@ -64,10 +64,6 @@ export class CartDetailsComponent {
   { id: 'PY', value: 'Puducherry' }];
 
   constructor(private cartdata: CartsharedService) {
-
-  }
-
-  ngOnInit() {
     this.loggedInUserID = commonWrapper.isLoggedIn();
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
       this.isLoggedIn = true;
@@ -75,9 +71,15 @@ export class CartDetailsComponent {
     }
     else {
       this.userdetails.cart = localStorageWrapper.getCart();
-      this.calculateTotal();
+      if (this.userdetails.cart != null) {
+        this.calculateTotal();
+      }
       this.isLoggedIn = false;
     }
+  }
+
+  ngOnInit() {
+
   }
   dummyValues() {
     {
@@ -145,21 +147,21 @@ export class CartDetailsComponent {
 
   loggedInUser = () => {
     let parent = this;
-    //this.dummyValues();
-    fetch(commonWrapper.apiRoot + '/getUserById', {
-      method: 'post',
-      body: JSON.stringify(parent.userID),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        parent.userdetails = data;
-        parent.calculateTotal();
-      });
+    this.dummyValues();
+    // fetch(commonWrapper.apiRoot + '/getUserById', {
+    //   method: 'post',
+    //   body: JSON.stringify(parent.userID),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    //   .then(function (response) {
+    //     return response.json();
+    //   })
+    //   .then(function (data) {
+    //     parent.userdetails = data;
+    //     parent.calculateTotal();
+    //   });
   }
 
   getDiscountValue(price: number, discount: number) {
@@ -221,9 +223,9 @@ export class CartDetailsComponent {
   proceedToCheckout() {
     let validate = this.validateUserDetails();
     if (validate) {
-      
+
     }
-    else{
+    else {
       commonWrapper.scrollToElement('billingsection');
     }
   }
@@ -291,7 +293,7 @@ export class CartDetailsComponent {
   }
   stateName(index: number) {
 
-    for (let i = 0; i < this.indianStates.length; i++) {
+    for (let i = 0; i < this.indianStates.length-1; i++) {
       if (this.indianStates[i].id.toLowerCase().indexOf(this.userdetails.addresses[index].state.toLowerCase()) > -1)
         return this.indianStates[i].value;
 

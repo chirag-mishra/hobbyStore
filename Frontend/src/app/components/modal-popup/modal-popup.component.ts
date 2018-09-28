@@ -47,7 +47,7 @@ export class ModalPopupComponent {
         // console.log('Name: ' + profile.getName());
         // console.log('Image URL: ' + profile.getImageUrl());
         // console.log('Email: ' + profile.getEmail());
-        //YOUR CODE HERE
+        // YOUR CODE HERE
       }, function (error) {
         console.log(JSON.stringify(error, undefined, 2));
       });
