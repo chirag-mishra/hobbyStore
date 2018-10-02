@@ -52,7 +52,7 @@
                 <h2 class="product-price">{{productsObj.price | currency:'&#8377;'}}</h2>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart();" [disabled]="qtyInput>productsObj.stock">
+                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart();" [disabled]="productsObj.stock<1">
                     Add To Cart
                 </button>
             </div>
@@ -76,14 +76,14 @@
             </div>
         </div> -->
         <!-- end row -->
-        <div class="row inStockMargin text-danger" *ngIf="productsObj.quantity ==0">
+        <!-- <div class="row inStockMargin text-danger" *ngIf="productsObj.quantity ==0">
             <h4>Out Of Stock</h4>
         </div>
         <div class="row inStockMargin" *ngIf="productsObj.quantity >0" [hidden]="addToCartText == 'Out of Stock'">
             <div class="col-sm-12 col-xs-12 text-center p-0" [ngClass]="{'col-md-3 col-lg-3 text-success':inStockText=='In Stock','col-md-7 col-lg-7 text-danger':inStockText!='In Stock'}">
                 <span class="monospaced">{{inStockText}}</span>
             </div>
-        </div>
+        </div> -->
         <!-- end row -->
     </div>
     <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 commentSection pull-left" id="itemComment">
