@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { ApiService } from '../../shared/api.service';
     styleUrls: ['./product-detail.component.css'],
     providers: [ApiService]
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent {
     public prodRatinObj: ProductRating;
     rate: number;
     onStarClick: boolean;
@@ -48,7 +48,6 @@ export class ProductDetailComponent implements OnInit {
         let id = this.route.snapshot.params["id"];
         this.apiService.getProductDetails('5b96bba1355e53554ba9d6c6', function (productsObj) {
             parent.productsObj = productsObj;
-            console.log(parent.productsObj);
             parent.itemImageUrl = productsObj.imgUrls[0];
             parent.reviewObj = productsObj.reviews;
             let bodyObject = {
@@ -67,73 +66,8 @@ export class ProductDetailComponent implements OnInit {
                 parent.similarProductObjects = data;
             });
         });
-
-        // this.productsObj={
-        //     "_id":"",
-        //     "title":"",
-        //     "description":[],
-        //     "specification":[],
-        //     "imgUrls":[],
-        //     "rating":0,
-        //     "price":0,
-        //     "discount":0,
-        //     "category":[],
-        //     "genre":"",
-        //     "stock":0,
-        //     "date":"",
-        //     "reviews":[
-        //         {"userName": "",
-        //         "rating": 0,
-        //         "title": "",
-        //         "description": ""}
-        //     ]
-        // }
-        // this.similarProductObjects=[{
-        //     category: [],
-        //     date: "",
-        //     discount: 0,
-        //     genre: "",
-        //     imgUrl: "",
-        //     price: 0,
-        //     rating: 0,
-        //     stock: 0,
-        //     title: "",
-        //     _id: ""
-        // }]
     }
-    ngOnInit() {
-        
-        // fetch(commonWrapper.apiRoot + '/getProductById/5b96bba1355e53554ba9d6c6')
-        // .then(function(response) {
-        //   return response.json();
-        // })
-        // .then(function(myJson) {
-        //    parent.productsObj= (myJson);
-        //     let bodyObject = {
-        //      "category":parent.productsObj.category[0]
-        //    }
-        //     fetch(commonWrapper.apiRoot + '/getProductsForCategory/', {
-        //         method: 'post',
-        //         headers: {
-        //             'content-type': 'application/json'
-        //         },
-        //         body: JSON.stringify(bodyObject)
-        //     }).then(function (response) {
-        //         return response.json();
-        //     }).then(function (data) {
-        //         console.log(data);
-        //         parent.similarProductObjects=data;
-        //     });
-        // // if (parent.productsObj.stock == 0) {
-        // //     parent.outOfStock = true;
-        // //     parent.qtyInput = 0;
-        // //     parent.addToCartText = "Out of Stock"
-        // // }
-        // parent.itemImageUrl = parent.productsObj.imgUrls[0];
-        // parent.reviewObj = parent.productsObj.reviews;
-        // });
-
-    }
+    
     imageChange(value: any) {
         this.itemImageUrl = value.path[0].src;
     }

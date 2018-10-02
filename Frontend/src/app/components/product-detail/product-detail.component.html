@@ -1,4 +1,11 @@
-<div class="container-fluid clearfix" id="product-section">
+<ng-template #spinner>
+    <div class="spinner centered">
+        <i class="fas fa-snowflake fa-spin"></i>
+        <div class="grayout"></div>
+    </div>
+</ng-template>
+
+<div class="container-fluid clearfix" id="product-section" *ngIf="productsObj != undefined; else spinner">
 
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left descriptionLeft">
         <div class="productMainImage">
