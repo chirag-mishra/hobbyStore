@@ -136,7 +136,7 @@ export class ProductDetailComponent implements OnInit {
         //     console.log(this.prodRatinObj);
         // }
     }
-    AddTotalQuantitytoCart(productQuantity: number) {
+    AddTotalQuantitytoCart() {
         let id = this.route.snapshot.params['id'];
 
         console.log({ "productId": id, "quantity": this.qtyInput });
