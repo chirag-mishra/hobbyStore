@@ -15,6 +15,10 @@ export class HeaderComponent implements AfterViewInit {
   bestSellers: any[] = ["Huppin's", "Popjens", "Bicycle"];
   cartvalue: number = 0;
   display: boolean;
+  asyncSelected:any;
+  params:any;
+  api:any;
+  
   toolbarInfo: any = {
     toolbarDetails: [
       {
