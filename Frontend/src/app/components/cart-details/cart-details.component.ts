@@ -147,21 +147,21 @@ export class CartDetailsComponent {
 
   loggedInUser = () => {
     let parent = this;
-    this.dummyValues();
-    // fetch(commonWrapper.apiRoot + '/getUserById', {
-    //   method: 'post',
-    //   body: JSON.stringify(parent.userID),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    //   .then(function (response) {
-    //     return response.json();
-    //   })
-    //   .then(function (data) {
-    //     parent.userdetails = data;
-    //     parent.calculateTotal();
-    //   });
+    // this.dummyValues();
+    fetch(commonWrapper.apiRoot + '/getUserById', {
+      method: 'post',
+      body: JSON.stringify(parent.userID),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        parent.userdetails = data;
+        parent.calculateTotal();
+      });
   }
 
   getDiscountValue(price: number, discount: number) {
@@ -174,7 +174,6 @@ export class CartDetailsComponent {
     else {
       this.userdetails.cart[index].quantity--;
       localStorageWrapper.decreaseQuantity(this.userdetails.cart[index].productId);
-      this.cartdata.changecartvalue(-1);
       this.calculateTotal();
     }
   }
@@ -185,7 +184,6 @@ export class CartDetailsComponent {
     else {
       this.userdetails.cart[index].quantity++;
       localStorageWrapper.increaseQuantity(this.userdetails.cart[index].productId);
-      this.cartdata.changecartvalue(1);
       this.calculateTotal();
     }
   }
@@ -216,7 +214,6 @@ export class CartDetailsComponent {
   removeItem(index: number) {
     let prodquantity = this.userdetails.cart[index].quantity;
     this.userdetails.cart.splice(index, 1);
-    this.cartdata.changecartvalue(-1 * prodquantity);
     localStorageWrapper.removeItemFromCart();
     this.calculateTotal();
   }

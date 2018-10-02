@@ -138,11 +138,7 @@ export class ProductDetailComponent implements OnInit {
     }
     AddTotalQuantitytoCart() {
         let id = this.route.snapshot.params['id'];
-
-        console.log({ "productId": id, "quantity": this.qtyInput });
-        localStorageWrapper.addToCart({ "productId": id, "quantity": this.qtyInput })
+        localStorageWrapper.addToCart({ "productId": id, "quantity": this.qtyInput });
     }
-    addsimilarproducttocart() {
-        this.cartdata.changecartvalue(1);
-    }
+    
 }
