@@ -68,7 +68,7 @@ export class CartDetailsComponent {
     this.loggedInUserID = commonWrapper.isLoggedIn();
     if (this.loggedInUserID != "" && this.loggedInUserID != undefined) {
       this.isLoggedIn = true;
-      this.loggedInUser();
+      this.GetUserDetails();
     }
     else {
       this.userdetails.cart = localStorageWrapper.getCart();
@@ -82,74 +82,10 @@ export class CartDetailsComponent {
   ngOnInit() {
 
   }
-  dummyValues() {
-    {
-      this.userdetails = {
-        "_id": "5b8d325c355e53554ba9d6c5",
-        "emailId": "sant@hobbyfare.com",
-        "name": "Sanat Samantray",
-        "imageUrl": "url",
-        "addresses": [
-          {
-            "title": "home",
-            "firstname": "Sanat",
-            "lastname": "Samantray",
-            "email": "anonymous@gmail.com",
-            "contact": 9581248172,
-            "address": "406, sun valley apartment",
-            "landmark": "near maharshi vidya mandir school",
-            "city": "hyderabad",
-            "state": "TG",
-            "pincode": 500084
-          },
-          {
-            "title": "work",
-            "firstname": "Chirag",
-            "lastname": "Mishra",
-            "email": "anonymous@gmail.com",
-            "contact": 9581248172,
-            "address": "406, sun valley apartment",
-            "landmark": "near maharshi vidya mandir school",
-            "city": "hyderabad",
-            "state": "OR",
-            "pincode": 500084
-          }
-        ],
-        "cart": [
-          {
-            "productIds": 1,
-            "category": ["Beginner", "Intermediate"],
-            "genre": "card",
-            "imgUrls": ["assets/images/prod1.jpg", "assets/images/prod2.jpg"],
-            "price": 200,
-            "discount": 10,
-            "quantity": 6,
-            "title": "Bicycle Cards",
-            "variant": "Blue",
-            "stock": 5
-          },
-          {
-            "_id": 2,
-            "category": ["Beginner", "Intermediate"],
-            "genre": "card",
-            "imgUrls": ["assets/images/prod1.jpg", "assets/images/prod2.jpg"],
-            "price": 300,
-            "discount": 51.99,
-            "quantity": 1,
-            "title": "Bicycle Cards",
-            "variant": "Blue",
-            "stock": 0
-          }
-        ]
-      }
-    }
-    this.calculateTotal();
-  }
 
-  loggedInUser = () => {
+  GetUserDetails = () => {
     let parent = this;
     commonWrapper.getUserDetails(this.userID, function (userdetails) {
-      console.log("received in cart, this object \n", JSON.stringify(userdetails));
       parent.userdetails = userdetails;
       parent.calculateTotal();
       parent.cartLoad = "";
@@ -161,15 +97,17 @@ export class CartDetailsComponent {
   }
   decreaseQty(index: number) {
     let parent = this;
+    let userObject;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
-      commonWrapper.updateCart({ "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } }, function (success) {
-        commonWrapper.getUserDetails(this.userID, function (userdetails) {
-          if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
-            if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
-              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+      userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } };
+      commonWrapper.updateCart(userObject, function (success) {
+        commonWrapper.getUserDetails(parent.userID, function (userdetails) {
+          parent.userdetails = userdetails;
+          if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+            if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
             }
           }
-          parent.userdetails = userdetails;
           parent.calculateTotal();
         });
       });
@@ -187,15 +125,17 @@ export class CartDetailsComponent {
   }
   increaseQty(index: number) {
     let parent = this;
+    let userObject;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
-      commonWrapper.updateCart({ "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": 1 } }, function (success) {
-        commonWrapper.getUserDetails(this.userID, function (userdetails) {
-          if (userdetails != null && userdetails != undefined) {
-            if (userdetails.cart != null && userdetails.cart != undefined) {
-              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+      userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } };
+      commonWrapper.updateCart(userObject, function (success) {
+        commonWrapper.getUserDetails(parent.userID, function (userdetails) {
+          parent.userdetails = userdetails;
+          if (parent.userdetails != null && parent.userdetails != undefined) {
+            if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
             }
           }
-          parent.userdetails = userdetails;
           parent.calculateTotal();
         });
       });
@@ -215,15 +155,17 @@ export class CartDetailsComponent {
     // let prodquantity = this.userdetails.cart[index].quantity;
     // this.userdetails.cart.splice(index, 1);
     let parent = this;
+    let userObject;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
-      commonWrapper.updateCart({ "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 * this.userdetails.cart[index].quantity } }, function (success) {
-        commonWrapper.getUserDetails(this.userID, function (userdetails) {
-          if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
-            if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
-              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+      userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } };
+      commonWrapper.updateCart(userObject, function (success) {
+        commonWrapper.getUserDetails(parent.userID, function (userdetails) {
+          parent.userdetails = userdetails;
+          if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+            if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
             }
           }
-          parent.userdetails = userdetails;
           parent.calculateTotal();
         });
       });

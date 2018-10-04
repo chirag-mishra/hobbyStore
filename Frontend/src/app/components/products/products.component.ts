@@ -11,6 +11,7 @@ import { CartsharedService } from '../../shared/cartsharedservice/cartshared.ser
 export class ProductsComponent {
   //items per page array
   itemsPerPage: any = [8, 10, 20, 'All'];
+  userdetails: any;
   //sort by items array
   orderByItems: any = ["Popularity", "Discount", "New", "Price - High to Low", "Price - Low to High"];
   //products objects 
@@ -92,15 +93,18 @@ export class ProductsComponent {
     }
     this.order = value;
   }
-  AdditemtoCart(productId: number) {
+  AdditemtoCart(productId: any) {
     let loggedUserId = commonWrapper.isLoggedIn();
-
+    let parent = this;
+    let userObject;
     if (loggedUserId != "" && loggedUserId != undefined) {
-      commonWrapper.updateCart({ "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } }, function (success) {
+      userObject = { "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } };
+      commonWrapper.updateCart(userObject, function (success) {
         commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
-          if (userdetails != null && userdetails != undefined) {
-            if (userdetails.cart != null && userdetails.cart != undefined) {
-              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(userdetails.cart));
+          parent.userdetails = userdetails;
+          if (parent.userdetails != null && parent.userdetails != undefined) {
+            if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
             }
           }
         });

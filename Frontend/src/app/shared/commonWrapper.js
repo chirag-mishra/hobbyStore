@@ -25,17 +25,16 @@ getUserDetails = (userId, next) => {
     })
     .then(function (data) {
       user = data;
-      console.log("user details \n",user);
       next(user);
     });
 }
 
-updateCart = (user, next) => {
-  let jsonParams = { "emailId": user.emailId, "product": { "productId": user.productId, "quantity": user.quantity } };
+updateCart = (userParams, next) => {
+  //let jsonParams = { "emailId": user.emailId, "product": { "productId": user.productId, "quantity": user.quantity } };
   let user;
   fetch(commonWrapper.apiRoot + '/updateCart', {
     method: 'post',
-    body: JSON.stringify(jsonParams),
+    body: JSON.stringify(userParams),
     headers: {
       'Content-Type': 'application/json'
     }

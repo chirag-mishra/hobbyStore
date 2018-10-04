@@ -18,6 +18,7 @@ export class HeaderComponent implements AfterViewInit {
   asyncSelected: any;
   params: any;
   api: any;
+  userdetails: any;
 
   toolbarInfo: any = {
     toolbarDetails: [
@@ -60,16 +61,19 @@ export class HeaderComponent implements AfterViewInit {
     this.display = false;
     this.mouseOverOut = false;
     let loggedUserId = commonWrapper.isLoggedIn();
+    let parent = this;
 
     if (loggedUserId != "" && loggedUserId != undefined) {
       commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
-        if (userdetails != null && userdetails != undefined) {
-          if (userdetails.cart != null && userdetails.cart != undefined) {
-            this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(userdetails.cart));
+        parent.userdetails = userdetails;
+        if (parent.userdetails != null && parent.userdetails != undefined) {
+          if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+            parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
           }
         }
       });
     }
+
   }
 
   ngOnInit() {

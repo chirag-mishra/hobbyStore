@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,6 +22,7 @@ export class ProductDetailComponent {
     addToCartText: string;
     inStockText: string;
     productsObj: any;
+    userdetails: any;
 
     commentObj: any = [
         {
@@ -67,7 +68,7 @@ export class ProductDetailComponent {
             });
         });
     }
-    
+
     imageChange(value: any) {
         this.itemImageUrl = value.path[0].src;
     }
@@ -102,13 +103,16 @@ export class ProductDetailComponent {
     AddTotalQuantitytoCart() {
         let id = this.route.snapshot.params['id'];
         let loggedUserId = commonWrapper.isLoggedIn();
-
+        let parent = this;
+        let userObject;
         if (loggedUserId != "" && loggedUserId != undefined) {
-            commonWrapper.updateCart({ "emailId": loggedUserId, "product": { "productId": id, "quantity": 1 } }, function (success) {
+            userObject = { "emailId": loggedUserId, "product": { "productId": id, "quantity": 1 } };
+            commonWrapper.updateCart(userObject, function (success) {
                 commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
-                    if (userdetails != null && userdetails != undefined) {
-                        if (userdetails.cart != null && userdetails.cart != undefined) {
-                            this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(userdetails.cart));
+                    parent.userdetails = userdetails;
+                    if (parent.userdetails != null && parent.userdetails != undefined) {
+                        if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+                            parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
                         }
                     }
                 });
