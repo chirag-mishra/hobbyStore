@@ -1,6 +1,6 @@
-//product {"_id" : "id", "quantity" : "qty"}
+//product {"productId" : "id", "quantity" : "qty"}
 ls_addToCart = (product) => {
-    fetch(commonWrapper.apiRoot + '/getProductById/5b96bba1355e53554ba9d6c6')
+    fetch(commonWrapper.apiRoot + '/getProductById/' + product.productId)
         .then(function (response) {
             return response.json();
         })
@@ -19,7 +19,7 @@ ls_addToCart = (product) => {
                 cart.push(product);
                 localStorage.setItem("cart", [JSON.stringify(cart)]);
             }
-            else if (!cartContains(product._id)) {
+            else if (!cartContains(product.productId)) {
                 let cart = JSON.parse(localStorage.getItem("cart"));
                 cart.push(product);
                 localStorage.setItem("cart", JSON.stringify(cart));
@@ -27,7 +27,7 @@ ls_addToCart = (product) => {
             else {
                 let cart = JSON.parse(localStorage.getItem("cart"));
                 for (singleProduct of cart) {
-                    if (singleProduct._id == product._id)
+                    if (singleProduct.productId == product.productId)
                         singleProduct.quantity += product.quantity;
                 }
                 localStorage.setItem("cart", JSON.stringify(cart));

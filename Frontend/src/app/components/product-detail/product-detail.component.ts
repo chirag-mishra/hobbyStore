@@ -34,7 +34,7 @@ export class ProductDetailComponent implements OnInit {
     similarProductObjects: any;
 
     constructor(private route: ActivatedRoute, private router: Router,
-        private cartdata: CartsharedService,
+        private userdata: CartsharedService,
         private apiService: ApiService) {
         this.onStarClick = false;
         //this.itemImageUrl = "";
@@ -102,7 +102,7 @@ export class ProductDetailComponent implements OnInit {
         // }]
     }
     ngOnInit() {
-        
+
         // fetch(commonWrapper.apiRoot + '/getProductById/5b96bba1355e53554ba9d6c6')
         // .then(function(response) {
         //   return response.json();
@@ -167,7 +167,26 @@ export class ProductDetailComponent implements OnInit {
     }
     AddTotalQuantitytoCart() {
         let id = this.route.snapshot.params['id'];
-        localStorageWrapper.addToCart({ "productId": id, "quantity": this.qtyInput });
+        let loggedUserId = commonWrapper.isLoggedIn();
+
+        if (loggedUserId != "" && loggedUserId != undefined) {
+            commonWrapper.updateCart({ "emailId": loggedUserId, "product": { "productId": id, "quantity": 1 } }, function (success) {
+                commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
+                    if (userdetails != null && userdetails != undefined) {
+                        if (userdetails.cart != null && userdetails.cart != undefined) {
+                            this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(userdetails.cart));
+                        }
+                    }
+                });
+            });
+        }
+        else {
+            localStorageWrapper.addToCart({ "productId": id, "quantity": 1 });
+            let cartdetails = localStorageWrapper.getCart();
+            if (cartdetails != "" && cartdetails != undefined) {
+                this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
+            }
+        }
     }
 
 }

@@ -9,13 +9,13 @@ import { CartsharedService } from '../../shared/cartsharedservice/cartshared.ser
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-//items per page array
-itemsPerPage: any = [8,10,20,'All'];
-//sort by items array
-orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price - Low to High"];
-//products objects 
-//Note:(products object should be in this format for sorting and filtering,date should be in 'yyyy-mm-dd' format)  
- productObjects : any;
+  //items per page array
+  itemsPerPage: any = [8, 10, 20, 'All'];
+  //sort by items array
+  orderByItems: any = ["Popularity", "Discount", "New", "Price - High to Low", "Price - Low to High"];
+  //products objects 
+  //Note:(products object should be in this format for sorting and filtering,date should be in 'yyyy-mm-dd' format)  
+  productObjects: any;
 
   //paging required inputs
   public filter: string = '';
@@ -26,7 +26,7 @@ orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price
     id: 'advanced',
     itemsPerPage: 8,
     currentPage: 1
-    
+
   };
   public labels: any = {
     previousLabel: 'Previous',
@@ -38,16 +38,16 @@ orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price
   starRating: number[];
   //sorting required inputs
   sortedCollection: any[];
-  constructor(private orderPipe: OrderPipe,private cartdata:CartsharedService) {
+  constructor(private orderPipe: OrderPipe, private userdata: CartsharedService) {
     this.starRating = [0, 1, 2, 3, 4];
     var parent = this;
     fetch(commonWrapper.apiRoot + '/products/magic')
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(myJson) {
-           parent.productObjects= (myJson);
-        });
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (myJson) {
+        parent.productObjects = (myJson);
+      });
     this.sortedCollection = this.orderPipe.transform(this.productObjects, 'rating');
     this.productObjects = this.sortedCollection;
   }
@@ -56,7 +56,7 @@ orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price
     this.config.currentPage = number;
   }
   //onclick of 'item per page' options 
-  totalItemPerPage : string = this.config.itemsPerPage.toString();
+  totalItemPerPage: string = this.config.itemsPerPage.toString();
   onItemChange(item: any) {
     this.config.itemsPerPage = item == 'All' ? this.productObjects.length : item;
     this.totalItemPerPage = item;
@@ -92,8 +92,26 @@ orderByItems : any =["Popularity","Discount","New","Price - High to Low", "Price
     }
     this.order = value;
   }
-  AdditemtoCart()
-  {
-    this.cartdata.changecartvalue(1);
+  AdditemtoCart(productId: number) {
+    let loggedUserId = commonWrapper.isLoggedIn();
+
+    if (loggedUserId != "" && loggedUserId != undefined) {
+      commonWrapper.updateCart({ "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } }, function (success) {
+        commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
+          if (userdetails != null && userdetails != undefined) {
+            if (userdetails.cart != null && userdetails.cart != undefined) {
+              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(userdetails.cart));
+            }
+          }
+        });
+      });
+    }
+    else {
+      localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
+      let cartdetails = localStorageWrapper.getCart();
+      if (cartdetails != "" && cartdetails != undefined) {
+        this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
+      }
+    }
   }
 }

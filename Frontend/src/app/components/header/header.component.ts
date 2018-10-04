@@ -1,4 +1,4 @@
-import { Component,AfterViewInit} from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 declare const gapi: any;
 
@@ -15,10 +15,10 @@ export class HeaderComponent implements AfterViewInit {
   bestSellers: any[] = ["Huppin's", "Popjens", "Bicycle"];
   cartvalue: number = 0;
   display: boolean;
-  asyncSelected:any;
-  params:any;
-  api:any;
-  
+  asyncSelected: any;
+  params: any;
+  api: any;
+
   toolbarInfo: any = {
     toolbarDetails: [
       {
@@ -53,25 +53,35 @@ export class HeaderComponent implements AfterViewInit {
       },
     ]
   };
-  loginDetails:any={};
-  signInModalHide:boolean;
-  mouseOverOut:boolean;
-  constructor(private data: CartsharedService) {
+  loginDetails: any = {};
+  signInModalHide: boolean;
+  mouseOverOut: boolean;
+  constructor(private userdata: CartsharedService) {
     this.display = false;
-    this.mouseOverOut=false;
+    this.mouseOverOut = false;
+    let loggedUserId = commonWrapper.isLoggedIn();
+
+    if (loggedUserId != "" && loggedUserId != undefined) {
+      commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
+        if (userdetails != null && userdetails != undefined) {
+          if (userdetails.cart != null && userdetails.cart != undefined) {
+            this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(userdetails.cart));
+          }
+        }
+      });
+    }
   }
 
+  ngOnInit() {
+    this.userdata.currentvalue.subscribe(quantity => this.cartvalue = quantity);
+  }
   public url = commonWrapper.apiRoot + '/partialTextSearch';
   public query = '';
 
   handleHttpResultSelected(result: any) {
-    console.log(result);
     this.query = result;
   }
 
-  ngOnInit() {
-    this.data.currentvalue.subscribe(quantity => this.cartvalue < quantity ? 0 : this.cartvalue += quantity);
-  }
 
   scrollToDiv = (id) => {
     document.querySelector('#' + id).scrollIntoView({
@@ -100,46 +110,45 @@ export class HeaderComponent implements AfterViewInit {
       document.getElementById("Category").classList.remove('display-none');
     }
   }
-  recieveMessage($event){
-    let that=this;
-    that.loginDetails=JSON.parse($event);
-    if(Object.keys(that.loginDetails).length != 0)
-    {
+  recieveMessage($event) {
+    let that = this;
+    that.loginDetails = JSON.parse($event);
+    if (Object.keys(that.loginDetails).length != 0) {
       var el = document.getElementById("loginBtn");
-      el.dataset.toggle="";
-      that.signInModalHide=true;
-      that.mouseOverOut=true;
-      localStorage.setItem('googleLoginDetails',JSON.stringify(that.loginDetails));
+      el.dataset.toggle = "";
+      that.signInModalHide = true;
+      that.mouseOverOut = true;
+      localStorage.setItem('googleLoginDetails', JSON.stringify(that.loginDetails));
     }
   }
-  logOut(){
+  logOut() {
     var el = document.getElementById("loginBtn");
-      el.dataset.toggle="modal";
-      this.loginDetails={};
-      this.signInModalHide=false;
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-      localStorage.setItem('googleLoginDetails',null);
+    el.dataset.toggle = "modal";
+    this.loginDetails = {};
+    this.signInModalHide = false;
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      localStorage.setItem('googleLoginDetails', null);
       console.log('User signed out.');
     });
   }
-  mouseOver($event){
-    this.mouseOverOut=true;
+  mouseOver($event) {
+    this.mouseOverOut = true;
   }
-  mouseOut($event){
-    this.mouseOverOut=false;
+  mouseOut($event) {
+    this.mouseOverOut = false;
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     let logindata = localStorage.getItem('googleLoginDetails');
     var el = document.getElementById("loginBtn");
-    if(JSON.parse(logindata)!= null && JSON.parse(logindata) !=undefined && JSON.parse(logindata) != '{}'){
+    if (JSON.parse(logindata) != null && JSON.parse(logindata) != undefined && JSON.parse(logindata) != '{}') {
       this.loginDetails = JSON.parse(logindata);
-      this.signInModalHide=true;
-      el.dataset.toggle="";
+      this.signInModalHide = true;
+      el.dataset.toggle = "";
     }
-    else{
-      this.signInModalHide=false;
-      el.dataset.toggle="modal";
+    else {
+      this.signInModalHide = false;
+      el.dataset.toggle = "modal";
     }
   }
 }

@@ -25,7 +25,8 @@ export class CartDetailsComponent {
   state: string = ""; pincode: string = "";
   selectedIndex: number;
   userdetails: any = [];
-  userID: any = { "emailId": "sanat@hobbyfare.com" };
+  userID: any = "sanat@hobbyfare.com";
+  cartLoad: string = "loading";
 
   indianStates: any = [{ id: 'AR', value: 'Arunachal Pradesh' },
   { id: 'AS', value: 'Assam' },
@@ -63,9 +64,9 @@ export class CartDetailsComponent {
   { id: 'DL', value: 'Delhi' },
   { id: 'PY', value: 'Puducherry' }];
 
-  constructor(private cartdata: CartsharedService) {
+  constructor(private userdata: CartsharedService) {
     this.loggedInUserID = commonWrapper.isLoggedIn();
-    if (this.loggedInUserID != "" && this.loggedInUserID != null) {
+    if (this.loggedInUserID != "" && this.loggedInUserID != undefined) {
       this.isLoggedIn = true;
       this.loggedInUser();
     }
@@ -147,51 +148,107 @@ export class CartDetailsComponent {
 
   loggedInUser = () => {
     let parent = this;
-    // this.dummyValues();
-    fetch(commonWrapper.apiRoot + '/getUserById', {
-      method: 'post',
-      body: JSON.stringify(parent.userID),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        parent.userdetails = data;
-        parent.calculateTotal();
-      });
+    commonWrapper.getUserDetails(this.userID, function (userdetails) {
+      console.log("received in cart, this object \n", JSON.stringify(userdetails));
+      parent.userdetails = userdetails;
+      parent.calculateTotal();
+      parent.cartLoad = "";
+    });
   }
 
   getDiscountValue(price: number, discount: number) {
     return (price - ((discount / 100) * price));
   }
   decreaseQty(index: number) {
-    if (this.userdetails.cart[index].quantity == 0) {
-      this.userdetails.cart[index].quantity = 0;
+    let parent = this;
+    if (this.loggedInUserID != "" && this.loggedInUserID != null) {
+      commonWrapper.updateCart({ "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } }, function (success) {
+        commonWrapper.getUserDetails(this.userID, function (userdetails) {
+          if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+            if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+            }
+          }
+          parent.userdetails = userdetails;
+          parent.calculateTotal();
+        });
+      });
     }
     else {
-      this.userdetails.cart[index].quantity--;
       localStorageWrapper.decreaseQuantity(this.userdetails.cart[index].productId);
+      this.userdetails.cart = localStorageWrapper.getCart();
+      if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+        if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+          this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+        }
+      }
       this.calculateTotal();
     }
   }
   increaseQty(index: number) {
-    if (this.userdetails.cart[index].quantity > this.userdetails.cart[index].stock - 1) {
-      this.userdetails.cart[index].quantity = this.userdetails.cart[index].stock;
+    let parent = this;
+    if (this.loggedInUserID != "" && this.loggedInUserID != null) {
+      commonWrapper.updateCart({ "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": 1 } }, function (success) {
+        commonWrapper.getUserDetails(this.userID, function (userdetails) {
+          if (userdetails != null && userdetails != undefined) {
+            if (userdetails.cart != null && userdetails.cart != undefined) {
+              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+            }
+          }
+          parent.userdetails = userdetails;
+          parent.calculateTotal();
+        });
+      });
     }
     else {
-      this.userdetails.cart[index].quantity++;
       localStorageWrapper.increaseQuantity(this.userdetails.cart[index].productId);
+      this.userdetails.cart = localStorageWrapper.getCart();
+      if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+        if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+          this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+        }
+      }
       this.calculateTotal();
     }
   }
+  removeItem(index: number) {
+    // let prodquantity = this.userdetails.cart[index].quantity;
+    // this.userdetails.cart.splice(index, 1);
+    let parent = this;
+    if (this.loggedInUserID != "" && this.loggedInUserID != null) {
+      commonWrapper.updateCart({ "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 * this.userdetails.cart[index].quantity } }, function (success) {
+        commonWrapper.getUserDetails(this.userID, function (userdetails) {
+          if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+            if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+              this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+            }
+          }
+          parent.userdetails = userdetails;
+          parent.calculateTotal();
+        });
+      });
+    }
+    else {
+      localStorageWrapper.removeItemFromCart(this.userdetails.cart[index].productId);
+      this.userdetails.cart = localStorageWrapper.getCart();
+      if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+        if (this.userdetails.cart != null && this.userdetails.cart != undefined) {
+          this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(this.userdetails.cart));
+        }
+      }
+      this.calculateTotal();
+    }
+  }
+
   calculateTotal() {
     this.finalPrice = 0;
-    for (var value of this.userdetails.cart) {
-      var sellprice = value.stock == 0 ? 0 : this.getDiscountValue(value.price, value.discount);
-      this.finalPrice += sellprice * parseInt(value.quantity);
+    if (this.userdetails != "" && this.userdetails != undefined) {
+      if (this.userdetails.cart != "" && this.userdetails.cart != undefined) {
+        for (var value of this.userdetails.cart) {
+          var sellprice = value.stock == 0 ? 0 : this.getDiscountValue(value.price, value.discount);
+          this.finalPrice += sellprice * parseInt(value.quantity);
+        }
+      }
     }
     this.unalterdPrice = this.finalPrice;
     //this.validatePromoCode(this.promocode);
@@ -211,12 +268,6 @@ export class CartDetailsComponent {
     }
   }
 
-  removeItem(index: number) {
-    let prodquantity = this.userdetails.cart[index].quantity;
-    this.userdetails.cart.splice(index, 1);
-    localStorageWrapper.removeItemFromCart();
-    this.calculateTotal();
-  }
   proceedToCheckout() {
     let validate = this.validateUserDetails();
     if (validate) {
@@ -289,11 +340,11 @@ export class CartDetailsComponent {
     this.pincode = this.userdetails.addresses[index].pincode;
   }
   stateName(index: number) {
-
-    for (let i = 0; i < this.indianStates.length-1; i++) {
-      if (this.indianStates[i].id.toLowerCase().indexOf(this.userdetails.addresses[index].state.toLowerCase()) > -1)
-        return this.indianStates[i].value;
-
+    if (this.indianStates != undefined) {
+      for (let i = 0; i < this.indianStates.length - 1; i++) {
+        if (this.indianStates[i].id.toLowerCase().indexOf(this.userdetails.addresses[index].state.toLowerCase()) > -1)
+          return this.indianStates[i].value;
+      }
     }
   }
   addNewAddress() {
