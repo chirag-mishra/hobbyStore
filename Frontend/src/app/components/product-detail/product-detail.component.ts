@@ -47,6 +47,7 @@ export class ProductDetailComponent {
 
         var parent = this;
         let id = this.route.snapshot.params["id"];
+        console.log(id);
         this.apiService.getProductDetails('5b96bba1355e53554ba9d6c6', function (productsObj) {
             parent.productsObj = productsObj;
             parent.itemImageUrl = productsObj.imgUrls[0];

@@ -202,3 +202,11 @@ ul li:hover{
     background: transparent;
     color:#e6e6e6
 }
+.spinner .fas {    
+    font-size: 100px;
+   color: #1b4067; 
+}
+.centered {
+   margin: 50px auto;
+   text-align: center;
+}

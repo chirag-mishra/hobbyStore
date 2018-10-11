@@ -1,7 +1,6 @@
 <ng-template #spinner>
     <div class="spinner centered">
         <i class="fas fa-snowflake fa-spin"></i>
-        <div class="grayout"></div>
     </div>
 </ng-template>
 
@@ -153,7 +152,7 @@
             <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of similarProductObjects">
 
                 <div class="card">
-                    <a href="/products/{{product.category[1] | lowercase}}/{{product._id}}">
+                    <a [routerLink]="['/products/',product.category[1],product._id]">
                         <div id="{{product.category+'/'+product._id}}">
                             <img class="card-img-top" src="{{product?.imgUrl}}" alt="Card image cap">
                             <div class="list-group list-group-flush">
