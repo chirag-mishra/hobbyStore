@@ -77,6 +77,7 @@ export class CartDetailsComponent {
       }
       this.isLoggedIn = false;
     }
+    this.cartLoad = "";
   }
 
   ngOnInit() {
@@ -88,7 +89,6 @@ export class CartDetailsComponent {
     commonWrapper.getUserDetails(this.userID, function (userdetails) {
       parent.userdetails = userdetails;
       parent.calculateTotal();
-      parent.cartLoad = "";
     });
   }
 
