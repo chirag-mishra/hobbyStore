@@ -30,7 +30,7 @@
             <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of (productObjects |  orderBy: order:reverse:'case-insensitive' | stringFilter:filter) | paginate: config">
                 <div class="card">
                     <div [routerLink]="['products/',product.category[1],product._id]">
-                        <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">
+                        <img class="card-img-top" [src]="product.imgUrls[0]" alt="Card image cap">
                         <div class="list-group list-group-flush">
                             <div><span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
                             aria-hidden="true"></span></div>
