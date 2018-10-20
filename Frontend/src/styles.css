@@ -53,3 +53,74 @@ body a:hover{
 .themeColorBg {
     background-color: #1b4067;
 }
+
+/* card styling*/
+.card {
+    padding: 5px;
+    background: #fafafa;
+    color: #212529;
+}
+
+.cardContainer{
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    float: left;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.cardContainer:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cardContainer img {
+    transition: all ease 0.4s;
+}
+
+.cardContainer:hover img {
+    transform: scale(1.08);
+}
+
+.card-buttons{
+    border-top : 1px solid #f2f3f5;
+}
+
+.card-buttons a{
+    display: inline-block;
+    width : 50%;
+    float: left;
+    padding: 2px;
+    text-align: center;
+}
+
+
+
+.card-buttons a:first-child {
+    border-right: 1px solid #f2f3f5;
+}
+
+.card-buttons a{
+    font-size: 14px;
+    font-weight: 600;
+    transition: all ease 0.5s;
+    text-transform: capitalize;
+}
+
+
+.card img {
+    border-bottom: 1px solid #f2f3f5;
+    padding: 10px;
+}
+
+.cardLayout {
+    clear: both;
+    margin: 10px auto;
+}
+.list-group.list-group-flush{
+    text-align: center;
+    color: #212529;
+}
+.starRating{
+    color: #ffc107;
+}

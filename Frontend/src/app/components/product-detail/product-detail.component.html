@@ -161,14 +161,15 @@
                         <div id="{{product.category+'/'+product._id}}">
                             <img class="card-img-top" src="{{product?.imgUrls[0]}}" alt="Card image cap">
                             <div class="list-group list-group-flush">
+                                    <div><span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
+                                            aria-hidden="true"></span></div>
                                 <div>Title : {{product.title}}</div>
                                 <div>Price : {{product.price | currency:'&#8377;'}}</div>
-                                <div>Rating : {{product.rating}}</div>
                             </div>
                         </div>
                     </a>
                     <div class="card-buttons">
-                        <a href="#">Buy Now</a>
+                        <a>Buy Now</a>
                         <a (click)="addsimilarproducttocart();">Add to Cart</a>
                     </div>
 

@@ -74,6 +74,7 @@ export class ProductDetailComponent implements OnInit {
                 }).then(function (data) {
                     parent.similarProductObjects = data;
                 }).catch(function (error) {
+                    parent.similarProductObjects=undefined;
                     parent.isError = true;
                 });
             }
