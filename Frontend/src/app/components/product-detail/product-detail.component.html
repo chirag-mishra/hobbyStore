@@ -1,6 +1,11 @@
 <ng-template #spinner>
-    <div class="spinner centered">
+    <div class="spinner centered" *ngIf="!isError">
         <i class="fas fa-snowflake fa-spin"></i>
+    </div>
+    <div class="error centered" *ngIf="isError">
+        <label for="errorTitle"><i class="fas fa-times-circle"></i>Error:</label>
+        <hr>
+        <label for="errorDesc">Failed to fetch data from the server</label>
     </div>
 </ng-template>
 

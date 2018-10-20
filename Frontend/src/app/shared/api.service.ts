@@ -15,6 +15,8 @@ export class ApiService{
         })
         .then(function(myJson) {
             next(myJson) ;
+        }).catch(function(error){
+            next('error');
         });
     }
 }

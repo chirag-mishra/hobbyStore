@@ -163,7 +163,9 @@ transition: all ease 0.4s;
     margin: 50px auto;
     text-align: center;
 }
-
+.error .fas{
+    color:red; 
+}
 @media(min-width : 1024px) {
     .centered {
         margin: 150px auto;

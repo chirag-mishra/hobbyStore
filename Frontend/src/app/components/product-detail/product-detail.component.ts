@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
     inStockText: string;
     productsObj: any;
     userdetails: any;
-
+    isError:boolean;
     commentObj: any = [
         {
             userName: "Rakesh",
@@ -44,36 +44,41 @@ export class ProductDetailComponent implements OnInit {
         this.addToCartText = "Add to Cart";
         this.starRating = [0, 1, 2, 3, 4];
         this.rate = 0;
-
-        
-        
+        this.isError=false;
     }
     ngOnInit(){
         var parent = this;
         let id;
         this.route.paramMap.subscribe((params: ParamMap) => {
             id = params.get('id');
-            parent.productsObj=undefined; 
-        this.apiService.getProductDetails(id, function (productsObj) {
-            parent.productsObj = productsObj;
-            parent.itemImageUrl = productsObj.imgUrls[0];
-            parent.reviewObj = productsObj.reviews;
-            let bodyObject = {
-                "category": parent.productsObj.category[0]
+            parent.productsObj = undefined;
+            this.apiService.getProductDetails(id, function (productsObj) {
+                if(productsObj == 'error'){
+                    parent.isError = true;
+                }
+                else{
+                parent.productsObj = productsObj;
+                parent.itemImageUrl = productsObj.imgUrls[0];
+                parent.reviewObj = productsObj.reviews;
+                let bodyObject = {
+                    "category": parent.productsObj.category[0]
+                }
+                fetch(commonWrapper.apiRoot + '/getProductsForCategory/', {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(bodyObject)
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    parent.similarProductObjects = data;
+                }).catch(function (error) {
+                    parent.isError = true;
+                });
             }
-            fetch(commonWrapper.apiRoot + '/getProductsForCategory/', {
-                method: 'post',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(bodyObject)
-            }).then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                parent.similarProductObjects = data;
-            });
+            })
         });
-    });
     }
     imageChange(value: any) {
         this.itemImageUrl = value.path[0].src;
