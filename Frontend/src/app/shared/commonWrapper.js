@@ -19,6 +19,8 @@ getUserDetails = (userId, next) => {
     headers: {
       'Content-Type': 'application/json'
     }
+  }).catch(function(error){
+    console.log("error");
   })
     .then(function (response) {
       return response.json();

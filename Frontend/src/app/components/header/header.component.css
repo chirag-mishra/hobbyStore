@@ -211,3 +211,7 @@ a div {
 .pointer{
     cursor: pointer;
 }
+
+.bg-none {
+    background: none;
+}

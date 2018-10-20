@@ -49,3 +49,7 @@ body a:hover{
 #goUpLink {
     cursor: pointer;
 }
+
+.themeColorBg {
+    background-color: #1b4067;
+}
