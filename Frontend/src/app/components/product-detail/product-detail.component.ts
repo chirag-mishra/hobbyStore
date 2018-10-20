@@ -67,10 +67,13 @@ export class ProductDetailComponent implements OnInit {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(bodyObject)
-            }).then(function (response) {
+            })
+            .then(function (response) {
                 return response.json();
             }).then(function (data) {
                 parent.similarProductObjects = data;
+            }).catch(function(error) {
+                console.log(error ,"error");
             });
         });
     });

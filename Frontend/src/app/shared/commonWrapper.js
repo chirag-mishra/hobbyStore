@@ -9,7 +9,7 @@ scrollToElement = (id) => {
   });
 }
 
-var apiRoot = "http://7b01ab6d.ngrok.io";
+var apiRoot = "http://fb0aa368.ngrok.io";
 
 getUserDetails = (userId, next) => {
   let user;
@@ -19,6 +19,8 @@ getUserDetails = (userId, next) => {
     headers: {
       'Content-Type': 'application/json'
     }
+  }).catch(function(error){
+    console.log("error");
   })
     .then(function (response) {
       return response.json();

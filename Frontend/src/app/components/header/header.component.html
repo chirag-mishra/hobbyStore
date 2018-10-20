@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-color" id="navigationBar">
   <div class="col-lg-2 col-md-3 col-sm-4 col-6">
     <a [routerLink]="['/']" class=" navbar-brand">
-      <img src="assets/images/HoppyFare_FinalLogo-DarkBlueFormat.png" class="fit-image" alt="Card image cap">
+      <img src="assets/images/Hoppy Fare_Final Logo-White Format.svg" class="fit-image" alt="Card image cap">
     </a>
   </div>
 
@@ -16,15 +16,15 @@
         <input type="text" class="p-1" [value]="query" placeholder="Search" ngxTypeahead [taUrl]="url" [taParams]="params"
           [taApi]="api" (taSelected)="handleHttpResultSelected($event)" id="searchBar">
         <span>
-          <button class="btn btn-md login-btn bg-color">
+          <button class="btn btn-md login-btn bg-none">
             <span class="fas fa-search"></span>
           </button>
         </span>
       </li>
 
       <li class="nav-item dropdownTrigger">
-        <button class="btn btn-md login-btn bg-color" (click)="onMouseClick($event)">
-          <span class="fas fa-bars login-btn bg-color"></span>
+        <button class="btn btn-md login-btn bg-none" (click)="onMouseClick($event)">
+          <span class="fas fa-bars login-btn bg-none"></span>
         </button>
         <div id="Category" class="col-md-12 col-lg-12 col-sm-12 col-12 category-section dropdownContent">
           <div class="row">
@@ -132,7 +132,7 @@
       </li>
 
       <li class="nav-item signInContent">
-        <button class="btn btn-md login-btn bg-color" (mouseover)="mouseOver($event)" (mouseout)="mouseOut($event)" id="loginBtn" href="#" data-toggle="modal" data-target="#exampleModal">
+        <button class="btn btn-md login-btn bg-none" (mouseover)="mouseOver($event)" (mouseout)="mouseOut($event)" id="loginBtn" href="#" data-toggle="modal" data-target="#exampleModal">
           <span class="fas fa-user-plus"></span>
         </button>
         

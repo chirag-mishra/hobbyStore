@@ -75,6 +75,7 @@ li.nav-item{
 
 #navigationBar {
     padding: 0;
+    background: #1b4067;
 }
 .align-center{
     text-align: center;
@@ -210,4 +211,8 @@ a div {
 }
 .pointer{
     cursor: pointer;
+}
+
+.bg-none {
+    background: none;
 }
