@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { ProductRating } from "./../../shared/product-rating";
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute,ParamMap } from '@angular/router';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 import { ApiService } from '../../shared/api.service';
 @Component({
@@ -10,7 +10,7 @@ import { ApiService } from '../../shared/api.service';
     styleUrls: ['./product-detail.component.css'],
     providers: [ApiService]
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
     public prodRatinObj: ProductRating;
     rate: number;
     onStarClick: boolean;
@@ -45,10 +45,16 @@ export class ProductDetailComponent {
         this.starRating = [0, 1, 2, 3, 4];
         this.rate = 0;
 
+        
+        
+    }
+    ngOnInit(){
         var parent = this;
-        let id = this.route.snapshot.params["id"];
-        console.log(id);
-        this.apiService.getProductDetails('5b96bba1355e53554ba9d6c6', function (productsObj) {
+        let id;
+        this.route.paramMap.subscribe((params: ParamMap) => {
+            id = params.get('id');
+            parent.productsObj=undefined; 
+        this.apiService.getProductDetails(id, function (productsObj) {
             parent.productsObj = productsObj;
             parent.itemImageUrl = productsObj.imgUrls[0];
             parent.reviewObj = productsObj.reviews;
@@ -64,12 +70,11 @@ export class ProductDetailComponent {
             }).then(function (response) {
                 return response.json();
             }).then(function (data) {
-                console.log(data);
                 parent.similarProductObjects = data;
             });
         });
+    });
     }
-
     imageChange(value: any) {
         this.itemImageUrl = value.path[0].src;
     }
