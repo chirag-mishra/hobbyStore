@@ -53,3 +53,14 @@ body a:hover{
 .themeColorBg {
     background-color: #1b4067;
 }
+
+.spinner i{
+    font-size: 150px;
+    color: #1b4067;    
+}
+
+.spinner {
+    
+    margin: 50px auto;
+    text-align: center;
+}

@@ -17,7 +17,7 @@ export class ProductsComponent {
   //products objects 
   //Note:(products object should be in this format for sorting and filtering,date should be in 'yyyy-mm-dd' format)  
   productObjects: any;
-  
+
   //paging required inputs
   public filter: string = '';
   public maxSize: number = 7;
@@ -102,20 +102,18 @@ export class ProductsComponent {
       commonWrapper.updateCart(userObject, function (success) {
         commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
           parent.userdetails = userdetails;
-          if (parent.userdetails != null && parent.userdetails != undefined) {
-            if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
-              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-            }
-          }
+
+          parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
+
         });
       });
     }
     else {
       localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
       let cartdetails = localStorageWrapper.getCart();
-      if (cartdetails != "" && cartdetails != undefined) {
-        this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
-      }
+
+      this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
+
     }
   }
 }

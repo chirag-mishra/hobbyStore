@@ -1,5 +1,5 @@
-<div *ngIf="cartLoad != 'loading' else cartLoading">
-    <div class="cart-container" *ngIf="userdetails.cart != null; else noItemBlock">
+<div *ngIf="cartLoad != true else cartLoading">
+    <div class="cart-container" *ngIf="noItem != true; else noItemBlock">
         <div class="cart-content">
 
             <div class="row-fluid clearfix">
@@ -52,6 +52,7 @@
                                     <button class="btn btn-link" type="button">
                                         Saved Addresses
                                     </button>
+                                    <span class="arrowDown"><i class="fas fa-angle-down"></i> </span>
                                 </h5>
                             </div>
 

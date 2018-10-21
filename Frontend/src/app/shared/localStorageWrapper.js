@@ -57,6 +57,8 @@ ls_decreaseQuantity = (productId) => {
     }
     if (toRemove)
         cart.splice(cart.indexOf(toRemove), 1);
+
+
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
@@ -74,7 +76,7 @@ ls_removeItemFromCart = (productId) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-ls_cartContains = (productId) => {
+cartContains = (productId) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     for (product of cart) {
         if (product.productId == productId)
@@ -89,7 +91,7 @@ ls_getCart = () => {
 }
 
 getRequest = (url, next) => {
-    
+
 }
 
 localStorageWrapper = {
@@ -98,5 +100,5 @@ localStorageWrapper = {
     increaseQuantity: ls_increaseQuantity,
     decreaseQuantity: ls_decreaseQuantity,
     removeItemFromCart: ls_removeItemFromCart,
-    getCart : ls_getCart
+    getCart: ls_getCart
 }

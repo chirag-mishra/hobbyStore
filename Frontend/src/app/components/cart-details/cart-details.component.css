@@ -238,3 +238,14 @@ i.shownInline{
 
 .spinner .fa {     font-size: 200px;
     color: #1b4067; }
+
+.arrowDown {
+    float: right;
+    margin: auto 10px;
+}
+
+.arrowDown i {
+    vertical-align: sub;
+    color: #ffffff;
+    font-weight: 700;
+}

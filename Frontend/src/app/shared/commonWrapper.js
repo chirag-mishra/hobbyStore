@@ -1,3 +1,5 @@
+
+
 isLoggedIn = () => {
   let userID = "sanat@hobbyfare.com";
   return userID;
@@ -9,7 +11,7 @@ scrollToElement = (id) => {
   });
 }
 
-var apiRoot = "http://fb0aa368.ngrok.io";
+var apiRoot = "http://797c5cca.ngrok.io";
 
 getUserDetails = (userId, next) => {
   let user;
@@ -19,9 +21,10 @@ getUserDetails = (userId, next) => {
     headers: {
       'Content-Type': 'application/json'
     }
-  }).catch(function(error){
-    console.log("error");
   })
+    .catch(function (error) {
+      console.log("error");
+    })
     .then(function (response) {
       return response.json();
     })
@@ -52,7 +55,7 @@ updateCart = (userParams, next) => {
 
 calculateTotalQuantity = (cart) => {
   let totalQuantity = 0;
-  if (cart != null && cart != undefined) {
+  if (cart.length != 0) {
     for (let item of cart) {
       totalQuantity += item.quantity;
     }

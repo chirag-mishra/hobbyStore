@@ -67,9 +67,9 @@ export class HeaderComponent implements AfterViewInit {
       commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
         parent.userdetails = userdetails;
         if (parent.userdetails != null && parent.userdetails != undefined) {
-          if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+ 
             parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-          }
+          
         }
       });
     }
