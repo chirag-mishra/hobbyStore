@@ -17,7 +17,11 @@ export class ProductsComponent {
   //products objects 
   //Note:(products object should be in this format for sorting and filtering,date should be in 'yyyy-mm-dd' format)  
   productObjects: any;
+<<<<<<< HEAD
 
+=======
+  isError:boolean;
+>>>>>>> ac11396cbd4d2c742376e9dd733d0448f46295ab
   //paging required inputs
   public filter: string = '';
   public maxSize: number = 7;
@@ -41,6 +45,7 @@ export class ProductsComponent {
   sortedCollection: any[];
   constructor(private orderPipe: OrderPipe, private userdata: CartsharedService) {
     this.starRating = [0, 1, 2, 3, 4];
+    this.isError=false;
     var parent = this;
     fetch(commonWrapper.apiRoot + '/products/magic')
       .then(function (response) {
@@ -48,9 +53,13 @@ export class ProductsComponent {
       })
       .then(function (myJson) {
         parent.productObjects = (myJson);
+        parent.sortedCollection = parent.orderPipe.transform(parent.productObjects, 'rating');
+        parent.productObjects = parent.sortedCollection;
+      }).catch(function(error){
+        parent.productObjects=undefined;
+        parent.isError=true;
       });
-    this.sortedCollection = this.orderPipe.transform(this.productObjects, 'rating');
-    this.productObjects = this.sortedCollection;
+      
   }
   //onclick of page number in pagination
   onPageChange(number: number) {
