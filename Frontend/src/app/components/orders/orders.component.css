@@ -41,3 +41,14 @@
 .card {
     margin: 15px 0;
 }
+.spinner .fas {    
+    font-size: 150px;
+   color: #1b4067; 
+}
+.centered {
+   margin: 50px auto;
+   text-align: center;
+}
+.error .fas{
+   color:red; 
+}

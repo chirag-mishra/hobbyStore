@@ -9,7 +9,7 @@ scrollToElement = (id) => {
   });
 }
 
-var apiRoot = "http://fb0aa368.ngrok.io";
+var apiRoot = "http://8a8b9add.ngrok.io";
 
 getUserDetails = (userId, next) => {
   let user;

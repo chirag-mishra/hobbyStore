@@ -19,4 +19,23 @@ export class ApiService{
             next('error');
         });
     }
+    
+    public getOrdersForUser(id: any, next:any){
+        let bodyObject = {
+            "emailId": id
+        }
+        fetch(commonWrapper.apiRoot + '/getOrdersForUser/', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bodyObject)
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            next(data) ;
+        }).catch(function(error){
+            next('error');
+        });
+    }
 }
