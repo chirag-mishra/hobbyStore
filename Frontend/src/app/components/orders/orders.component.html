@@ -1,11 +1,11 @@
-<div class="container-fluid ordersContainer">
+<div class="container-fluid ordersContainer" *ngIf="orders != undefined; else spinner">
   <div class="accordion" id="accordionExample">
     <div class="card" *ngFor="let item of orders;let i=index">
       <div class="card-header" id="heading{{i}}" data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="false"
       [attr.aria-controls]="'collapse'+i">
         <div class="pull-left">
           <button class="btn" type="button">
-            Order No. : {{item.orderId}}
+            Order No. : {{item._id}}
           </button>
         </div>
 
@@ -22,7 +22,7 @@
               <label for="name">
                 <b>{{item.deliveryAddress.name}}</b>
               </label>
-              <p>{{item.deliveryAddress.address}}</p>
+              <p>{{item.deliveryAddress.address.address}}<span *ngIf="item.deliveryAddress.address.landmark != ''">,{{item.deliveryAddress.address.landmark}}</span><span *ngIf="item.deliveryAddress.address.city != ''">,{{item.deliveryAddress.address.city}}</span><span *ngIf="item.deliveryAddress.address.pincode != ''">-{{item.deliveryAddress.address.pincode}}</span><span *ngIf="item.deliveryAddress.address.state != ''">,{{item.deliveryAddress.address.state}}</span></p>
               <label for="phone">
                 <b>Phone : </b>{{item.deliveryAddress.phone}}</label>
             </div>
@@ -50,16 +50,16 @@
                   </div>
 
                   <div class="label-Opacity">Color: {{product.color}}</div>
-                  <div class="label-Opacity">Seller: {{product.seller}}</div>
+            
                 </div>
                 <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
                   <div>
                     <i class="fas fa-wallet progressPadding fontColor"></i>{{product.price}}</div>
-                  <div class="text-success">
-                    <i class="fas fa-star progressPadding"></i>{{product.offer}} Offer Applied</div>
+                  <div class="text-success" *ngIf="item.offer != '{}'">
+                    <i class="fas fa-star progressPadding"></i>{{item.offer.code}} Offer Applied</div>
                   <div>
                     <i class="fas fa-comment-alt progressPadding fontColor"></i>
-                    <a href="{{product.reviewUrl}}">Rate and Review Product</a>
+                    <a href="{{product.productUrl}}">Rate and Review Product</a>
                   </div>
                   <div>
                     <i class="fas fa-exchange-alt progressPadding fontColor"></i>
@@ -121,3 +121,13 @@
     </div>
   </div>
 </div>
+<ng-template #spinner>
+  <div class="spinner centered" *ngIf="!isError">
+      <i class="fas fa-snowflake fa-spin"></i>
+  </div>
+  <div class="error centered" *ngIf="isError">
+      <label for="errorTitle"><i class="fas fa-times-circle"></i>Error:</label>
+      <hr>
+      <label for="errorDesc">Failed to fetch data from the server</label>
+  </div>
+</ng-template>

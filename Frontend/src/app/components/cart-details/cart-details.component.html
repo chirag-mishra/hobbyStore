@@ -1,6 +1,15 @@
-<div *ngIf="cartLoad != true else cartLoading">
-    <div class="cart-container" *ngIf="noItem != true; else noItemBlock">
-        <div class="cart-content">
+<div class="update-container"  *ngIf="showUpdateSpinner === true">
+        <div class="updateContent" >
+            <div class="spinnerUpdate">
+                <i class="fas fa-snowflake fa-spin"></i>
+            </div>
+            <span class="spinnerTitle" *ngIf="updateItem === true"><label for="updateItem">Updating item</label></span>
+            <span class="spinnerTitle" *ngIf="removeCartItem === true"><label for="removeItem">Removing item</label></span>
+        </div>
+    </div>
+<div *ngIf="cartLoad != 'loading' else cartLoading">
+    <div class="cart-container" *ngIf="userdetails.cart != null; else noItemBlock">
+        <div class="cart-content" id="cartContent">
 
             <div class="row-fluid clearfix">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cartProductList">
@@ -256,3 +265,5 @@
         </div>
     </div>
 </ng-template>
+
+    

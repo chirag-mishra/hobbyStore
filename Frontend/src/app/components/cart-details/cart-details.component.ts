@@ -26,9 +26,10 @@ export class CartDetailsComponent {
   selectedIndex: number;
   userdetails: any = [];
   userID: any = "sanat@hobbyfare.com";
-  cartLoad: boolean = true;
-  noItem: boolean = true;
-
+  cartLoad: string = "loading";
+  showUpdateSpinner:boolean;
+  updateItem:boolean;
+  removeCartItem:boolean;
   indianStates: any = [{ id: 'AR', value: 'Arunachal Pradesh' },
   { id: 'AS', value: 'Assam' },
   { id: 'BR', value: 'Bihar' },
@@ -74,13 +75,25 @@ export class CartDetailsComponent {
     else {
       this.isLoggedIn = false;
       this.userdetails.cart = localStorageWrapper.getCart();
+<<<<<<< HEAD
       if (this.userdetails.cart.length == 0) { this.noItem = true; }
       else {
+=======
+      console.log(this.userdetails.cart)
+      if (this.userdetails.cart != null) {
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         this.calculateTotal();
         this.noItem = false;
       }
       this.cartLoad = false;
     }
+<<<<<<< HEAD
+=======
+    this.cartLoad = "";
+    this.showUpdateSpinner=false;
+    this.updateItem=false;
+    this.removeCartItem=false;
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
   }
 
 
@@ -93,6 +106,7 @@ export class CartDetailsComponent {
     let parent = this;
     commonWrapper.getUserDetails(this.userID, function (userdetails) {
       parent.userdetails = userdetails;
+<<<<<<< HEAD
       if (parent.userdetails != undefined && parent.userdetails != null) {
         if (parent.userdetails.cart.length == 0) {
           parent.noItem = true;
@@ -104,6 +118,10 @@ export class CartDetailsComponent {
       }
       else { parent.noItem = false; }
       parent.cartLoad = false;
+=======
+      console.log(parent.userdetails)
+      parent.calculateTotal();
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     });
   }
 
@@ -113,17 +131,31 @@ export class CartDetailsComponent {
   decreaseQty(index: number) {
     let parent = this;
     let userObject;
+    parent.showUpdateSpinner =true;
+    parent.removeCartItem=false;
+    parent.updateItem=true;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
       userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } };
       commonWrapper.updateCart(userObject, function (success) {
         commonWrapper.getUserDetails(parent.userID, function (userdetails) {
           parent.userdetails = userdetails;
+<<<<<<< HEAD
 
           parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
           if (parent.userdetails.cart.length! = 0) {
             parent.calculateTotal();
           }
           else { parent.noItem = true; }
+=======
+          if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+            if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));            
+            }
+          }
+          parent.calculateTotal();
+          parent.showUpdateSpinner =false;
+          parent.updateItem=false;
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         });
       });
     }
@@ -135,13 +167,22 @@ export class CartDetailsComponent {
       if (this.userdetails.cart.length != 0) {
         this.calculateTotal();
       }
+<<<<<<< HEAD
       else { this.noItem = true; }
 
+=======
+      this.calculateTotal();
+      parent.showUpdateSpinner =false;
+      parent.updateItem=false;
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     }
   }
   increaseQty(index: number) {
     let parent = this;
     let userObject;
+    parent.showUpdateSpinner =true;
+    parent.removeCartItem=false;
+    parent.updateItem=true;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
       userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": 1 } };
       commonWrapper.updateCart(userObject, function (success) {
@@ -152,7 +193,13 @@ export class CartDetailsComponent {
           if (parent.userdetails.cart.length != 0) {
             parent.calculateTotal();
           }
+<<<<<<< HEAD
           else { parent.noItem = true; }
+=======
+          parent.calculateTotal();
+          parent.showUpdateSpinner =false;
+          parent.updateItem=false;
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         });
       });
     }
@@ -167,7 +214,13 @@ export class CartDetailsComponent {
       else {
         this.noItem = true;
       }
+<<<<<<< HEAD
 
+=======
+      this.calculateTotal();
+      parent.showUpdateSpinner =false;
+      parent.updateItem=false;
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     }
   }
   removeItem(index: number) {
@@ -175,14 +228,28 @@ export class CartDetailsComponent {
     // this.userdetails.cart.splice(index, 1);
     let parent = this;
     let userObject;
+    parent.showUpdateSpinner=true;
+    parent.removeCartItem=true;
+    parent.updateItem=false;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
       userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 * this.userdetails.cart[index].quantity } };
       commonWrapper.updateCart(userObject, function (success) {
         commonWrapper.getUserDetails(parent.userID, function (userdetails) {
           parent.userdetails = userdetails;
+<<<<<<< HEAD
           parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
           if (parent.userdetails.cart.length != 0) { parent.calculateTotal(); }
           parent.noItem = true;
+=======
+          if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+            if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
+              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
+            }
+          }
+          parent.calculateTotal();
+          parent.showUpdateSpinner=false;
+          parent.removeCartItem=false;
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         });
       });
     }
@@ -193,7 +260,13 @@ export class CartDetailsComponent {
       if (this.userdetails.cart.length != 0) {
         this.calculateTotal();
       }
+<<<<<<< HEAD
       else { this.noItem = true; }
+=======
+      this.calculateTotal();
+      parent.showUpdateSpinner=false;
+      parent.removeCartItem=false;
+>>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     }
   }
 
