@@ -27,7 +27,9 @@ export class CartDetailsComponent {
   userdetails: any = [];
   userID: any = "sanat@hobbyfare.com";
   cartLoad: string = "loading";
-
+  showUpdateSpinner:boolean;
+  updateItem:boolean;
+  removeCartItem:boolean;
   indianStates: any = [{ id: 'AR', value: 'Arunachal Pradesh' },
   { id: 'AS', value: 'Assam' },
   { id: 'BR', value: 'Bihar' },
@@ -72,12 +74,16 @@ export class CartDetailsComponent {
     }
     else {
       this.userdetails.cart = localStorageWrapper.getCart();
+      console.log(this.userdetails.cart)
       if (this.userdetails.cart != null) {
         this.calculateTotal();
       }
       this.isLoggedIn = false;
     }
     this.cartLoad = "";
+    this.showUpdateSpinner=false;
+    this.updateItem=false;
+    this.removeCartItem=false;
   }
 
   ngOnInit() {
@@ -88,6 +94,7 @@ export class CartDetailsComponent {
     let parent = this;
     commonWrapper.getUserDetails(this.userID, function (userdetails) {
       parent.userdetails = userdetails;
+      console.log(parent.userdetails)
       parent.calculateTotal();
     });
   }
@@ -98,6 +105,9 @@ export class CartDetailsComponent {
   decreaseQty(index: number) {
     let parent = this;
     let userObject;
+    parent.showUpdateSpinner =true;
+    parent.removeCartItem=false;
+    parent.updateItem=true;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
       userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } };
       commonWrapper.updateCart(userObject, function (success) {
@@ -105,10 +115,12 @@ export class CartDetailsComponent {
           parent.userdetails = userdetails;
           if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
             if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
-              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
+              parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));            
             }
           }
           parent.calculateTotal();
+          parent.showUpdateSpinner =false;
+          parent.updateItem=false;
         });
       });
     }
@@ -121,11 +133,16 @@ export class CartDetailsComponent {
         }
       }
       this.calculateTotal();
+      parent.showUpdateSpinner =false;
+      parent.updateItem=false;
     }
   }
   increaseQty(index: number) {
     let parent = this;
     let userObject;
+    parent.showUpdateSpinner =true;
+    parent.removeCartItem=false;
+    parent.updateItem=true;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
       userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } };
       commonWrapper.updateCart(userObject, function (success) {
@@ -137,6 +154,8 @@ export class CartDetailsComponent {
             }
           }
           parent.calculateTotal();
+          parent.showUpdateSpinner =false;
+          parent.updateItem=false;
         });
       });
     }
@@ -149,6 +168,8 @@ export class CartDetailsComponent {
         }
       }
       this.calculateTotal();
+      parent.showUpdateSpinner =false;
+      parent.updateItem=false;
     }
   }
   removeItem(index: number) {
@@ -156,6 +177,9 @@ export class CartDetailsComponent {
     // this.userdetails.cart.splice(index, 1);
     let parent = this;
     let userObject;
+    parent.showUpdateSpinner=true;
+    parent.removeCartItem=true;
+    parent.updateItem=false;
     if (this.loggedInUserID != "" && this.loggedInUserID != null) {
       userObject = { "emailId": this.loggedInUserID, "product": { "productId": this.userdetails.cart[index].productId, "quantity": -1 } };
       commonWrapper.updateCart(userObject, function (success) {
@@ -167,6 +191,8 @@ export class CartDetailsComponent {
             }
           }
           parent.calculateTotal();
+          parent.showUpdateSpinner=false;
+          parent.removeCartItem=false;
         });
       });
     }
@@ -179,6 +205,8 @@ export class CartDetailsComponent {
         }
       }
       this.calculateTotal();
+      parent.showUpdateSpinner=false;
+      parent.removeCartItem=false;
     }
   }
 
