@@ -77,24 +77,6 @@ export class ProductDetailComponent implements OnInit {
                         parent.isError = true;
                     });
                 }
-<<<<<<< HEAD
-=======
-                fetch(commonWrapper.apiRoot + '/getProductsForCategory/', {
-                    method: 'post',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(bodyObject)
-                }).then(function (response) {
-                    return response.json();
-                }).then(function (data) {
-                    parent.similarProductObjects = data;
-                }).catch(function (error) {
-                    parent.similarProductObjects=undefined;
-                    parent.isError = true;
-                });
-            }
->>>>>>> ac11396cbd4d2c742376e9dd733d0448f46295ab
             })
         });
     }
@@ -148,9 +130,9 @@ export class ProductDetailComponent implements OnInit {
         else {
             localStorageWrapper.addToCart({ "productId": id, "quantity": 1 });
             let cartdetails = localStorageWrapper.getCart();
-            
-                this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
-            
+
+            this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
+
         }
     }
 

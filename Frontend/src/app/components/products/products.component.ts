@@ -17,11 +17,7 @@ export class ProductsComponent {
   //products objects 
   //Note:(products object should be in this format for sorting and filtering,date should be in 'yyyy-mm-dd' format)  
   productObjects: any;
-<<<<<<< HEAD
-
-=======
   isError:boolean;
->>>>>>> ac11396cbd4d2c742376e9dd733d0448f46295ab
   //paging required inputs
   public filter: string = '';
   public maxSize: number = 7;
