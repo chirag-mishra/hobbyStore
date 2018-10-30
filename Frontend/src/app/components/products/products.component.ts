@@ -116,9 +116,7 @@ export class ProductsComponent {
     else {
       localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
       let cartdetails = localStorageWrapper.getCart();
-
       this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
-
     }
   }
 }

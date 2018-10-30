@@ -7,8 +7,8 @@
             <span class="spinnerTitle" *ngIf="removeCartItem === true"><label for="removeItem">Removing item</label></span>
         </div>
     </div>
-<div *ngIf="cartLoad != 'loading' else cartLoading">
-    <div class="cart-container" *ngIf="userdetails.cart != null; else noItemBlock">
+<div *ngIf="cartLoad != true else cartLoading">
+    <div class="cart-container" *ngIf="noItem  != true; else noItemBlock">
         <div class="cart-content" id="cartContent">
 
             <div class="row-fluid clearfix">
