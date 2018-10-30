@@ -75,25 +75,17 @@ export class CartDetailsComponent {
     else {
       this.isLoggedIn = false;
       this.userdetails.cart = localStorageWrapper.getCart();
-<<<<<<< HEAD
-      if (this.userdetails.cart.length == 0) { this.noItem = true; }
-      else {
-=======
       console.log(this.userdetails.cart)
       if (this.userdetails.cart != null) {
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         this.calculateTotal();
         this.noItem = false;
       }
       this.cartLoad = false;
     }
-<<<<<<< HEAD
-=======
     this.cartLoad = "";
     this.showUpdateSpinner=false;
     this.updateItem=false;
     this.removeCartItem=false;
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
   }
 
 
@@ -106,22 +98,8 @@ export class CartDetailsComponent {
     let parent = this;
     commonWrapper.getUserDetails(this.userID, function (userdetails) {
       parent.userdetails = userdetails;
-<<<<<<< HEAD
-      if (parent.userdetails != undefined && parent.userdetails != null) {
-        if (parent.userdetails.cart.length == 0) {
-          parent.noItem = true;
-        }
-        else {
-          parent.calculateTotal();
-          parent.noItem = false;
-        }
-      }
-      else { parent.noItem = false; }
-      parent.cartLoad = false;
-=======
       console.log(parent.userdetails)
       parent.calculateTotal();
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     });
   }
 
@@ -139,14 +117,6 @@ export class CartDetailsComponent {
       commonWrapper.updateCart(userObject, function (success) {
         commonWrapper.getUserDetails(parent.userID, function (userdetails) {
           parent.userdetails = userdetails;
-<<<<<<< HEAD
-
-          parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-          if (parent.userdetails.cart.length! = 0) {
-            parent.calculateTotal();
-          }
-          else { parent.noItem = true; }
-=======
           if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
             if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
               parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));            
@@ -155,7 +125,6 @@ export class CartDetailsComponent {
           parent.calculateTotal();
           parent.showUpdateSpinner =false;
           parent.updateItem=false;
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         });
       });
     }
@@ -167,14 +136,9 @@ export class CartDetailsComponent {
       if (this.userdetails.cart.length != 0) {
         this.calculateTotal();
       }
-<<<<<<< HEAD
-      else { this.noItem = true; }
-
-=======
       this.calculateTotal();
       parent.showUpdateSpinner =false;
       parent.updateItem=false;
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     }
   }
   increaseQty(index: number) {
@@ -193,13 +157,9 @@ export class CartDetailsComponent {
           if (parent.userdetails.cart.length != 0) {
             parent.calculateTotal();
           }
-<<<<<<< HEAD
-          else { parent.noItem = true; }
-=======
           parent.calculateTotal();
           parent.showUpdateSpinner =false;
           parent.updateItem=false;
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         });
       });
     }
@@ -214,13 +174,9 @@ export class CartDetailsComponent {
       else {
         this.noItem = true;
       }
-<<<<<<< HEAD
-
-=======
       this.calculateTotal();
       parent.showUpdateSpinner =false;
       parent.updateItem=false;
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     }
   }
   removeItem(index: number) {
@@ -236,11 +192,6 @@ export class CartDetailsComponent {
       commonWrapper.updateCart(userObject, function (success) {
         commonWrapper.getUserDetails(parent.userID, function (userdetails) {
           parent.userdetails = userdetails;
-<<<<<<< HEAD
-          parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-          if (parent.userdetails.cart.length != 0) { parent.calculateTotal(); }
-          parent.noItem = true;
-=======
           if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
             if (parent.userdetails.cart != null && parent.userdetails.cart != undefined) {
               parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
@@ -249,7 +200,6 @@ export class CartDetailsComponent {
           parent.calculateTotal();
           parent.showUpdateSpinner=false;
           parent.removeCartItem=false;
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
         });
       });
     }
@@ -260,13 +210,9 @@ export class CartDetailsComponent {
       if (this.userdetails.cart.length != 0) {
         this.calculateTotal();
       }
-<<<<<<< HEAD
-      else { this.noItem = true; }
-=======
       this.calculateTotal();
       parent.showUpdateSpinner=false;
       parent.removeCartItem=false;
->>>>>>> b339c0cb6d41898e6045c6192876790787f6f418
     }
   }
 
