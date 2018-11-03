@@ -39,7 +39,9 @@ export class ProductsComponent {
   starRating: number[];
   //sorting required inputs
   sortedCollection: any[];
+  showUpdateSpinner:boolean;
   constructor(private orderPipe: OrderPipe, private userdata: CartsharedService) {
+    this.showUpdateSpinner = false;
     this.starRating = [0, 1, 2, 3, 4];
     this.isError=false;
     var parent = this;
@@ -101,6 +103,7 @@ export class ProductsComponent {
   AdditemtoCart(productId: any) {
     let loggedUserId = commonWrapper.isLoggedIn();
     let parent = this;
+    parent.showUpdateSpinner = true;
     let userObject;
     if (loggedUserId != "" && loggedUserId != undefined) {
       userObject = { "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } };
@@ -109,7 +112,7 @@ export class ProductsComponent {
           parent.userdetails = userdetails;
 
           parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-
+          parent.showUpdateSpinner =false;
         });
       });
     }
@@ -117,6 +120,7 @@ export class ProductsComponent {
       localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
       let cartdetails = localStorageWrapper.getCart();
       this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
+      parent.showUpdateSpinner=false;
     }
   }
 }

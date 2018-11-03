@@ -33,10 +33,11 @@ export class ProductDetailComponent implements OnInit {
         }
     ];
     similarProductObjects: any;
-
+    showUpdateSpinner:boolean;
     constructor(private route: ActivatedRoute, private router: Router,
         private userdata: CartsharedService,
         private apiService: ApiService) {
+        this.showUpdateSpinner=false;
         this.onStarClick = false;
         //this.itemImageUrl = "";
         this.inStockText = "In Stock";
@@ -111,10 +112,17 @@ export class ProductDetailComponent implements OnInit {
         //     console.log(this.prodRatinObj);
         // }
     }
-    AddTotalQuantitytoCart() {
-        let id = this.route.snapshot.params['id'];
+    AddTotalQuantitytoCart(productId:any) {
+        let id;
+        if(productId == undefined){
+            id = this.route.snapshot.params['id'];
+        }
+        else{
+            id=productId;
+        }
         let loggedUserId = commonWrapper.isLoggedIn();
         let parent = this;
+        parent.showUpdateSpinner=true;
         let userObject;
         if (loggedUserId != "" && loggedUserId != undefined) {
             userObject = { "emailId": loggedUserId, "product": { "productId": id, "quantity": 1 } };
@@ -123,7 +131,7 @@ export class ProductDetailComponent implements OnInit {
                     parent.userdetails = userdetails;
 
                     parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-
+                    parent.showUpdateSpinner=false;
                 });
             });
         }
@@ -132,7 +140,7 @@ export class ProductDetailComponent implements OnInit {
             let cartdetails = localStorageWrapper.getCart();
 
             this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
-
+            parent.showUpdateSpinner=false
         }
     }
 

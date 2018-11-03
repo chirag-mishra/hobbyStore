@@ -1,3 +1,11 @@
+<div class="update-container"  *ngIf="showUpdateSpinner">
+    <div class="updateContent" >
+        <div class="spinnerUpdate">
+            <i class="fas fa-snowflake fa-spin"></i>
+        </div>
+        <span class="spinnerTitle"><label for="updateItem">Updating cart</label></span>
+    </div>
+</div>
 <ng-template #spinner>
     <div class="spinner centered" *ngIf="!isError">
         <i class="fas fa-snowflake fa-spin"></i>
@@ -63,7 +71,7 @@
                 <h2 class="product-price">{{productsObj.price | currency:'&#8377;'}}</h2>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart();" [disabled]="productsObj.stock<1">
+                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart(undefined);" [disabled]="productsObj.stock<1">
                     Add To Cart
                 </button>
             </div>
@@ -170,7 +178,7 @@
                     </a>
                     <div class="card-buttons">
                         <a>Buy Now</a>
-                        <a (click)="addsimilarproducttocart();">Add to Cart</a>
+                        <a (click)="AddTotalQuantitytoCart(product._id);">Add to Cart</a>
                     </div>
 
                 </div>

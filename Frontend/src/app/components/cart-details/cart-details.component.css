@@ -240,39 +240,3 @@ i.shownInline{
 .spinner .fa {     font-size: 200px;
     color: #1b4067; }
 
-.spinnerUpdate{
-    font-size: 50px;
-    color: #1b4067;
-    display: inline-block;
-    vertical-align: middle;
-}
-.spinnerTitle{
-    margin:10px;
-}
-
-.update-container {
-    height: 100%;
-    width: 100%;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    background-color: rgba(0,0,0, 0.5); /* Black w/opacity */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    transition: 0.5s;
-    text-align: center;
-}
-
-.updateContent{
-    text-align: center;
-    display: inline-block;
-    position: absolute;
-    padding: 20px;
-    top : 50%;
-    left : 50%;
-    transform: translate(-50%,-50%);
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    transition: all ease 0.5s;
-}
