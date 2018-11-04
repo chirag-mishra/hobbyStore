@@ -1,9 +1,11 @@
-<div class="update-container"  *ngIf="showUpdateSpinner">
-    <div class="updateContent" >
+<div class="update-container" *ngIf="showUpdateSpinner">
+    <div class="updateContent">
         <div class="spinnerUpdate">
             <i class="fas fa-snowflake fa-spin"></i>
         </div>
-        <span class="spinnerTitle"><label for="updateItem">Updating cart</label></span>
+        <span class="spinnerTitle">
+            <label for="updateItem">Updating cart</label>
+        </span>
     </div>
 </div>
 <ng-template #spinner>
@@ -11,7 +13,8 @@
         <i class="fas fa-snowflake fa-spin"></i>
     </div>
     <div class="error centered" *ngIf="isError">
-        <label for="errorTitle"><i class="fas fa-times-circle"></i>Error:</label>
+        <label for="errorTitle">
+            <i class="fas fa-times-circle"></i>Error:</label>
         <hr>
         <label for="errorDesc">Failed to fetch data from the server</label>
     </div>
@@ -71,7 +74,7 @@
                 <h2 class="product-price">{{productsObj.price | currency:'&#8377;'}}</h2>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddTotalQuantitytoCart(undefined);" [disabled]="productsObj.stock<1">
+                <button class="btn btn-lg btn-primary btn-brand btn-full-width" (click)="AddItemtoCart();" [disabled]="productsObj.stock<1">
                     Add To Cart
                 </button>
             </div>
@@ -169,16 +172,18 @@
                         <div id="{{product.category+'/'+product._id}}">
                             <img class="card-img-top" src="{{product?.imgUrls[0]}}" alt="Card image cap">
                             <div class="list-group list-group-flush">
-                                    <div><span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
-                                            aria-hidden="true"></span></div>
+                                <div>
+                                    <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
+                                        aria-hidden="true"></span>
+                                </div>
                                 <div>Title : {{product.title}}</div>
                                 <div>Price : {{product.price | currency:'&#8377;'}}</div>
                             </div>
                         </div>
                     </a>
                     <div class="card-buttons">
-                        <a>Buy Now</a>
-                        <a (click)="AddTotalQuantitytoCart(product._id);">Add to Cart</a>
+                        <a (click)="BuyNowProduct(product._id);">Buy Now</a>
+                        <a (click)="AddItemtoCart(product._id);">Add to Cart</a>
                     </div>
 
                 </div>

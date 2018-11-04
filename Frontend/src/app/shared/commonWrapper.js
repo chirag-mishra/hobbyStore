@@ -11,7 +11,7 @@ scrollToElement = (id) => {
   });
 }
 
-var apiRoot = "http://043f7f55.ngrok.io";
+var apiRoot = "http://fd54f236.ngrok.io";
 
 getUserDetails = (userId, next) => {
   let user;
@@ -22,14 +22,14 @@ getUserDetails = (userId, next) => {
       'Content-Type': 'application/json'
     }
   })
-    .catch(function (error) {
-      console.log("error");
-    })
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       user = data;
+      next(user);
+    }).catch(function (error) {
+      user = undefined;
       next(user);
     });
 }
@@ -50,6 +50,9 @@ updateCart = (userParams, next) => {
     .then(function (data) {
       user = data;
       next(user);
+    }).catch(function (error) {
+      user = undefined;
+      next(user);
     });
 }
 
@@ -63,11 +66,79 @@ calculateTotalQuantity = (cart) => {
   return totalQuantity;
 }
 
+addItemToCart = (productId, parent) => {
+  let loggedUserId = commonWrapper.isLoggedIn();
+  parent.showUpdateSpinner = true;
+  let userObject;
+  if (loggedUserId != "" && loggedUserId != undefined) {
+    userObject = { "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } };
+    commonWrapper.updateCart(userObject, function (success) {
+      commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
+        parent.userdetails = userdetails;
+        parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
+        parent.showUpdateSpinner = false;
+      });
+    });
+  }
+  else {
+    localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
+    let cartdetails = localStorageWrapper.getCart();
+    parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
+    parent.showUpdateSpinner = false;
+  }
+}
+
+buyNowProduct = (productId, parent) => {
+  let loggedUserId = commonWrapper.isLoggedIn();
+  parent.showUpdateSpinner = true;
+  let userObject;
+  if (loggedUserId != "" && loggedUserId != undefined) {
+    userObject = { "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } };
+    commonWrapper.updateCart(userObject, function (success) {
+      commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
+        parent.userdetails = userdetails;
+
+        parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
+        parent.showUpdateSpinner = false;
+        parent.router.navigate(['cart']);
+      });
+    });
+  }
+  else {
+    localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
+    let cartdetails = localStorageWrapper.getCart();
+    parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
+    parent.showUpdateSpinner = false;
+    parent.router.navigate(['cart']);
+  }
+}
+
+updateProductinCart = (loggedInUserID, productId, quantity, parent) => {
+  userObject = { "emailId": parent.loggedInUserID, "product": { "productId": parentthis.userdetails.cart[index].productId, "quantity": -1 * this.userdetails.cart[index].quantity } };
+  commonWrapper.updateCart(userObject, function (success) {
+    commonWrapper.getUserDetails(parent.userID, function (userdetails) {
+      parent.userdetails = userdetails;
+      parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
+
+      if (parent.userdetails.cart.length != 0) {
+        parent.calculateTotal();
+      }
+      else { parent.noItem = true; }
+
+      parent.showUpdateSpinner = false;
+      parent.removeCartItem = false;
+    });
+  });
+}
+
 commonWrapper = {
   scrollToElement,
   isLoggedIn,
   getUserDetails,
   updateCart,
   calculateTotalQuantity,
-  apiRoot
+  apiRoot,
+  addItemToCart,
+  buyNowProduct,
+  updateProductinCart
 }

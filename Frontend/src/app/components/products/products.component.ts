@@ -3,6 +3,7 @@ import { PaginationInstance } from '../../../../node_modules/ngx-pagination/dist
 import { StringFilterPipe } from './../../shared/string-filter.pipe';
 import { OrderPipe } from 'ngx-order-pipe';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -17,7 +18,7 @@ export class ProductsComponent {
   //products objects 
   //Note:(products object should be in this format for sorting and filtering,date should be in 'yyyy-mm-dd' format)  
   productObjects: any;
-  isError:boolean;
+  isError: boolean;
   //paging required inputs
   public filter: string = '';
   public maxSize: number = 7;
@@ -39,11 +40,11 @@ export class ProductsComponent {
   starRating: number[];
   //sorting required inputs
   sortedCollection: any[];
-  showUpdateSpinner:boolean;
-  constructor(private orderPipe: OrderPipe, private userdata: CartsharedService) {
+  showUpdateSpinner: boolean;
+  constructor(private orderPipe: OrderPipe, private userdata: CartsharedService, private router: Router) {
     this.showUpdateSpinner = false;
     this.starRating = [0, 1, 2, 3, 4];
-    this.isError=false;
+    this.isError = false;
     var parent = this;
     fetch(commonWrapper.apiRoot + '/products/magic')
       .then(function (response) {
@@ -53,11 +54,11 @@ export class ProductsComponent {
         parent.productObjects = (myJson);
         parent.sortedCollection = parent.orderPipe.transform(parent.productObjects, 'rating');
         parent.productObjects = parent.sortedCollection;
-      }).catch(function(error){
-        parent.productObjects=undefined;
-        parent.isError=true;
+      }).catch(function (error) {
+        parent.productObjects = undefined;
+        parent.isError = true;
       });
-      
+
   }
   //onclick of page number in pagination
   onPageChange(number: number) {
@@ -101,26 +102,9 @@ export class ProductsComponent {
     this.order = value;
   }
   AdditemtoCart(productId: any) {
-    let loggedUserId = commonWrapper.isLoggedIn();
-    let parent = this;
-    parent.showUpdateSpinner = true;
-    let userObject;
-    if (loggedUserId != "" && loggedUserId != undefined) {
-      userObject = { "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } };
-      commonWrapper.updateCart(userObject, function (success) {
-        commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
-          parent.userdetails = userdetails;
-
-          parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-          parent.showUpdateSpinner =false;
-        });
-      });
-    }
-    else {
-      localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
-      let cartdetails = localStorageWrapper.getCart();
-      this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
-      parent.showUpdateSpinner=false;
-    }
+    commonWrapper.addItemToCart(productId, this);
+  }
+  BuyNowProduct(productId: any) {
+    commonWrapper.buyNowProduct(productId, this);
   }
 }

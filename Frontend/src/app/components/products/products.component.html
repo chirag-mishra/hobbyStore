@@ -1,9 +1,11 @@
-<div class="update-container"  *ngIf="showUpdateSpinner">
-    <div class="updateContent" >
+<div class="update-container" *ngIf="showUpdateSpinner">
+    <div class="updateContent">
         <div class="spinnerUpdate">
             <i class="fas fa-snowflake fa-spin"></i>
         </div>
-        <span class="spinnerTitle"><label for="updateItem">Updating cart</label></span>
+        <span class="spinnerTitle">
+            <label for="updateItem">Updating cart</label>
+        </span>
     </div>
 </div>
 
@@ -34,21 +36,25 @@
             <div class="catalogueControlItem">
                 <input type="text" class="input productItemFilter" placeholder="filter by title" [(ngModel)]="filter">
             </div>
-        </div>    
+        </div>
         <div class="cardLayout clearfix" *ngIf="productObjects != undefined; else spinner">
             <div class="cardContainer col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of (productObjects |  orderBy: order:reverse:'case-insensitive' | stringFilter:filter) | paginate: config">
                 <div class="card">
-                    <div [routerLink]="['products/',product.category[1],product._id]">
+                    <div [routerLink]="['products/','magic',product._id]">
                         <img class="card-img-top" [src]="product.imgUrls[0]" alt="Card image cap">
                         <div class="list-group list-group-flush">
-                            <div><span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
-                            aria-hidden="true"></span></div>
-                            <div class="title"><h5>{{product.title}}</h5></div>
-                            <div>{{product.price | currency:'&#8377;'}}</div>                            
+                            <div>
+                                <span class="fa-star" *ngFor="let star of starRating; let i=index" id="{{star+1}}" [ngClass]="{'fas starRating':i<product.rating,'far':i>=product.rating}"
+                                    aria-hidden="true"></span>
+                            </div>
+                            <div class="title">
+                                <h5>{{product.title}}</h5>
+                            </div>
+                            <div>{{product.price | currency:'&#8377;'}}</div>
                         </div>
                     </div>
                     <div class="card-buttons">
-                        <a>Buy Now</a>
+                        <a (click)="BuyNowProduct(product._id);">Buy Now</a>
                         <a (click)="AdditemtoCart(product._id);">Add to Cart</a>
                     </div>
                 </div>
@@ -56,10 +62,13 @@
         </div>
     </div>
     <div class="paginationComponent">
-        <div class="paginationTemplate"><pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide" [previousLabel]="labels.previousLabel"
-            [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel" [screenReaderPageLabel]="labels.screenReaderPageLabel"
-            [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)"></pagination-controls></div>
-  
+        <div class="paginationTemplate">
+            <pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide"
+                [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                [screenReaderPageLabel]="labels.screenReaderPageLabel" [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                (pageChange)="onPageChange($event)"></pagination-controls>
+        </div>
+
     </div>
 </div>
 <ng-template #spinner>
@@ -67,7 +76,8 @@
         <i class="fas fa-snowflake fa-spin"></i>
     </div>
     <div class="error centered" *ngIf="isError">
-        <label for="errorTitle"><i class="fas fa-times-circle"></i>Error:</label>
+        <label for="errorTitle">
+            <i class="fas fa-times-circle"></i>Error:</label>
         <hr>
         <label for="errorDesc">Failed to fetch data from the server</label>
     </div>

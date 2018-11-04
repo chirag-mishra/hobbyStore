@@ -7,7 +7,6 @@ ls_addToCart = (product) => {
         .then(function (response) {
             product.price = response.price;
             product.title = response.title;
-            product.img = response.imgUrl;
             product.discount = response.discount;
             product.rating = response.rating;
             product.category = response.category;

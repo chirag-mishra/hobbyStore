@@ -33,11 +33,11 @@ export class ProductDetailComponent implements OnInit {
         }
     ];
     similarProductObjects: any;
-    showUpdateSpinner:boolean;
+    showUpdateSpinner: boolean;
     constructor(private route: ActivatedRoute, private router: Router,
         private userdata: CartsharedService,
         private apiService: ApiService) {
-        this.showUpdateSpinner=false;
+        this.showUpdateSpinner = false;
         this.onStarClick = false;
         //this.itemImageUrl = "";
         this.inStockText = "In Stock";
@@ -112,36 +112,18 @@ export class ProductDetailComponent implements OnInit {
         //     console.log(this.prodRatinObj);
         // }
     }
-    AddTotalQuantitytoCart(productId:any) {
+    AddItemtoCart(productId: any) {
         let id;
-        if(productId == undefined){
+        if (productId == undefined) {
             id = this.route.snapshot.params['id'];
         }
-        else{
-            id=productId;
-        }
-        let loggedUserId = commonWrapper.isLoggedIn();
-        let parent = this;
-        parent.showUpdateSpinner=true;
-        let userObject;
-        if (loggedUserId != "" && loggedUserId != undefined) {
-            userObject = { "emailId": loggedUserId, "product": { "productId": id, "quantity": 1 } };
-            commonWrapper.updateCart(userObject, function (success) {
-                commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
-                    parent.userdetails = userdetails;
-
-                    parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-                    parent.showUpdateSpinner=false;
-                });
-            });
-        }
         else {
-            localStorageWrapper.addToCart({ "productId": id, "quantity": 1 });
-            let cartdetails = localStorageWrapper.getCart();
-
-            this.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
-            parent.showUpdateSpinner=false
+            id = productId;
         }
+        commonWrapper.addItemToCart(id, this);
     }
 
+    BuyNowProduct(productId: any) {
+        commonWrapper.buyNowProduct(productId, this);
+    }
 }
