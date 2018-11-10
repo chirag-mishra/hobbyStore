@@ -120,10 +120,10 @@ export class ProductDetailComponent implements OnInit {
         else {
             id = productId;
         }
-        commonWrapper.addItemToCart(id, this);
+        commonWrapper.addItemToCart(id, this,false);
     }
 
     BuyNowProduct(productId: any) {
-        commonWrapper.buyNowProduct(productId, this);
+        commonWrapper.addItemToCart(productId, this,true);
     }
 }

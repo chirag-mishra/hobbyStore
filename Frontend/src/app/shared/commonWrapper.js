@@ -11,7 +11,7 @@ scrollToElement = (id) => {
   });
 }
 
-var apiRoot = "http://fd54f236.ngrok.io";
+var apiRoot = "http://551352b0.ngrok.io";
 
 getUserDetails = (userId, next) => {
   let user;
@@ -66,7 +66,7 @@ calculateTotalQuantity = (cart) => {
   return totalQuantity;
 }
 
-addItemToCart = (productId, parent) => {
+addItemToCart = (productId, parent, byNowStatus) => {
   let loggedUserId = commonWrapper.isLoggedIn();
   parent.showUpdateSpinner = true;
   let userObject;
@@ -77,6 +77,9 @@ addItemToCart = (productId, parent) => {
         parent.userdetails = userdetails;
         parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
         parent.showUpdateSpinner = false;
+        if(byNowStatus){
+          parent.router.navigate(['cart']);
+        }
       });
     });
   }
@@ -85,31 +88,9 @@ addItemToCart = (productId, parent) => {
     let cartdetails = localStorageWrapper.getCart();
     parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
     parent.showUpdateSpinner = false;
-  }
-}
-
-buyNowProduct = (productId, parent) => {
-  let loggedUserId = commonWrapper.isLoggedIn();
-  parent.showUpdateSpinner = true;
-  let userObject;
-  if (loggedUserId != "" && loggedUserId != undefined) {
-    userObject = { "emailId": loggedUserId, "product": { "productId": productId, "quantity": 1 } };
-    commonWrapper.updateCart(userObject, function (success) {
-      commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
-        parent.userdetails = userdetails;
-
-        parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
-        parent.showUpdateSpinner = false;
-        parent.router.navigate(['cart']);
-      });
-    });
-  }
-  else {
-    localStorageWrapper.addToCart({ "productId": productId, "quantity": 1 });
-    let cartdetails = localStorageWrapper.getCart();
-    parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(cartdetails));
-    parent.showUpdateSpinner = false;
-    parent.router.navigate(['cart']);
+    if(byNowStatus){
+      parent.router.navigate(['cart']);
+    }
   }
 }
 
@@ -139,6 +120,5 @@ commonWrapper = {
   calculateTotalQuantity,
   apiRoot,
   addItemToCart,
-  buyNowProduct,
   updateProductinCart
 }
