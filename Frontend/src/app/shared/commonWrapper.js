@@ -1,5 +1,3 @@
-
-
 isLoggedIn = () => {
   let userID = "sanat@hobbyfare.com";
   return userID;
@@ -11,7 +9,7 @@ scrollToElement = (id) => {
   });
 }
 
-var apiRoot = "http://fd54f236.ngrok.io";
+var apiRoot = "http://8aa46596.ngrok.io";
 
 getUserDetails = (userId, next) => {
   let user;
