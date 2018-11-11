@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 import { Form } from '@angular/forms/src/directives/form_interface';
 import { Tree } from '@angular/router/src/utils/tree';
@@ -9,7 +9,7 @@ import { Tree } from '@angular/router/src/utils/tree';
   styleUrls: ['./cart-details.component.css']
 })
 
-export class CartDetailsComponent {
+export class CartDetailsComponent implements OnInit {
 
   isLoggedIn: boolean;
   loggedInUserID: string;
@@ -31,6 +31,9 @@ export class CartDetailsComponent {
   showUpdateSpinner: boolean;
   updateItem: boolean;
   removeCartItem: boolean;
+  savingAddress:boolean;
+  isAddressBtnClicked:boolean;
+  removeAddressLoader:boolean;
   indianStates: any = [{ id: 'AR', value: 'Arunachal Pradesh' },
   { id: 'AS', value: 'Assam' },
   { id: 'BR', value: 'Bihar' },
@@ -68,6 +71,17 @@ export class CartDetailsComponent {
   { id: 'PY', value: 'Puducherry' }];
 
   constructor(private userdata: CartsharedService) {
+   
+    this.savingAddress=false;
+    this.showUpdateSpinner = false;
+    this.updateItem = false;
+    this.removeCartItem = false;
+    this.isAddressBtnClicked=false;
+    this.removeAddressLoader=false;
+  }
+
+
+  ngOnInit() {
     this.loggedInUserID = commonWrapper.isLoggedIn();
     if (this.loggedInUserID != "" && this.loggedInUserID != undefined) {
       this.isLoggedIn = true;
@@ -86,16 +100,6 @@ export class CartDetailsComponent {
         this.cartLoad = false;
       }
     }
-
-    this.showUpdateSpinner = false;
-    this.updateItem = false;
-    this.removeCartItem = false;
-  }
-
-
-  ngOnInit() {
-
-
   }
 
   GetUserDetails = () => {
@@ -122,6 +126,8 @@ export class CartDetailsComponent {
   decreaseQty(index: number) {
     let parent = this;
     let userObject;
+    parent.removeAddressLoader=false;
+    parent.savingAddress=false;
     parent.showUpdateSpinner = true;
     parent.removeCartItem = false;
     parent.updateItem = true;
@@ -160,6 +166,8 @@ export class CartDetailsComponent {
   increaseQty(index: number) {
     let parent = this;
     let userObject;
+    parent.savingAddress=false;
+    parent.removeAddressLoader=false;
     parent.showUpdateSpinner = true;
     parent.removeCartItem = false;
     parent.updateItem = true;
@@ -200,6 +208,8 @@ export class CartDetailsComponent {
     // this.userdetails.cart.splice(index, 1);
     let parent = this;
     let userObject;
+    parent.savingAddress=false;
+    parent.removeAddressLoader=false;
     parent.showUpdateSpinner = true;
     parent.removeCartItem = true;
     parent.updateItem = false;
@@ -342,6 +352,12 @@ export class CartDetailsComponent {
     }
   }
   addNewAddress() {
+    this.isAddressBtnClicked=true;
+    this.savingAddress=true;
+    this.removeAddressLoader=false;
+    this.showUpdateSpinner = true;
+    this.updateItem = false;
+    this.removeCartItem = false;
     let parent = this;
     let validate = this.validateUserDetails();
     if (validate) {
@@ -371,11 +387,145 @@ export class CartDetailsComponent {
           if (response.ok) {
             parent.userdetails.addresses.push(addressParams.address);
             parent.selectedIndex = parent.userdetails.addresses.length - 1;
+            parent.showUpdateSpinner = false;
+            parent.savingAddress=false;  
+            parent.isAddressBtnClicked=false;         
           }
         })
     }
     else {
       commonWrapper.scrollToElement('billingsection');
+      parent.showUpdateSpinner = false;
+      parent.savingAddress=false;     
     }
+  }
+  modelChange(value: any, field: any) {
+    let emailreg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let pincodereg = /^[1-9][0-9]{5}$/;
+    let phonereg = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+    if (this.isAddressBtnClicked) {
+      switch (field) {
+        case 'firstname':
+          if (value.trim() == "" || value.trim() == null) {
+            this.invalidelement = "firstname";
+          }
+          else {
+            this.invalidelement = "";
+            this.firstname=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+          case'lastname':
+          if (value.trim() == "" || value.trim() == null) {
+            this.invalidelement = "lastname";
+          }
+          else{
+            this.invalidelement = "";
+            this.lastname=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+          case 'email':
+          if (!emailreg.test(String(value.trim()).toLowerCase())) {
+            this.invalidelement = "email";
+          }
+          else
+          {
+            this.invalidelement = "";
+            this.email=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+          case 'title':
+          if (value.trim() == "" || value.trim() == null) {
+            this.invalidelement = "title";
+          }
+          else{
+            this.invalidelement = "";
+            this.addresstitle=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+          case 'address':
+          if (value.trim() == "" || value.trim() == null) {
+            this.invalidelement = "address";
+          }
+          else{
+            this.invalidelement = "";
+            this.address=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+          case 'contact':
+          if (!phonereg.test(String(value.trim()).toLowerCase())) {
+            this.invalidelement = "contact";
+          }
+          else{
+            this.invalidelement = "";
+            this.contact=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+          case 'city':
+          if (value.trim() == "" || value.trim() == null) {
+            this.invalidelement = "city";
+          }
+          else
+          {
+            this.invalidelement = "";
+            this.city=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+          case 'state':
+          if (value == "" || value == null) {
+            this.invalidelement = "state";
+          }
+          else
+          {
+            this.invalidelement = "";
+            this.state=this.indianStates[value].id;
+            this.validateUserDetails();
+          }
+          break;
+          case 'pincode':
+          if (!pincodereg.test(String(value.trim()).toLowerCase())) {
+            this.invalidelement = "pincode";
+          }
+          else
+          {
+            this.invalidelement = "";
+            this.pincode=value.trim();
+            this.validateUserDetails();
+          }
+          break;
+        default:
+        break;
+      }
+    }
+  }
+  removeAddress(i:any) {
+    this.savingAddress=false;
+    this.removeAddressLoader=true;
+    this.showUpdateSpinner = true;
+    this.removeCartItem = false;
+    this.updateItem = false;
+    let parent =this;
+    let addressParams = {
+      "emailId": "sanat@hobbyfare.com",
+      "address": this.userdetails.addresses[i]
+    }
+    fetch(commonWrapper.apiRoot + '/removeAddress', {
+      method: 'post',
+      body: JSON.stringify(addressParams),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(function (response) {
+        parent.userdetails.addresses = parent.userdetails.addresses.filter(item=>item != parent.userdetails.addresses[i]);
+        parent.showUpdateSpinner = false;
+        parent.removeAddressLoader = false;
+      })
   }
 }

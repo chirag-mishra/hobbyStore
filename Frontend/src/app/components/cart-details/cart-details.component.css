@@ -137,7 +137,7 @@ color: #dc3545;
 
 
 .cardbodyaddress{
-    padding: 1.25rem;
+    padding: 1.08rem;
     transition: all ease .3s;
     cursor: pointer;
     display: inline-block;
@@ -221,10 +221,17 @@ color: #dc3545;
 .circularTick{
     font-size:17px;
     color:rgb(0, 128, 0);
-    float: right;
     display: none;
 }
-
+.displayInline{
+    display: inline-block;
+}
+.circularCross{
+    float: right;
+    display: inline-block;
+    color: red;
+    font-size: 17px;
+}
 i.shownInline{
     display: inline-block;
 }
@@ -239,4 +246,7 @@ i.shownInline{
 
 .spinner .fa {     font-size: 200px;
     color: #1b4067; }
+.fa-minus,.fa-plus{
+    cursor: pointer;
+}
 
