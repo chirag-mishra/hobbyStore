@@ -101,9 +101,11 @@ export class ProductsComponent {
     }
     this.order = value;
   }
+  
   AdditemtoCart(productId: any) {
     commonWrapper.addItemToCart(productId, this,false);
   }
+
   BuyNowProduct(productId: any) {
     commonWrapper.addItemToCart(productId, this,true);
   }

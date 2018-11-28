@@ -1,5 +1,3 @@
-
-
 isLoggedIn = () => {
   let userID = "sanat@hobbyfare.com";
   return userID;
