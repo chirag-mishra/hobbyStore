@@ -34,13 +34,13 @@ export class SliderComponent {
     constructor(public datepipe: DatePipe){
         let interval = setInterval(() => {
             let presentTime = this.datepipe.transform(new Date(), 'MMM d, y, HH:mm:ss');
-            let duration = countDownTimer.countDown("Sep 10, 2018 20:53:00",presentTime);
+            let duration = countDownTimer.countDown("Nov 10, 2018 20:53:00",presentTime);
             //console.log(duration);
             this.time =duration;
             if(duration ==  "false")
             {
             clearInterval(interval);
-            this.time = "EXPIRED";
+            this.time = "00:00:00:00";
             };
           },1000);
           this.starRating = [0, 1, 2, 3, 4];

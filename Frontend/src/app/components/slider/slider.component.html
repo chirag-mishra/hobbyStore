@@ -23,7 +23,7 @@
           </div>
           <div class="col-md-12 col-lg-12 col-12 col-sm-12 content">
             <div class="col-md-8 col-lg-8 col-12 col-sm-12" style="margin: 0 auto;">
-              <div class="cardContainer col-lg-4 col-md-4 col-sm-12 col-xs-12" *ngFor="let product of products">
+              <div class="cardContainer col-lg-4 col-md-4 col-sm-12 col-12" *ngFor="let product of products">
                   <div class="card">
                       <div [routerLink]="['products/',product.category[1] | lowercase,product._id]">
                           <img class="card-img-top" [src]="product.imgUrl" alt="Card image cap">

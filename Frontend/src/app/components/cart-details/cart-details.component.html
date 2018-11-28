@@ -14,13 +14,13 @@
         <div class="cart-content" id="cartContent">
 
             <div class="row-fluid clearfix">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cartProductList">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-12 cartProductList">
                     <div class="productInCart clearfix" *ngFor="let productinfo of userdetails.cart;let i =index">
                         <div>
-                            <div class="prodThumbnail col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-left">
+                            <div class="prodThumbnail col-lg-2 col-md-2 col-sm-12 col-12 pull-left">
                                 <img src="{{productinfo.imgUrls[0]}}" alt="Product1" class="img-thumbnail">
                             </div>
-                            <div class="itemDetailsCart col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-left">
+                            <div class="itemDetailsCart col-lg-10 col-md-10 col-sm-12 col-12 pull-left">
                                 <div class="itemName">
                                     <a href="/products/{{productinfo.category[1]}}/{{productinfo.productId}}">{{productinfo.title}}</a>
                                 </div>
@@ -192,7 +192,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 billSection">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12 billSection">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
                     </h4>

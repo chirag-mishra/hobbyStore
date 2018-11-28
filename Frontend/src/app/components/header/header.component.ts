@@ -92,27 +92,13 @@ export class HeaderComponent implements AfterViewInit {
       behavior: 'smooth'
     });
   }
-  // onMouseOver(event:any){
-  //   document.getElementById("Category").classList.remove('display-none');
-  // }
-  // onMouseOut(event:any){
-  //   document.getElementById("Category").classList.add('display-none');
-  // }
-  onMouseOver(event: any) {
-    if (!this.display) {
-      document.getElementById("Category").classList.remove('display-none');
-    }
-  }
-  onMouseOut(event: any) {
-    if (!this.display) {
-      document.getElementById("Category").classList.add('display-none');
-    }
-  }
   onMouseClick(event: any) {
     this.display = !this.display;
     if (this.display) {
-      document.getElementById("Category").classList.remove('display-none');
+      document.getElementById("Category").classList.remove('hide');
     }
+    else
+    document.getElementById("Category").classList.add('hide');
   }
   recieveMessage($event) {
     let that = this;
