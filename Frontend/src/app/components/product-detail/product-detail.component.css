@@ -37,6 +37,7 @@ button:focus {outline:0;}
 }
 ul.productImages{
     list-style-type: none;
+    padding: 0;
 }
 
 ul.productImages li{
@@ -71,7 +72,8 @@ transition: all ease 0.4s;
     cursor: pointer;
 }
 .btnAddComment{
-    float: right;
+    /* float: right; */
+    margin-top: 20px;
 }
 .commentSection{
     border: 1px solid #ced4da;

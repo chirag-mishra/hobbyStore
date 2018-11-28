@@ -14,13 +14,13 @@
         <div class="cart-content" id="cartContent">
 
             <div class="row-fluid clearfix">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cartProductList">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-12 cartProductList">
                     <div class="productInCart clearfix" *ngFor="let productinfo of userdetails.cart;let i =index">
                         <div>
-                            <div class="prodThumbnail col-lg-2 col-md-2 col-sm-12 col-xs-12 pull-left">
+                            <div class="prodThumbnail col-lg-3 col-md-4 col-sm-12 col-12 pull-left">
                                 <img src="{{productinfo.imgUrls[0]}}" alt="Product1" class="img-thumbnail">
                             </div>
-                            <div class="itemDetailsCart col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-left">
+                            <div class="itemDetailsCart col-lg-9 col-md-8 col-sm-12 col-12 pull-left">
                                 <div class="itemName">
                                     <a href="/products/{{productinfo.category[1]}}/{{productinfo.productId}}">{{productinfo.title}}</a>
                                 </div>
@@ -37,13 +37,13 @@
                                         <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
                                             <button class="fas fa-minus" aria-hidden="true" (click)="decreaseQty(i)" [disabled]="productinfo.quantity == 1 || productinfo.stock == 0"></button>
                                         </span>
-                                        <input class="btn btn-default btn-xs inputCartQnty btn-qty" value="productinfo.quantity" [(ngModel)]="productinfo.quantity"
+                                        <input class="btn btn-default btn inputCartQnty btn-qty" value="productinfo.quantity" [(ngModel)]="productinfo.quantity"
                                         />
                                         <span class="btn btn-default btn-lg btn-qty btnIncDecCart">
                                             <button class="fas fa-plus" aria-hidden="true" (click)="increaseQty(i)" [disabled]="productinfo.quantity > productinfo.stock || productinfo.stock == 0"></button>
                                         </span>
-                                    </div>
                                     <a (click)="removeItem(i);" class="removeLink btn btn-info">Remove</a>
+                                </div>
                                 </div>
                                 <!-- <div class="inStockMargin">
                                     <div class="p-0" [ngClass]="{ 'text-success':availabilityCheck(i),'text-danger':productinfo.stock==0}">
@@ -57,7 +57,7 @@
 
                     <div class="accordion" id="savedAddressesAccordion" *ngIf="isLoggedIn==true">
                         <div class="card">
-                            <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#savedAddressCollapse" aria-expanded="true"
+                            <div class="card-header" id="savedAddressesHeading" data-toggle="collapse" data-target="#savedAddressCollapse" aria-expanded="true"
                                 aria-controls="savedAddressCollapse">
                                 <h5 class="mb-0">
                                     <button class="btn btn-link" type="button">
@@ -179,20 +179,21 @@
                                         Please provide a valid state.
                                     </div>
                                 </div>
+                                <div class="col-md-4 mb-3">
+                                        <label for="txtpincode">PinCode</label>
+                                        <input type="text" class="form-control" (ngModelChange)="modelChange($event,'pincode');" name="txtpincode" [(ngModel)]="pincode" placeholder="" required="" id="txtpincode">
+                                        <div [ngClass]="{'invalidentry':invalidelement==='pincode','hidden':invalidelement !=='pincode'}">
+                                            Please enter a valid pincode.
+                                        </div>
+                                    </div>
                             </div>
-                            <div class="mb-3 width-20">
-                                <label for="txtpincode">PinCode</label>
-                                <input type="text" class="form-control" (ngModelChange)="modelChange($event,'pincode');" name="txtpincode" [(ngModel)]="pincode" placeholder="" required="" id="txtpincode">
-                                <div [ngClass]="{'invalidentry':invalidelement==='pincode','hidden':invalidelement !=='pincode'}">
-                                    Please enter a valid pincode.
-                                </div>
-                            </div>
+                            
                             <a (click)="addNewAddress();" *ngIf="isLoggedIn == true" class="removeLink btn btn-info">Save as new address</a>
                         </form>
 
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 billSection">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12 billSection">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
                     </h4>

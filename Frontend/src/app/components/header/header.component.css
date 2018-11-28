@@ -106,13 +106,17 @@ a div {
 }
 
 .dropdownContent {
-    display: none;
     transition: all ease 0.5s;
     z-index: 20;
 }
 
+
 .dropdownTrigger:hover .dropdownContent {
     display: block;
+}
+
+.thumbnailContainer {
+    margin: 0;
 }
 
 .categoryIcon {
@@ -214,4 +218,8 @@ a div {
 
 .bg-none {
     background: none;
+}
+
+.dropdownTrigger .dropdown-toggle::after {
+    display: none;
 }
