@@ -1,11 +1,18 @@
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) { .home-search { min-width: 100px; }}
 
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) { .home-search  { min-width: 200px; } }
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) { .searchLink{ display: block; } } 
 
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { .home-search  { min-width: 250px; } }
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {.searchLink{ display: inline-block; }} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {.searchLink{ display: inline-block; }} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {.searchLink{ display: inline-block; }} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {.searchLink{ display: inline-block; }}
 
 .formHeader{
     position: relative;
@@ -28,7 +35,7 @@
 .inline-block{
     display: inline-block;
 }
-.display-none{
+.hide{
     display: none;
 }
 .bg-color{
@@ -68,10 +75,12 @@
     text-align: right;
     width: 100%;
 }
-
-li.nav-item{
+.signInContent,.dropdownTrigger,.cart{
     display: inline-block;
 }
+/* li.nav-item{
+    display: inline-block;
+} */
 
 #navigationBar {
     padding: 0;
@@ -94,11 +103,12 @@ a div {
 .category-section{
     position: absolute;
     right: 0;
-    top : 40px;
     z-index: 1;
     background-color: #ffffff;
     text-align: center;
     color : #999999;
+    transition: all ease 0.5s;
+    z-index: 20;
 }
 
 #navbar {

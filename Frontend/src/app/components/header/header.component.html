@@ -11,8 +11,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav mr-auto navList">
-      <li class="nav-item active">
-        <pre class="card card-block card-header display-none">{{asyncSelected | json}}</pre>
+      <li class="nav-item active searchLink">
+        <pre class="card card-block card-header hide">{{asyncSelected | json}}</pre>
         <input type="text" class="p-1" [value]="query" placeholder="Search" ngxTypeahead [taUrl]="url" [taParams]="params"
           [taApi]="api" (taSelected)="handleHttpResultSelected($event)" id="searchBar">
         <span>
@@ -23,7 +23,7 @@
       </li>
 
       <li class="nav-item dropdownTrigger">
-        <button class="btn btn-md login-btn bg-none dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="onMouseClick($event)">
+        <button class="btn btn-md login-btn bg-none dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="fas fa-bars login-btn bg-none"></span>
         </button>
         <div id="Category" class="col-md-12 col-lg-12 col-sm-12 col-12 category-section dropdownContent dropdown-menu">
@@ -124,7 +124,7 @@
           </div>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item cart">
         <a href="#" class="btn btn-md cartButton" [routerLink]="['cart']">
           <span class="fas fa-shopping-cart"></span>
           <span>{{cartvalue}}</span>
