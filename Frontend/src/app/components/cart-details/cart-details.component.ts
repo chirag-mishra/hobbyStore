@@ -34,6 +34,7 @@ export class CartDetailsComponent implements OnInit {
   savingAddress:boolean;
   isAddressBtnClicked:boolean;
   removeAddressLoader:boolean;
+  disablePromobtn:boolean =false;
   indianStates: any = [{ id: 'AR', value: 'Arunachal Pradesh' },
   { id: 'AS', value: 'Assam' },
   { id: 'BR', value: 'Bihar' },
@@ -258,18 +259,23 @@ export class CartDetailsComponent implements OnInit {
     //this.validatePromoCode(this.promocode);
   }
   validatePromoCode(promocode: any) {
+    if(this.disablePromobtn == false)
+    {
     if (promocode === "NEW20") {
       var discountpercent = 20;
       this.promocodeval = (discountpercent / 100) * this.unalterdPrice;
       this.invalidPromocode = false;
       //this.finalPrice = this.unalterdPrice;
       this.finalPrice -= this.promocodeval;
+      this.disablePromobtn = true;
     }
     else {
       this.promocodeval = 0;
       this.invalidPromocode = true;
       this.finalPrice = this.unalterdPrice;
+      this.disablePromobtn = true;
     }
+  }
   }
 
   proceedToCheckout() {

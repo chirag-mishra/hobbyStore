@@ -221,12 +221,12 @@
                     <form class="card p-2">
                         <div class="input-group">
                             <input name="promoVal" [disabled]="promoApply" [(ngModel)]="promoVal" type="text" class="form-control" placeholder="Promo code">
-                            <button type="button" *ngIf="promoApply" (click)="promoApply=false;promoVal=null;promocodeval=0;calculateTotal()" class="close clearBtn"
+                            <button type="button" *ngIf="promoApply" (click)="promoApply=false;promoVal=null;promocodeval=0;disablePromobtn = false;calculateTotal()" class="close clearBtn"
                                 aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <div class="input-group-append">
-                                <button (click)="validatePromoCode(promoVal);promoApply=true" class="btn btn-secondary">Apply</button>
+                                <button [disabled]="disablePromobtn"(click)="validatePromoCode(promoVal);promoApply=true" class="btn btn-secondary">Apply</button>
                             </div>
                             <div *ngIf="promoApply" [ngClass]="{'invalid-promo shownInline':invalidPromocode,'hidden':!invalidPromocode}">
                                 Invalid Promo Code
