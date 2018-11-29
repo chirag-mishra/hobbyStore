@@ -1,6 +1,6 @@
 
 /* Extra small devices (phones, 600px and down) */
-@media (max-width: 600px) { .searchLink{ display: block; } } 
+@media (max-width: 600px) { .searchLink{ display: block; text-align: center; } } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {.searchLink{ display: inline-block; }} 
@@ -75,6 +75,13 @@
     text-align: right;
     width: 100%;
 }
+
+@media(max-width : 768px) {
+    .navList {
+        text-align: center;        
+    }
+}
+
 .signInContent,.dropdownTrigger,.cart{
     display: inline-block;
 }
@@ -121,8 +128,10 @@ a div {
 }
 
 
+@media(min-width : 768px) {
 .dropdownTrigger:hover .dropdownContent {
     display: block;
+}
 }
 
 .thumbnailContainer {

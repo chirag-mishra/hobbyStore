@@ -214,11 +214,11 @@ color: #dc3545;
 }
 
 #txtcontactno.form-control{
-    width: 25%;
+    width: auto;
 }
 
 #phonecode.form-control {
-    width: 10%;
+    width: auto;
 }
 
 .width-20{

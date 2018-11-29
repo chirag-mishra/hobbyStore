@@ -60,9 +60,9 @@
                             <div class="card-header" id="savedAddressesHeading" data-toggle="collapse" data-target="#savedAddressCollapse" aria-expanded="true"
                                 aria-controls="savedAddressCollapse">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button">
+                                    <a class="btn-link" >
                                         Saved Addresses
-                                    </button>
+                                    </a>
                                     <span class="arrowDown"><i class="fas fa-angle-down"></i> </span>
                                 </h5>
                             </div>
@@ -151,9 +151,8 @@
                             <div class="mb-3">
                                 <label for="txtcontactno">Phone Number</label>
                                 <div id="contactDetails">
-                                    <input type="text" class="form-control" value="+91" disabled="disabled" id="phonecode">
                                     <span id="phoneDash">
-                                        <strong>-</strong>
+                                        <strong>+91 -</strong>
                                     </span>
                                     <input type="text" name="txtcontactno" (ngModelChange)="modelChange($event,'contact');"  class="form-control" id="txtcontactno" [(ngModel)]="contact">
                                     <div [ngClass]="{'invalidentry':invalidelement==='contact','hidden':invalidelement !=='contact'}">
