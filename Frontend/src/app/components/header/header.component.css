@@ -187,9 +187,9 @@ a div {
 }
 .dropdown-content {
     text-align: left;
-    display: none;
     position: absolute;
     right: 0;
+    left:unset;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -223,7 +223,7 @@ a div {
     float: right;
     position: relative;
     width: 0;
-    top: -22px;
+    top: -30px;
     left: -22px;
     font-size: x-large;
     color: #f9f9f9;
@@ -241,4 +241,16 @@ a div {
 
 .dropdownTrigger .dropdown-toggle::after {
     display: none;
+}
+.logInImg-content{
+    width:35%;
+    display: inline-block;
+}
+.loginImg{
+    width:100%;
+    border-radius: 50%;
+}
+.signInGoogle{
+    background: none;
+    padding: 0;
 }

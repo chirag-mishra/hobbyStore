@@ -127,7 +127,7 @@
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-12 pull-left">
                 <label for="description">Description:</label>
-                <textarea class="form-control" name="description" [(ngModel)]="commentObj.description" rows="5" id="descriptionRating"></textarea>
+                <textarea class="form-control" name="description" [ngModel]="commentObj.decription" (ngModelChange)="descChange($event);" rows="5" id="descriptionRating"></textarea>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-12 pull-left">
                 <button type="submit" class="btn btn-lg btnAddComment btn-primary btn-brand btn-full-width" [disabled]="rate==0">

@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
+import { Router} from '@angular/router';
 declare const gapi: any;
 
 @Component({
@@ -19,7 +20,7 @@ export class HeaderComponent implements AfterViewInit {
   params: any;
   api: any;
   userdetails: any;
-
+  isSignedIn:boolean;
   toolbarInfo: any = {
     toolbarDetails: [
       {
@@ -57,7 +58,8 @@ export class HeaderComponent implements AfterViewInit {
   loginDetails: any = {};
   signInModalHide: boolean;
   mouseOverOut: boolean;
-  constructor(private userdata: CartsharedService) {
+  constructor(private userdata: CartsharedService,private router: Router) {
+    this.isSignedIn = false;
     this.display = false;
     this.mouseOverOut = false;
     let loggedUserId = commonWrapper.isLoggedIn();
@@ -66,8 +68,9 @@ export class HeaderComponent implements AfterViewInit {
     if (loggedUserId != "" && loggedUserId != undefined) {
       commonWrapper.getUserDetails(loggedUserId, function (userdetails) {
         parent.userdetails = userdetails;
+        parent.isSignedIn = true;
         if (parent.userdetails != null && parent.userdetails != undefined) {
- 
+       
             parent.userdata.changecartvalue(commonWrapper.calculateTotalQuantity(parent.userdetails.cart));
           
         }
@@ -96,23 +99,28 @@ export class HeaderComponent implements AfterViewInit {
   recieveMessage($event) {
     let that = this;
     that.loginDetails = JSON.parse($event);
+    console.log(that.loginDetails);
     if (Object.keys(that.loginDetails).length != 0) {
-      var el = document.getElementById("loginBtn");
-      el.dataset.toggle = "";
+      // var el = document.getElementById("loginBtn");
+      // el.dataset.toggle = "";
       that.signInModalHide = true;
       that.mouseOverOut = true;
+      that.isSignedIn = true;
       localStorage.setItem('googleLoginDetails', JSON.stringify(that.loginDetails));
     }
   }
   logOut() {
-    var el = document.getElementById("loginBtn");
-    el.dataset.toggle = "modal";
+    // var el = document.getElementById("loginBtn");
+    // el.dataset.toggle = "modal";
     this.loginDetails = {};
     this.signInModalHide = false;
     var auth2 = gapi.auth2.getAuthInstance();
+    var parent=this;
     auth2.signOut().then(function () {
       localStorage.setItem('googleLoginDetails', null);
       console.log('User signed out.');
+      parent.router.navigate(['/']);
+      parent.isSignedIn=false;
     });
   }
   mouseOver($event) {

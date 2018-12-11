@@ -104,13 +104,28 @@ export class ProductDetailComponent implements OnInit {
         });
     };
     onCommentSubmit() {
-        // if(this.rate>0){
-        //     this.prodRatinObj = new ProductRating();
-        //     this.prodRatinObj.comment.rating = this.rate;
-        //     this.prodRatinObj.comment.title= this.commentObj.title!=undefined ?this.commentObj.title : "";
-        //     this.prodRatinObj.comment.description = this.commentObj.decription!=undefined?// // this.commentObj.decription:"";
-        //     console.log(this.prodRatinObj);
-        // }
+        if(this.rate>0){
+        let commentBody = {
+            "emailId": "sanat@hobbyfare.com",
+            "rating": this.rate,
+            "title": (this.commentObj.title).trim()!="" ?this.commentObj.title.trim() : "",
+            "decription": this.commentObj.decription!=undefined?this.commentObj.decription:""
+          }
+        console.log(commentBody);
+        //   fetch(commonWrapper.apiRoot + '/removeAddress', {
+        //     method: 'post',
+        //     body: JSON.stringify(commentBody),
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     }
+        //   })
+        //     .then(function (response) {
+
+        //     })
+        }
+    }
+    descChange(value){
+        this.commentObj.decription=value.trim();
     }
     AddItemtoCart(productId: any) {
         let id;

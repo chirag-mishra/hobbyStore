@@ -132,12 +132,13 @@
       </li>
 
       <li class="nav-item signInContent">
-        <button class="btn btn-md login-btn bg-none" (mouseover)="mouseOver($event)" (mouseout)="mouseOut($event)" id="loginBtn" href="#" data-toggle="modal" data-target="#exampleModal">
+        <button *ngIf="!isSignedIn" class="btn btn-md login-btn bg-none" (mouseover)="mouseOver($event)" (mouseout)="mouseOut($event)" id="loginBtn" href="#" data-toggle="modal" data-target="#exampleModal">
           <span class="fas fa-user-plus"></span>
         </button>
-        
-        <div class="dropdown-content" [ngClass]="[(signInModalHide && mouseOverOut)? 'profileShowDropDown' : 'profileHideDropDown']"
-          (mouseover)="mouseOver($event)" (mouseout)="mouseOut($event)">
+        <button data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" *ngIf="isSignedIn" class="btn btn-default signInGoogle">
+          <span class="logInImg-content"><img class="loginImg" src="https://lh5.googleusercontent.com/-B0BncB8zxLM/AAAAAAAAAAI/AAAAAAAAA0Y/oJtb_MN4IYc/s96-c/photo.jpg" alt="login img"></span>
+        </button>
+        <div class="dropdown-content dropdown-menu">
           <p class="loginCaret"><i class="fas fa-caret-up"></i></p>
           <div><i class="fas fa-user-circle icon"></i><span><a href="#">My Profile</a></span></div>
           <div><i class="fas fa-luggage-cart icon"></i><span><a href="/orders">Orders</a></span></div>
