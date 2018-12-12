@@ -19,6 +19,8 @@ export class ProductsComponent {
   //Note:(products object should be in this format for sorting and filtering,date should be in 'yyyy-mm-dd' format)  
   productObjects: any;
   isError: boolean;
+  noData:boolean;
+  isActive:number;
   //paging required inputs
   public filter: string = '';
   public maxSize: number = 7;
@@ -45,19 +47,9 @@ export class ProductsComponent {
     this.showUpdateSpinner = false;
     this.starRating = [0, 1, 2, 3, 4];
     this.isError = false;
-    var parent = this;
-    fetch(commonWrapper.apiRoot + '/products/magic')
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (myJson) {
-        parent.productObjects = (myJson);
-        parent.sortedCollection = parent.orderPipe.transform(parent.productObjects, 'rating');
-        parent.productObjects = parent.sortedCollection;
-      }).catch(function (error) {
-        parent.productObjects = undefined;
-        parent.isError = true;
-      });
+    this.noData =false;
+    this.isActive=1;
+    this.FetchItems('magic',1);
 
   }
   //onclick of page number in pagination
@@ -108,5 +100,32 @@ export class ProductsComponent {
 
   BuyNowProduct(productId: any) {
     commonWrapper.addItemToCart(productId, this,true);
+  }
+
+  FetchItems(param:any,active:number){
+    this.isActive=active;
+    var parent = this;
+    parent.productObjects = undefined;
+    fetch(commonWrapper.apiRoot + '/products/'+param)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (myJson) {
+        if(myJson.length == 0 || myJson == [])
+        {
+          parent.noData=true;
+          parent.productObjects = undefined;
+          parent.isError = false;
+        }
+        else
+        {
+          parent.productObjects = (myJson);
+          parent.sortedCollection = parent.orderPipe.transform(parent.productObjects, 'rating');
+          parent.productObjects = parent.sortedCollection;
+        }
+      }).catch(function (error) {
+        parent.productObjects = undefined;
+        parent.isError = true;
+      });
   }
 }

@@ -11,12 +11,12 @@
 
 <div class="">
     <ul class="topMenu clearfix">
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6 active">All Items</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==1}" (click)="FetchItems('magic',1);">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==2}"  (click)="FetchItems('magic',2);">Accessories</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==3}"  (click)="FetchItems('abc',3);">Beginners</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==4}"  (click)="FetchItems('xyz',4);">Close up</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==5}"  (click)="FetchItems('pqr',5);">Mentalism</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==6}"  (click)="FetchItems('magic',6);">Magic trick</li>
     </ul>
     <div class="catalogue" id="productsCatalogue">
         <div class="catalogue-controls">
@@ -80,5 +80,8 @@
             <i class="fas fa-times-circle"></i>Error:</label>
         <hr>
         <label for="errorDesc">Failed to fetch data from the server</label>
+    </div>
+    <div class="error centered" *ngIf="noData">        
+        <label for="noDataFound">No data found.</label>
     </div>
 </ng-template>
