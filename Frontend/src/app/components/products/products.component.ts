@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   productObjects: any;
   isError: boolean;
   noData:boolean;
-  isActive:number;
+  isActive:string;
   //paging required inputs
   public filter: string = '';
   public maxSize: number = 7;
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
     this.starRating = [0, 1, 2, 3, 4];
     this.isError = false;
     this.noData =false;
-    this.isActive=1;
+    this.isActive="allitems";
   }
   ngOnInit(){
     let selectCategory;
@@ -109,27 +109,27 @@ export class ProductsComponent implements OnInit {
   FetchItems(param:any){
     let category;
     if(param == "allitems"){
-      this.isActive=1;
+      this.isActive=param;
       category='magic';
     }
     else if (param == "accessories"){
-      this.isActive=2;
+      this.isActive=param;
       category='magic';
     }
     else if(param == "beginners"){
-      this.isActive=3;
+      this.isActive=param;
       category='xyz';
     }
     else if (param == "closeup"){
-      this.isActive=4;
+      this.isActive=param;
       category='pqr';
     }
     else if(param == "mentalism"){
-      this.isActive=5;
+      this.isActive=param;
       category='abc';
     }
     else if (param == "cardmagic"){
-      this.isActive=6;
+      this.isActive=param;
       category='magic';
     }
     var parent = this;

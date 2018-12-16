@@ -9,14 +9,14 @@
     </div>
 </div>
 
-<div id="productsCatalogueContainer">
+<div>
     <ul class="topMenu clearfix">
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==1}" (click)="FetchItems('allitems');">All Items</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==2}"  (click)="FetchItems('accessories');">Accessories</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==3}"  (click)="FetchItems('beginners');">Beginners</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==4}"  (click)="FetchItems('closeup');">Close up</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==5}"  (click)="FetchItems('mentalism');">Mentalism</li>
-        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive==6}"  (click)="FetchItems('cardmagic');">Card magic</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive=='allitems'}" (click)="FetchItems('allitems');">All Items</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive=='accessories'}"  (click)="FetchItems('accessories');">Accessories</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive=='beginners'}"  (click)="FetchItems('beginners');">Beginners</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive=='closeup'}"  (click)="FetchItems('closeup');">Close up</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive=='mentalism'}"  (click)="FetchItems('mentalism');">Mentalism</li>
+        <li class="col-lg-2 col-md-2 col-sm-4 col-6" [ngClass]="{'active':isActive=='cardmagic'}"  (click)="FetchItems('cardmagic');">Card magic</li>
     </ul>
     <div class="catalogue" id="productsCatalogue">
         <div class="catalogue-controls">
