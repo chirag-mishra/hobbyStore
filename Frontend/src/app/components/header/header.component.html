@@ -28,7 +28,7 @@
         </button>
         <div id="Category" class="col-md-12 col-lg-12 col-sm-12 col-12 category-section dropdownContent dropdown-menu">
           <div class="row thumbnailContainer">
-            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon" (click)="ScrollToCategory('accessories');">
               <div class="flipper">
                 <div class="thumbnail frontSide">
                   <a href="/">
@@ -53,7 +53,7 @@
                 <a title="{{item.toolbarName}}" href="#">{{item.toolbarName}}</a>
               </div>
             </div>
-            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon" (click)="ScrollToCategory('beginners');">
               <div class="flipper">
                 <div class="thumbnail frontSide">
                   <a href="/">
@@ -70,7 +70,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon" (click)="ScrollToCategory('closeup');">
               <div class="flipper">
                 <div class="thumbnail frontSide">
                   <a href="/">
@@ -87,7 +87,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon" (click)="ScrollToCategory('mentalism');">
               <div class="flipper">
                 <div class="thumbnail frontSide">
                   <a href="/">
@@ -104,7 +104,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon">
+            <div class="col-md-2 col-lg-2 col-sm-12 col-12 p-4 categoryIcon" (click)="ScrollToCategory('cardmagic');">
               <div class="flipper">
                 <div class="thumbnail frontSide">
                   <a href="/">

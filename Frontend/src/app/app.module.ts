@@ -25,6 +25,7 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
 import { AboutComponent } from "./components/about/about.component";
 import { DatePipe } from '@angular/common';
 import { NewProductsComponent } from "./components/new-products/new-products.component";
+import { CategoryService } from './shared/category.service';
 var routes = [{
   path: "",
   component: HomeComponent
@@ -68,7 +69,7 @@ var routes = [{
     RouterModule.forRoot(routes), 
     NgxTypeaheadModule
   ],
-  providers: [CartsharedService,DatePipe],
+  providers: [CartsharedService,DatePipe,CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

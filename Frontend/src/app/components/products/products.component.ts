@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaginationInstance } from '../../../../node_modules/ngx-pagination/dist/ngx-pagination.module';
 import { StringFilterPipe } from './../../shared/string-filter.pipe';
 import { OrderPipe } from 'ngx-order-pipe';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { CategoryService } from '../../shared/category.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   //items per page array
   itemsPerPage: any = [8, 10, 20, 'All'];
   userdetails: any;
@@ -43,14 +44,17 @@ export class ProductsComponent {
   //sorting required inputs
   sortedCollection: any[];
   showUpdateSpinner: boolean;
-  constructor(private orderPipe: OrderPipe, private userdata: CartsharedService, private router: Router) {
+  constructor(private orderPipe: OrderPipe, private userdata: CartsharedService, private router: Router,
+    private categoryService:CategoryService) {
     this.showUpdateSpinner = false;
     this.starRating = [0, 1, 2, 3, 4];
     this.isError = false;
     this.noData =false;
     this.isActive=1;
-    this.FetchItems('magic',1);
-
+  }
+  ngOnInit(){
+    let selectCategory;
+    this.categoryService.currentvalue.subscribe(item=> this.FetchItems(item));
   }
   //onclick of page number in pagination
   onPageChange(number: number) {
@@ -102,11 +106,35 @@ export class ProductsComponent {
     commonWrapper.addItemToCart(productId, this,true);
   }
 
-  FetchItems(param:any,active:number){
-    this.isActive=active;
+  FetchItems(param:any){
+    let category;
+    if(param == "allitems"){
+      this.isActive=1;
+      category='magic';
+    }
+    else if (param == "accessories"){
+      this.isActive=2;
+      category='magic';
+    }
+    else if(param == "beginners"){
+      this.isActive=3;
+      category='xyz';
+    }
+    else if (param == "closeup"){
+      this.isActive=4;
+      category='pqr';
+    }
+    else if(param == "mentalism"){
+      this.isActive=5;
+      category='abc';
+    }
+    else if (param == "cardmagic"){
+      this.isActive=6;
+      category='magic';
+    }
     var parent = this;
     parent.productObjects = undefined;
-    fetch(commonWrapper.apiRoot + '/products/'+param)
+    fetch(commonWrapper.apiRoot + '/products/'+category)
       .then(function (response) {
         return response.json();
       })

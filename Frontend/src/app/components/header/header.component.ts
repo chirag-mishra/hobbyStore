@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CartsharedService } from '../../shared/cartsharedservice/cartshared.service';
 import { Router} from '@angular/router';
+import { CategoryService } from '../../shared/category.service';
 declare const gapi: any;
 
 @Component({
@@ -58,7 +59,8 @@ export class HeaderComponent implements AfterViewInit {
   loginDetails: any = {};
   signInModalHide: boolean;
   mouseOverOut: boolean;
-  constructor(private userdata: CartsharedService,private router: Router) {
+  constructor(private userdata: CartsharedService,private router: Router,
+    private catgeoryService:CategoryService) {
     this.isSignedIn = false;
     this.display = false;
     this.mouseOverOut = false;
@@ -141,5 +143,11 @@ export class HeaderComponent implements AfterViewInit {
       this.signInModalHide = false;
       el.dataset.toggle = "modal";
     }
+  }
+  ScrollToCategory(message:string){
+    this.catgeoryService.ChangeCatgeory(message);
+    document.querySelector('#productsCatalogueContainer').scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 }
